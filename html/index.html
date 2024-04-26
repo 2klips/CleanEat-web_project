@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crean-Eat</title>
+    <link rel="stylesheet" href="../css/main_style.css">
+    <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="../javascript/mainjs.js"></script>
+    <!-- <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=t3w54bbesl"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=t3w54bbesl&submodules=geocoder"></script> -->
+    <!-- <script>
+        var mapOptions = {
+            center: new naver.maps.LatLng(37.3595704, 127.105399),
+            zoom: 10
+        };
+        
+        var map = new naver.maps.Map('map', mapOptions);
+    </script> -->
+</head>
+<body>
+    <div id="container">
+        
+        <header>
+            <div id="searchbox">
+                <button type="submit" id="search-btn"><img src="../css/images/search_icon.png" alt=""></button>
+                <input id="search" type="text" placeholder="검색어를 입력하세요.">
+
+                <input type="checkbox" name="" id="search-filter-btn">
+                <label for="search-filter-btn"><img src="../css/images/options-outline.svg" alt="" id="menu"></label>
+
+                <div id="search-filter">
+                    <p>분류</p>
+                    <button class="search-btn"><img src="../css/images/cafe-outline.svg" alt="">카페</button>
+                    <button class="search-btn"><img src="../css/images/restaurant-outline.svg" alt="">식당</button>
+                    <button class="search-btn"><img src="../css/images/beer-outline.svg" alt="">주점</button>
+                    <br><button class="search-btn"><img src="../css/images/cube-outline.svg" alt="">급식소/납품업체</button>
+                    <p>위생등급</p>
+                    <button class="search-btn">⭐</button>
+                    <button class="search-btn">⭐⭐</button>
+                    <button class="search-btn">⭐⭐⭐</button><br>
+                    <button class="search-btn"><img src="../css/images/KakaoTalk_20240422_010835732.png" alt="" style="width: 40px; height: 40px;"></button>
+                    <br><button class="search-btn"><img src="../css/images/alert-circle-outline.svg" alt="">위생법 위반 업체</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="map" style="z-index: 0;position: absolute; top: 0px; width: 100%; height: 100%;;"></div>
+        <ul id="footer">
+            <input type="checkbox" name="footer-btn" id="footer-btn">
+            <li><a href="#"><img class="footer-img" src="../css/images/emergency.png" alt=""></a></li>
+            <li><a href="./list.html"><img class="footer-img" src="../css/images/list.png" alt="" id="home"></a></li>
+            <li><a href="./클린잇_로그인, 회원가입/index.html"><img class="footer-img" src="../css/images/user_icon.png" alt=""></a></li>
+            <label for="footer-btn"><img class="footer-img" src="../css/images/menu2.png" alt="" id="list_icon"></label>
+        </ul>
+        
+
+
+        <!-- swiper버튼 -->
+        <input type="checkbox" name="" id="swiperbutton">
+        <label for="swiperbutton"><img src="../css/images/swipe_icon.png" alt=""></label>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+
+        <input type="checkbox" id="check"><!-- slide버튼 -->
+        <label for="check"><img src="../css/images/up_icon.png" alt="" id="up"></label>
+        <div id="slide">
+            <div id="slide-empty"></div>
+            <div class="slide-content">
+                <img class="restaurant-img" src="../css/images/KakaoTalk_20240422_010835732_01.png" alt="">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="../css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <img class="bookmark" src="../css/images/bookmark-outline.svg" alt="">
+                </div>
+                <div class="slide-info">
+                    <h2>음식점이름</h2>
+                    <p>한식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>02-043-0000</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="../css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <img class="restaurant-img" src="../css/images/KakaoTalk_20240422_010835732_01.png" alt="">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="../css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <img class="bookmark" src="../css/images/bookmark-outline.svg" alt="">
+                </div>
+                <div class="slide-info">
+                    <h2>음식점이름</h2>
+                    <p>한식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>02-043-0000</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="../css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <img class="restaurant-img" src="../css/images/KakaoTalk_20240422_010835732_01.png" alt="">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="../css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <img class="bookmark" src="../css/images/bookmark-outline.svg" alt="">
+                </div>
+                <div class="slide-info">
+                    <h2>음식점이름</h2>
+                    <p>한식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>02-043-0000</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="../css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+        </div>
+
+        <a href="./list.html" id="list_button"><img src="../css/images/clipboard-outline.svg" style="width: 20px" alt="">
+        </a>
+
+    </div>
+    <!-- Initialize Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        freeMode: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+    </script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=t3w54bbesl"></script>
+    <!-- <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=t3w54bbesl&submodules=geocoder"></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var mapElement = document.getElementById("map");
+            if (mapElement) {
+
+
+                var mapOptions = {
+                    center: new naver.maps.LatLng(37.3595704, 127.105399), // 지도의 초기 중심 좌표
+                    zoom: 15 // 지도의 초기 확대 수준
+
+                };
+
+                // var map = new naver.maps.Map(mapElement, mapOptions);
+
+                // var marker = new naver.maps.Marker({
+                //     position: new naver.maps.LatLng(37.3595704, 127.105399),
+                //     map: map
+                // });
+                // var position = new naver.maps.LatLng(37.3595704, 127.105399);
+
+                var position = new naver.maps.LatLng(37.3595704, 127.105399);
+
+                var map = new naver.maps.Map('map', {
+                    center: position,
+                    zoom: 10
+                });
+
+                var markerOptions = {
+                    position: position,
+                    map: map,
+                    icon: {
+                        url: './css/images/backicon.png',
+                        size: new naver.maps.Size(22, 35),
+                        origin: new naver.maps.Point(0, 0),
+                        anchor: new naver.maps.Point(11, 35)
+                    }
+                };
+
+                var marker = new naver.maps.Marker(markerOptions);
+
+
+                naver.maps.Event.addListener(marker, "click", function(e) {
+                    if (infowindow.getMap()) {
+                        infowindow.close();
+                    } else {
+                        infowindow.open(map, marker);
+                    }
+                });
+            } else {
+                console.error("Container map not found.");
+            }
+        });
+        // element.setPosition(naver.maps.Position.LEFT_CENTER);
+        var HOME_PATH = window.HOME_PATH || '.';
+        
+        var contentString = [
+        '<div class="iw_inner">',
+        '   <h3>네이버 본사련</h3>',
+        '   <p>경기 성남시 분당구 정자일로 95<br/>',
+        '   </p>',
+        '</div>'
+        ].join('');
+
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 140,
+            backgroundColor: "#ffffff",
+            borderColor: "#BDF3FF",
+            borderWidth: 5,
+            anchorSize: new naver.maps.Size(30, 30),
+            anchorSkew: true,
+            anchorColor: "#BDF3FF",
+            pixelOffset: new naver.maps.Point(20, -20)
+        });
+    </script>
+</body>
+</html>
