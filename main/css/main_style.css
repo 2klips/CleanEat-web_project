@@ -86,13 +86,43 @@ header{
     border: 2px solid rgba(128, 128, 128, 0.6);
     justify-content: space-between;
     border-radius: 10px;
-    box-shadow: 3px 3px 10px 3px gray;
+    box-shadow: 1px 1px 2px 1px gray;
     align-items: center;
     max-width: 550px;
     flex-wrap: wrap;
     min-width: 288px;
     z-index: 100;
     background-color: white;
+    padding-top: 3px;
+}
+
+
+#search-btn{
+    background-color: rgba(0, 0, 0, 0);
+    width: 35px;
+	height: 35px;
+	margin: 0;
+	padding: 0;
+	border: none;
+    cursor: pointer;
+}
+
+
+
+#search::placeholder{
+    color: rgba(128, 128, 128, 0.5);
+    font-weight: bolder;
+}
+#searchbox > button > img{
+    width: 25px;
+    height: 25px;
+}
+
+
+#searchbox > #search::placeholder{
+    font-size: 16px;
+    font-weight: lighter;
+    color: rgba(128, 128, 128, 1.2);
 }
 
 #search-filter-btn{
@@ -109,7 +139,7 @@ header{
     display: none;
     font-weight: bolder;
     text-align: center;
-    box-shadow: 0px 5px 5px 5px gray;
+    box-shadow: 0px 2px 2px 2px gray;
     min-width: 288px;
     max-width: 550px;
     background-color: white;
@@ -119,15 +149,22 @@ header{
     border-bottom: 1px solid var(--skyblue-color);
     margin-bottom: 10px;
     padding: 5px;
+    margin-top: 10px;
+    text-align: left;
 }
 
-#search-filter > button > img{
+#search-filter > div:last-child{
+    width: 50px;
+    height: 50px;
+}
+
+#search-filter > input{
     width: 30px;
     height: 30px;
+    display: none;
 }
 
-
-#search-filter > button{
+#search-filter > .search-btn{
     text-align: center;
     padding: 3px;
     width: 80px;
@@ -135,30 +172,27 @@ header{
     margin-left: 0px;
     border: 1px solid black;
     font-weight: bolder;
+    display: inline-block;
 }
 
-#search-filter button:nth-child(6){
+#search-filter div:nth-child(5){
     width: 150px;
+    height: 40px;
+    padding: 5px;
 }
 
 
-
-
-#search-filter button:last-child{
-    width: 200px;
-}
 
 #search-filter .search-btn{
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid rgba(128, 128, 128, 0.4);
     border-radius: 5px;
     padding: 5px;
-    text-align: center;
-    justify-content: center;
-
 }
 
-#search-filter > .search-btn > img{
+#search-filter .search-btn 
+
+#search-filter > .search-btn > label > img{
     width: 20px;
     height: 20px;
     padding-top: 5px;
@@ -189,26 +223,7 @@ header > #searchbox > label > #menu{
     z-index: 101;
 }
 
-#search-btn{
-    background-color: rgba(0, 0, 0, 0);
-    width: 35px;
-	height: 35px;
-	margin: 0;
-	padding: 0;
-	border: none;
-    cursor: pointer;
-}
-#search-btn > img{
-    width: 35px;
-    height: 35px;
 
-}
-
-
-#search::placeholder{
-    color: rgba(128, 128, 128, 0.5);
-    font-weight: bolder;
-}
 
 
 
@@ -252,7 +267,7 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
 }
 #footer > #footer-btn ~ li{
-    margin: 8px 3px;
+    margin: 10px 3px;
 }
 
 #footer > #footer-btn ~ li{
