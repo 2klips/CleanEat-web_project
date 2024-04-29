@@ -143,35 +143,3 @@ transition: all .5s ease;
 .close-popup:hover {
     background-color: #6dbfff;
 }
-
-
-
-/* @media screen and (max-width: 767px) {
-    body {
-        justify-content: flex-start;
-        padding: 20px;
-    }
-    .int-area input {
-        font-size: 16px;
-    }
-    .Register-form, .Login-form {
-        width: 100%;
-    }
-    .Login-form > h1 {
-        font-size: 24px;
-        margin-bottom: 30px;
-    }
-    .int-area {
-        width: 100%;
-    }
-    .register button {
-        width: 100%;
-    }
-    .popup-content p{
-        white-space: nowrap;
-    }
-    html{
-        margin-right: 50px;
-        margin-left: 50px;
-    }
-} */
