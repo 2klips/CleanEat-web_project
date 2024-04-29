@@ -53,6 +53,7 @@ body, html{
     min-width: 288px;
     border: 2px solid rgba(128, 128, 128, 0.6);
     box-shadow: 3px 3px 10px 3px gray;
+    
 }
 
 #search-filter-btn{

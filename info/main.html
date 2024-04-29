@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="./index.js"></script>
+  <title>개인 정보 탭</title>
+</head>
+<body>
+  <div id="container">
+    <div id="userinfo">
+      <img src="./source/image.jpg" alt="강아지" id="userimg">
+      <div id="user">
+        <h2>ID</h2>
+        <p>name</p>
+      </div>
+    </div>
+    <div id="alarm" class="section">
+        <div><p>알림 수신</p></div>
+        <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="pushAlramSwitch()"></label></div>
+    </div>
+    <hr>
+    <a href="./bookmark.html"><div id="bookmark" class="section">북마크</div></a>
+    <hr>
+    <a href="./info.html"><div id="introduce" class="section">클린잇 소개 /위생등급 기준</div></a>
+    <hr>
+    <a href="#"><div id="complaint" class="section">
+      위생 불량 신고
+    </div></a>
+    <hr>
+  </div>
+  <p style="position:relative; bottom:90px; color:#595959">부정·불량 식품 신고는 국번없이 1399(무료)</p>
+  <footer><a href="#"><img src="" alt="홈버튼 이미지"></a></footer>
+</body>
+</html>
