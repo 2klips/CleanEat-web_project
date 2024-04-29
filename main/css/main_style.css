@@ -199,8 +199,8 @@ header > #searchbox > label > #menu{
     cursor: pointer;
 }
 #search-btn > img{
-    width: 35px;
-    height: 35px;
+    width: 23px;
+    height: 23px;
 
 }
 
@@ -443,7 +443,7 @@ header > #searchbox > label > #menu{
     /* left: 38%; */
     width: 100px;
     height: 25px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid var(--skyblue-color);
     background-color: white;
     text-align: center;
