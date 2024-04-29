@@ -73,8 +73,9 @@ header{
     width: 100%;
     height: 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     z-index: 100;
+    position: absolute;
 }
 
 /* 검색창 */
@@ -86,83 +87,127 @@ header{
     border: 2px solid rgba(128, 128, 128, 0.6);
     justify-content: space-between;
     border-radius: 10px;
-    box-shadow: 3px 3px 10px 3px gray;
+    box-shadow: 1px 1px 1px 1px gray;
     align-items: center;
     max-width: 550px;
     flex-wrap: wrap;
     min-width: 288px;
     z-index: 100;
     background-color: white;
+    /* padding-top: 3px; */
+    padding: 3px 8px 3px 0px;
+}
+
+
+#search-btn{
+    background-color: rgba(0, 0, 0, 0);
+    width: 35px;
+	height: 35px;
+	margin: 0;
+	padding: 0;
+	border: none;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+
+
+#search::placeholder{
+    color: rgba(128, 128, 128, 0.5);
+    font-weight: bolder;
+}
+
+
+
+#searchbox > #search::placeholder{
+    font-size: 16px;
+    font-weight: lighter;
+    color: rgba(128, 128, 128, 1.2);
 }
 
 #search-filter-btn{
     display: none;
 }
 
+
 /* 검색필터 */
 #search-filter{
     width: 100%;
-    height: 350px;
+    height: 280px;
     border-radius: 10px;
     z-index: 150;
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     display: none;
     font-weight: bolder;
     text-align: center;
-    box-shadow: 0px 5px 5px 5px gray;
+    box-shadow: 0px 2px 2px 2px gray;
     min-width: 288px;
     max-width: 550px;
     background-color: white;
+    justify-content: center;
 }
 
 #search-filter > p{
     border-bottom: 1px solid var(--skyblue-color);
     margin-bottom: 10px;
     padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
 }
 
-#search-filter > button > img{
-    width: 30px;
-    height: 30px;
+
+
+#search-filter > input{
+    display: none;
 }
 
-
-#search-filter > button{
+#search-filter > label{
     text-align: center;
-    padding: 3px;
-    width: 80px;
+    padding: 0px;
     margin-bottom: 10px;
     margin-left: 0px;
-    border: 1px solid black;
-    font-weight: bolder;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
 }
 
-#search-filter button:nth-child(6){
-    width: 150px;
-}
-
-
-
-
-#search-filter button:last-child{
-    width: 200px;
-}
-
-#search-filter .search-btn{
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
+#search-filter > label > div > img,
+#search-filter > label > div{
+    display: flex;
+    align-items: center;
     justify-content: center;
-
 }
 
-#search-filter > .search-btn > img{
-    width: 20px;
-    height: 20px;
-    padding-top: 5px;
+#search-filter label:last-child{
+    margin: 0px;
+    margin-bottom: 0px!important; 
 }
+
+#search-filter label:nth-child(16) > div{
+    width: 80px;
+    height: 45px;
+    padding: 5px;
+}
+
+
+#search-filter > .search-check:checked + label > div{
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+}
+
+#search-filter > label > div{
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+}
+
 
 #search-filter-btn:checked + label + #search-filter{
     display: block;
@@ -175,7 +220,7 @@ header > #searchbox > label > #menu{
     background-color: var(--white-color);
     z-index: 110;
     border-radius: 100%;
-    cursor: pointer;
+    cursor: pointer;;
 }
 
 #search{
@@ -189,26 +234,7 @@ header > #searchbox > label > #menu{
     z-index: 101;
 }
 
-#search-btn{
-    background-color: rgba(0, 0, 0, 0);
-    width: 35px;
-	height: 35px;
-	margin: 0;
-	padding: 0;
-	border: none;
-    cursor: pointer;
-}
-#search-btn > img{
-    width: 35px;
-    height: 35px;
 
-}
-
-
-#search::placeholder{
-    color: rgba(128, 128, 128, 0.5);
-    font-weight: bolder;
-}
 
 
 
@@ -227,10 +253,8 @@ header > #searchbox > label > #menu{
     justify-content: center;
     flex-wrap: wrap;
     position: absolute;
-    bottom: 40px;
-    left: 20px;
-    padding-top: 5px;
-    /* box-shadow: 0px 5px 5px 5px gray; */
+    bottom: 25px;
+    left: 15px;
     z-index: 140;
     list-style: none;
     background-color: var(--skyblue-color);
@@ -246,14 +270,13 @@ header > #searchbox > label > #menu{
 #footer > #footer-btn{
     display: none;
 }
-#footer > label > img{
-    width: 35px;
-    height: 35px;
+#footer > label  img{
     background-color: rgba(0, 0, 0, 0);
 }
 #footer > #footer-btn ~ li{
-    margin: 8px 3px;
+    margin: 0;
 }
+
 
 #footer > #footer-btn ~ li{
     display: none;
@@ -261,6 +284,7 @@ header > #searchbox > label > #menu{
 
 #footer > #footer-btn:checked ~ li{
     display: block;
+    height: 45px;
 }
 
 #footer > li > a > img{
@@ -273,24 +297,26 @@ header > #searchbox > label > #menu{
 
 /* 아래쪽 슬라이드 */
 #slide{
-    width: 100%;
+    width: 99%;
     height: 30px;
-    background-color: var(--whitesmoke-color);
+    background-color: white;
     position: fixed;
     z-index: 149;
-    bottom: 0;
+    bottom: -10px;
     transition: all 300ms ease-in-out;
     padding-top: 40px;
     overflow-y: scroll;
     box-shadow: 0px 1px 10px 0px gray;
     padding: 0px 15px;
+    border-radius: 30px;
 }
 #slide > #slide-empty{
-    width: 100%;
+    width: 90%;
     height: 30px;
     position: fixed;
     background-color: white;
     z-index: 100;
+    border-radius: 30px;
 }
 
 #slide > .slide-content{
@@ -305,13 +331,13 @@ header > #searchbox > label > #menu{
     
 }
 #slide > .slide-content > .slide-header{
-    width: 70%;
+    width: 68%;
     height: 35px;
-    /* float: right; */
+    position: absolute;
+    right: 0px;
     /* clear: both; */
     display: flex;
     justify-content: space-between;
-    
 }
 #slide > .slide-content > .slide-header > img{
     width: 30px;
@@ -338,7 +364,7 @@ header > #searchbox > label > #menu{
     width: 30px;
     height: 30px;
     position: absolute;
-    right: 5px;
+    right: 0px;
     bottom: 5px;
     cursor: pointer;
 }
@@ -349,7 +375,7 @@ header > #searchbox > label > #menu{
 /* 슬라이드 버튼 */
 #up{ 
     text-align: center;
-    width: 25px;
+    width: 20px;
     position: fixed;
     bottom: 5px;
     left: calc(50% - 14px);
@@ -361,13 +387,14 @@ header > #searchbox > label > #menu{
 
  /* 슬라이드 버튼 클릭시 실행 */
 #check:checked + label #up{
-
     transform: rotate(180deg);
     bottom: 370px;
 }
 
 #check:checked ~ #slide{
-    height: 400px;
+    height: 420px;
+    bottom: -30px;
+    padding-bottom: 80px;
 }
 
 
@@ -410,21 +437,30 @@ header > #searchbox > label > #menu{
 
 }
 #swiperbutton + label{
-    width: 45px;
-    height: 45px;
-    border: 3px solid var(--skyblue-color);
+    width: 20px;
+    height: 50px;
     position: fixed;
-    bottom: 45px;
-    right: 10px;
+    bottom: 35px;
+    right: -10px;
     cursor: pointer;
     z-index: 100;
-    border-radius: 100%;
-    text-align: center;
+    border-radius: 8px;
+    align-items: center;
     background-color: white;
+    display: flex;
+    padding-left: 3px;
+    transition: all 100ms ease-in-out;
 }
 
+#swiperbutton:checked + label{
+    width: 30px;
 
+}
 
+#swiperbutton:checked + label img{
+    transform: rotate(180deg);
+
+}
 #swiperbutton:checked + label + .swiper {
     position: fixed;
     width: 100%;
@@ -439,11 +475,11 @@ header > #searchbox > label > #menu{
 
 #list_button{
     position: fixed;
-    bottom: 50px;
+    bottom: 30px;
     /* left: 38%; */
-    width: 100px;
+    width: 80px;
     height: 25px;
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1px solid var(--skyblue-color);
     background-color: white;
     text-align: center;
