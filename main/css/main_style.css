@@ -112,7 +112,10 @@ header{
     align-items: center;
 }
 
-
+#search-btn > img{
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
 
 #search::placeholder{
     color: rgba(128, 128, 128, 0.5);

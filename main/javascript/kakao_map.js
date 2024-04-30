@@ -17,7 +17,7 @@ function createInfoWindowContent(title, address, phone, rating) {
             <div class="info-address">${address}</div>
             <div class="info-phone">${phone}</div>
             <div class="info-rating">${rating}</div>
-            <img class="info-marker-icon" src="../css/images/bookmark-full.svg" alt="마커 아이콘" style="width: 25px" />
+            <img class="info-marker-icon" src="./css/images/bookmark-full.svg" alt="마커 아이콘" style="width: 25px" />
         </div>
     `;
 }
@@ -50,7 +50,7 @@ var positions = [
 var infowindows = [];
 
 positions.forEach(function(position) {
-    var markerImage = new kakao.maps.MarkerImage("../css/images/location-outline.svg", new kakao.maps.Size(50, 50)); // 원하는 이미지 경로와 크기로 수정하세요.
+    var markerImage = new kakao.maps.MarkerImage("./css/images/location-outline.svg", new kakao.maps.Size(50, 50)); // 원하는 이미지 경로와 크기로 수정하세요.
 
     var marker = new kakao.maps.Marker({
         map: map,
