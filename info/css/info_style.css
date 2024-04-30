@@ -164,10 +164,10 @@ div#text {
 div#text > h1 {margin-left: 10px; font-size: 24px;font-weight: normal;}
 .bookmark{margin: 15px;}
 .bookmark_img{
- width: 120px;
- height: 120px;
- object-fit: cover;
- display: flex;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  display: flex;
 }
 #clean_eat {
   margin: 0 auto;
