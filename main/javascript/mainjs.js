@@ -5,11 +5,11 @@ window.navermap_authFailure = function () {
 }
 
 
-function changeherf(){
-    loginbtn = document.getElementById("loginbtn");
-    if(logincheck){
-        loginbtn.href = "../info/main.html";
-    }else{
-        loginbtn.href = "../login regist/index.html";
-    }
-}
+// function changeherf(){
+//     const loginbtn = document.getElementById("loginbtn");
+//     if(logincheck){
+//         loginbtn.href = "../info/main.html";
+//     }else{
+//         loginbtn.href = "../login_regist/index.html";
+//     }
+// }
