@@ -221,6 +221,11 @@ header > #searchbox > label > #menu{
 }
 
 
+#search-btn > img{
+    width: 23px;
+    height: 23px;
+}
+
 /* 메뉴 */
 #footer{
     width: 45px;
