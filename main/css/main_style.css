@@ -112,10 +112,7 @@ header{
     align-items: center;
 }
 
-#search-btn > img{
-    margin-left: 5px;
-    margin-bottom: 5px;
-}
+
 
 #search::placeholder{
     color: rgba(128, 128, 128, 0.5);
@@ -237,20 +234,6 @@ header > #searchbox > label > #menu{
     z-index: 101;
 }
 
-
-#search-btn{
-   background-color: rgba(0, 0, 0, 0);
-   width: 35px;
-	height: 35px;
-	margin: 0;
-	padding: 0;
-	border: none;
-    cursor: pointer;
-}
-#search-btn > img{
-    width: 23px;
-    height: 23px;
-}
 
 
 
@@ -496,9 +479,7 @@ header > #searchbox > label > #menu{
     /* left: 38%; */
     width: 80px;
     height: 25px;
-
-    border-radius: 10px;
-
+    border-radius: 15px;
     border: 1px solid var(--skyblue-color);
     background-color: white;
     text-align: center;
