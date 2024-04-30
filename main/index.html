@@ -10,8 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./javascript/mainjs.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=606cb3e160775ead960470f3b1a3b962"></script>
-    
-    
 </head>
 <body>
     <div id="container">
@@ -60,7 +58,7 @@
 
             <li style="margin-top: 10px;"><a href="https://www.foodsafetykorea.go.kr/portal/consumerNotify/customerNotifyStep1.do?rcptDvs=J&mobileFlag=1&menu_no=4897&menu_grp=MENU_MOB03"  target="_blank"><img class="footer-img" src="./css/images/emergency.png" alt="" style="width: 28px; height: 28px;"></a></li>
             <li><a href="./list.html"><img class="footer-img" src="./css/images/clipboard_paper_document_icon.png" alt="" id="home" style="width: 30px; height: 30px;"></a></li>
-            <li><a href="#"><img class="footer-img" src="./css/images/member_person_profile_icon.png" alt="" id="loginbtn" style="width: 30px; height: 30px;"></a></li>
+            <li><a href="../login_regist/index.html" id="loginbtn"><img class="footer-img" src="./css/images/member_person_profile_icon.png" alt="" id="loginbtn" style="width: 30px; height: 30px;"></a></li>
             <label for="footer-btn"><img class="footer-img" src="./css/images/menu2.png" alt="" id="list_icon" style="width: 40px; height: 40px;"></label>
 
         </ul>
@@ -85,7 +83,6 @@
                 <div class="swiper-slide">Slide 8</div>
                 <div class="swiper-slide">Slide 9</div>
             </div>
-            <div class="swiper-pagination"></div>
         </div>
 
 
@@ -168,14 +165,12 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        freeMode: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-    });
+            slidesPerView: 3,
+            spaceBetween: 30,
+            freeMode: true,
+            slidesOffsetAfter: 1150,
+            slidesOffsetBefore: 100,
+        });
     </script>
 
     <script src="./javascript/kakao_map.js"></script>

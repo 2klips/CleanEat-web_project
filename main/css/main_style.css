@@ -232,7 +232,6 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
 	height: 35px;
-	margin: 0 0 5px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;
@@ -421,6 +420,7 @@ header > #searchbox > label > #menu{
     display: none;
 }
 
+
 .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -429,7 +429,6 @@ header > #searchbox > label > #menu{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    transition: all 300ms ease-in-out;
     min-width: 225px;
     min-height: 150px;
     box-shadow: 3px 3px 10px 3px gray;
@@ -481,9 +480,7 @@ header > #searchbox > label > #menu{
     display: block;
 }
 
-.swiper-pagination{
-    display: none;
-}
+
 
 #list_button{
     position: fixed;
@@ -491,11 +488,7 @@ header > #searchbox > label > #menu{
     /* left: 38%; */
     width: 80px;
     height: 25px;
-
-
     border-radius: 10px;
-
-
     border: 1px solid var(--skyblue-color);
     background-color: white;
     text-align: center;
