@@ -220,6 +220,11 @@ header > #searchbox > label > #menu{
     text-decoration: none;
 }
 
+#search-btn > img{
+    width: 23px;
+    height: 23px;
+}
+
 
 /* 메뉴 */
 #footer{

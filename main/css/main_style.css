@@ -235,6 +235,20 @@ header > #searchbox > label > #menu{
 }
 
 
+#search-btn{
+   background-color: rgba(0, 0, 0, 0);
+   width: 35px;
+	height: 35px;
+	margin: 0;
+	padding: 0;
+	border: none;
+    cursor: pointer;
+}
+#search-btn > img{
+    width: 23px;
+    height: 23px;
+}
+
 
 
 
@@ -479,7 +493,9 @@ header > #searchbox > label > #menu{
     /* left: 38%; */
     width: 80px;
     height: 25px;
-    border-radius: 15px;
+
+    border-radius: 10px;
+
     border: 1px solid var(--skyblue-color);
     background-color: white;
     text-align: center;

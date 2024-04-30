@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M448 341.37V170.61A32 32 0 00432.11 143l-152-88.46a47.94 47.94 0 00-48.24 0L79.89 143A32 32 0 0064 170.61v170.76A32 32 0 0079.89 369l152 88.46a48 48 0 0048.24 0l152-88.46A32 32 0 00448 341.37z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M69 153.99l187 110 187-110M256 463.99v-200"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#55DDFF;stroke-width:32;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<path class="st0" d="M448,341.4V170.6c0-11.4-6.1-21.9-15.9-27.6l-152-88.5c-14.9-8.7-33.3-8.7-48.2,0L79.9,143
+	c-9.8,5.7-15.9,16.2-15.9,27.6v170.8c0,11.4,6.1,21.9,15.9,27.6l152,88.5c14.9,8.7,33.3,8.7,48.2,0l152-88.5
+	C442,363.3,448,352.7,448,341.4z"/>
+<path class="st0" d="M69,154l187,110l187-110 M256,464V264"/>
+</svg>
