@@ -1,0 +1,534 @@
+/* @font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 700;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
+} */
+
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 300;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+.nanumbarungothic * {
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
+
+:root{
+    /* color */
+    --white-color: white;
+    --whitesmoke-color: whitesmoke;
+    --skyblue-color: #8AE9FF;
+
+    --medium-font: 18px;
+}
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'NanumBarunGothic';
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    
+}
+#container{
+    width: 100%;
+    height: 100%;
+    max-width: 1980px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+
+#map{
+    position: absolute;
+    z-index: 0;
+}
+
+/* 헤더 부분 */
+header{
+    padding-top: 40px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    position: absolute;
+}
+
+/* 검색창 */
+#searchbox{
+    width: 85%;
+    height: 40px;
+    display: flex;
+    position: fixed;
+    border: 2px solid rgba(128, 128, 128, 0.6);
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px gray;
+    align-items: center;
+    max-width: 550px;
+    flex-wrap: wrap;
+    min-width: 288px;
+    z-index: 100;
+    background-color: white;
+    /* padding-top: 3px; */
+    padding: 3px 8px 3px 0px;
+}
+
+
+#search-btn{
+    background-color: rgba(0, 0, 0, 0);
+    width: 35px;
+	height: 35px;
+	margin: 0;
+	padding: 0;
+	border: none;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+
+
+#search::placeholder{
+    color: rgba(128, 128, 128, 0.5);
+    font-weight: bolder;
+}
+
+
+
+#searchbox > #search::placeholder{
+    font-size: 16px;
+    font-weight: lighter;
+    color: rgba(128, 128, 128, 1.2);
+}
+
+#search-filter-btn{
+    display: none;
+}
+
+
+/* 검색필터 */
+#search-filter{
+    width: 100%;
+    height: 280px;
+    border-radius: 10px;
+    z-index: 150;
+    padding: 10px 10px 0px 10px;
+    display: none;
+    font-weight: bolder;
+    text-align: center;
+    box-shadow: 0px 2px 2px 2px gray;
+    min-width: 288px;
+    max-width: 550px;
+    background-color: white;
+    justify-content: center;
+}
+
+#search-filter > p{
+    border-bottom: 1px solid var(--skyblue-color);
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
+}
+
+
+
+#search-filter > input{
+    display: none;
+}
+
+#search-filter > label{
+    text-align: center;
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+}
+
+#search-filter > label > div > img,
+#search-filter > label > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-filter label:last-child{
+    margin: 0px;
+    margin-bottom: 0px!important; 
+}
+
+#search-filter label:nth-child(16) > div{
+    width: 80px;
+    height: 45px;
+    padding: 5px;
+}
+
+
+#search-filter > .search-check:checked + label > div{
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+}
+
+#search-filter > label > div{
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+}
+
+
+#search-filter-btn:checked + label + #search-filter{
+    display: block;
+}
+
+header > #searchbox > label > #menu{
+    /* 메뉴 */
+    width: 35px;
+    height: 35px;
+    background-color: var(--white-color);
+    z-index: 110;
+    border-radius: 100%;
+    cursor: pointer;;
+}
+
+#search{
+    /* 검색창 */
+    border: none;
+    font-weight: bolder;
+    font-size: var(--medium-font);
+    width: 75%;
+    height: 24px;
+    position: sticky;
+    z-index: 101;
+}
+
+
+
+
+
+#map{
+    box-sizing: border-box;
+    width: 100%;
+    max-height: 1024px;
+    position: absolute;
+}
+
+
+/* 메뉴 */
+#footer{
+    width: 45px;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 25px;
+    left: 15px;
+    z-index: 140;
+    list-style: none;
+    background-color: var(--skyblue-color);
+    border-radius: 35px;
+}
+
+#footer-btn ~ label{
+    cursor: pointer;
+    z-index: 150;
+
+}
+
+#footer > #footer-btn{
+    display: none;
+}
+#footer > label  img{
+    background-color: rgba(0, 0, 0, 0);
+}
+#footer > #footer-btn ~ li{
+    margin: 0;
+}
+
+
+#footer > #footer-btn ~ li{
+    display: none;
+}
+
+#footer > #footer-btn:checked ~ li{
+    display: block;
+    height: 45px;
+}
+
+#footer > li > a > img{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+
+
+/* 아래쪽 슬라이드 */
+#slide{
+    width: 99%;
+    height: 30px;
+    background-color: white;
+    position: fixed;
+    z-index: 149;
+    bottom: -10px;
+    transition: all 300ms ease-in-out;
+    padding-top: 40px;
+    overflow-y: scroll;
+    box-shadow: 0px 1px 10px 0px gray;
+    padding: 0px 15px;
+    border-radius: 30px;
+}
+#slide > #slide-empty{
+    width: 90%;
+    height: 30px;
+    position: fixed;
+    background-color: white;
+    z-index: 100;
+    border-radius: 30px;
+}
+
+#slide > .slide-content{
+    width: 100%;
+    height: 135px;
+    margin-top: 30px;
+    padding: 5px;
+    border-top: 1px solid #55dfff;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    
+}
+#slide > .slide-content > .slide-header{
+    width: 68%;
+    height: 35px;
+    position: absolute;
+    right: 0px;
+    /* clear: both; */
+    display: flex;
+    justify-content: space-between;
+}
+#slide > .slide-content > .slide-header > img{
+    width: 30px;
+    height: 100%;
+}
+#slide > .slide-content > .restaurant-img{
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+#slide > .slide-content > .slide-info{
+
+    position: absolute;
+    left: 110px;
+    top: 40px;
+    display: inline-block;
+}
+#slide > .slide-content > .slide-info > p,h2,h3{
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+#slide > .slide-content > a> .more-info{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    bottom: 5px;
+    cursor: pointer;
+}
+#check{
+    display: none;
+}
+
+/* 슬라이드 버튼 */
+#up{ 
+    text-align: center;
+    width: 20px;
+    position: fixed;
+    bottom: 5px;
+    left: calc(50% - 14px);
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    z-index: 150;
+}
+
+
+ /* 슬라이드 버튼 클릭시 실행 */
+#check:checked + label #up{
+    transform: rotate(180deg);
+    bottom: 370px;
+}
+
+#check:checked ~ #slide{
+    height: 420px;
+    bottom: -30px;
+    padding-bottom: 80px;
+}
+
+
+
+/* 스크롤바 숨김 */
+*::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* 스와이프 */
+#swiperbutton + label + .swiper{
+    display: none;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 300ms ease-in-out;
+    min-width: 225px;
+    min-height: 150px;
+    box-shadow: 3px 3px 10px 3px gray;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+#swiperbutton{
+    display: none;
+
+}
+#swiperbutton + label{
+    width: 20px;
+    height: 50px;
+    position: fixed;
+    bottom: 35px;
+    right: -10px;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 8px;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    padding-left: 3px;
+    transition: all 100ms ease-in-out;
+}
+
+#swiperbutton:checked + label{
+    width: 30px;
+
+}
+
+#swiperbutton:checked + label img{
+    transform: rotate(180deg);
+
+}
+#swiperbutton:checked + label + .swiper {
+    position: fixed;
+    width: 100%;
+    bottom: 100px;
+    transition: all 300ms ease-in-out;
+    display: block;
+}
+
+.swiper-pagination{
+    display: none;
+}
+
+#list_button{
+    position: fixed;
+    bottom: 30px;
+    /* left: 38%; */
+    width: 80px;
+    height: 25px;
+    border-radius: 15px;
+    border: 1px solid var(--skyblue-color);
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+
+@media screen and (min-width:1024px) {
+    #footer{
+        height: 100%;
+        width: 50px;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #footer > a:nth-child(3){
+        order: -1;
+    }
+    #slide{
+        height: 100%;
+        width: 52px;
+        left: 20px;
+        top: 0;
+    }
+    #slide > iframe{
+        display: none;
+    }
+    #up{
+        left: 48px;
+        top: 48%;
+        transform: rotate(90deg);
+    }
+    #check:checked + label #up{
+
+        transform: rotate(270deg);
+        left: 290px;
+        bottom: 370px;
+    }
+    
+    #check:checked ~ #slide{
+        width: 300px;
+        height: 100%;
+    }
+    #check:checked ~ #slide > iframe{
+        display: flex;
+        padding-left: 10px;
+    }
+
+}
