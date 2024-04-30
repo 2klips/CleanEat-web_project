@@ -508,6 +508,7 @@ header > #searchbox > label > #menu{
     position: absolute;
     left: 0;
 }
+.swiper-logo { margin-top: 2px;}
 .swiper-header{width: 46%; height: 20px; position: absolute;right: 5%;top:2%;display: inline-flex;justify-content: space-between;margin-bottom: 5px;
     margin-left: 49%;}
 .swiper-text-area{
@@ -524,10 +525,11 @@ header > #searchbox > label > #menu{
 .score-star{ font-size: 0.8rem;}
 input[type="checkbox"]{appearance: none;}
 .bookmarkicon{
+    margin-top: 5px;
     width: 120%;
     height: 120%;
     cursor: pointer;
-    background-image: url('../../info/source/bookmark_icon_gray.png');
+    background-image: url('../css/images/bookmark-outline.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
