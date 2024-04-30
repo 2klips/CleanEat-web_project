@@ -514,7 +514,8 @@ header > #searchbox > label > #menu{
     position: absolute;
     left: 0;
 }
-.swiper-header{width: 48%; height: 20px; position: absolute;right: 5%;top:2%;display: inline-flex;justify-content: space-between;margin-bottom: 5px;}
+.swiper-header{width: 46%; height: 20px; position: absolute;right: 5%;top:2%;display: inline-flex;justify-content: space-between;margin-bottom: 5px;
+    margin-left: 49%;}
 .swiper-text-area{
     position: absolute;
     top: 18%;
@@ -523,7 +524,8 @@ header > #searchbox > label > #menu{
     flex-direction: column;
     font-size: 0.8rem;
 }
-.header-logo, .header-bookmark{width: 20%;}
+.header-logo{height: 100%;}
+.header-bookmark{width: 20%;}
 /*내부 꾸미기용 추가 css*/
 .score-star{ font-size: 0.8rem;}
 input[type="checkbox"]{appearance: none;}
