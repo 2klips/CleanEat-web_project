@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'NanumBarunGothic';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunGothic/NanumBarunGothicWeb.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunGothic/NanumBarunGothicWeb.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunGothic/NanumBarunGothicWeb.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunGothic/NanumBarunGothicWeb.ttf) format("truetype");
+  }
+  
+  a:link, a:visited {
+    text-decoration: none;
+    color: #595959;
+  }
+  a>div:hover, a>div:active{
+    border: none;
+    text-decoration: none;
+    color: #8AE9FF;
+  }
+  
+  hr{
+    margin: 0px;
+    border: 0;
+    height: 1px;
+    background-color: #8AE9FF;
+  }
+  img{
+    /*아래 코드는 드래그 방지용*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+  body{
+    display: flex;
+    height: 100vh;
+    align-items:center;
+    font-family: 'NanumBarunGothic';
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+      /*아래 코드는 드래그 방지용*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+  body::-webkit-scrollbar
+  {display: none;}
+  header{
+    box-sizing: border-box;
+    z-index: 2;
+    width: 92%;
+    height: 80px;
+    display: flex;
+    padding-top: 15px;
+    margin: 0px 0 15px 0;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0%;
+    background-color: white;
+  }
+#container{
+    padding-top: 80px;
+    flex-direction: column;
+    display: flex;
+    width: 92%;
+    justify-content: center;
+}
+#cleaneat_logo {width: 58px; margin: 0 auto;}
+#info_header {display: flex; justify-content: center;flex-direction: column;text-align: center;}
+#info_header :nth-child(even){
+  margin: 0;
+}

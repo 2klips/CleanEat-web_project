@@ -99,24 +99,10 @@ header{
 }
 
 
-#search-btn{
-    background-color: rgba(0, 0, 0, 0);
-    width: 35px;
-	height: 35px;
-	margin: 0;
-	padding: 0;
-	border: none;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
 
 
-#search-btn > img{
-    margin-left: 5px;
-    margin-bottom: 5px;
-}
+
+
 
 
 #search::placeholder{
@@ -237,15 +223,16 @@ header > #searchbox > label > #menu{
     height: 24px;
     position: sticky;
     z-index: 101;
+    margin-bottom: 8px;
 }
 
 
 
 #search-btn{
-   background-color: rgba(0, 0, 0, 0);
-   width: 35px;
+    background-color: rgba(0, 0, 0, 0);
+    width: 35px;
 	height: 35px;
-	margin: 0;
+	margin: 0 0 5px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;
@@ -253,9 +240,12 @@ header > #searchbox > label > #menu{
 #search-btn > img{
     width: 23px;
     height: 23px;
+    margin-bottom: 5px;
 }
 
-
+#search-filter-btn + label{
+    margin: 0 3px 5px 0;
+}
 
 
 
@@ -471,6 +461,7 @@ header > #searchbox > label > #menu{
     display: flex;
     padding-left: 3px;
     transition: all 100ms ease-in-out;
+    border-color: #55dfff;
 }
 
 #swiperbutton:checked + label{
