@@ -420,6 +420,7 @@ header > #searchbox > label > #menu{
     display: none;
 }
 
+
 .swiper-slide {
     /*text-align: center;*/
     font-size: 18px;
@@ -482,9 +483,7 @@ header > #searchbox > label > #menu{
     display: block;
 }
 
-.swiper-pagination{
-    display: none;
-}
+
 
 #list_button{
     position: fixed;
@@ -492,9 +491,7 @@ header > #searchbox > label > #menu{
     /* left: 38%; */
     width: 80px;
     height: 25px;
-
     border-radius: 10px;
-
     border: 1px solid var(--skyblue-color);
     background-color: white;
     text-align: center;

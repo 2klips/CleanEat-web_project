@@ -1,7 +1,7 @@
 var mapContainer = document.getElementById('map'),
     mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), 
-        level: 3 
+        center: new kakao.maps.LatLng(37.500716, 127.036539), 
+        level: 3
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -9,69 +9,75 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 지도 드래그 기능을 활성화합니다
 map.setDraggable(true);
 
+// 인포윈도우의 내용을 생성하는 함수
+function createInfoWindowContent(title, address, phone, rating) {
+    return `
+        <div class="custom-info-window">
+            <h4 class="info-title">${title}</h4>
+            <div class="info-address">${address}</div>
+            <div class="info-phone">${phone}</div>
+            <div class="info-rating">${rating}</div>
+            <img class="info-marker-icon" src="./css/images/bookmark-full.svg" alt="마커 아이콘" style="width: 25px" />
+        </div>
+    `;
+}
+
+{/* <img class="info-image" src="${imageSrc}" alt="Your Image" /> */}
+
 var positions = [
     {
-        title: '카카오', 
-        latlng: new kakao.maps.LatLng(33.450705, 126.570677),
-        content: '<div style="padding:5px;">카카오 오피스<br><a href="https://map.kakao.com/link/map/33.450705,126.570677" target="_blank">지도보기</a></div>'
+        title: '캘리포니아 피자키친', 
+        latlng: new kakao.maps.LatLng(37.500049, 127.036743),
+        content: createInfoWindowContent('캘리포니아 피자키친', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
     },
     {
-        title: '생태연못', 
-        latlng: new kakao.maps.LatLng(33.450936, 126.569477),
-        content: '<div style="padding:5px;">생태연못<br><a href="https://map.kakao.com/link/map/33.450936,126.569477" target="_blank">지도보기</a></div>'
+        title: '즐거운돈까스', 
+        latlng: new kakao.maps.LatLng(37.500816, 127.035493),
+        content: createInfoWindowContent('즐거운돈까스', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
     },
     {
-        title: '텃밭', 
-        latlng: new kakao.maps.LatLng(33.450879, 126.569940),
-        content: '<div style="padding:5px;">텃밭<br><a href="https://map.kakao.com/link/map/33.450879,126.569940" target="_blank">지도보기</a></div>'
+        title: '수제팔도찹쌀순대', 
+        latlng: new kakao.maps.LatLng(37.500739, 127.034283),
+        content: createInfoWindowContent('수제팔도찹쌀순대', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
     },
     {
-        title: '근린공원',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738),
-        content: '<div style="padding:5px;">근린공원<br><a href="https://map.kakao.com/link/map/33.451393,126.570738" target="_blank">지도보기</a></div>'
+        title: '오사무식당',
+        latlng: new kakao.maps.LatLng(37.499788, 127.034834),
+        content: createInfoWindowContent('오사무식당', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐', 'path/to/your/image1.jpg')
     }
 ];
 
-var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+var infowindows = [];
 
-var lastOpenedInfoWindow = null;
-
-for (var i = 0; i < positions.length; i++) {
-    var imageSize = new kakao.maps.Size(24, 35);
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+positions.forEach(function(position) {
+    var markerImage = new kakao.maps.MarkerImage("./css/images/location-outline.svg", new kakao.maps.Size(50, 50)); // 원하는 이미지 경로와 크기로 수정하세요.
 
     var marker = new kakao.maps.Marker({
         map: map,
-        position: positions[i].latlng,
-        title: positions[i].title,
-        image: markerImage
+        position: position.latlng,
+        title: position.title,
+        image: markerImage // 커스텀 마커 이미지 설정
     });
 
-    var infowindow = new kakao.maps.InfoWindow({
-        content: positions[i].content
+    var customOverlay = new kakao.maps.CustomOverlay({
+        content: position.content,
+        position: marker.getPosition(),
+        yAnchor: 1.5 // 인포윈도우를 마커 이미지의 아래에 위치하도록 조정
     });
 
-    // 기본적으로 인포윈도우를 열어둡니다
-    infowindow.open(map, marker);  // 마커 생성 후 바로 인포윈도우 열기
+    infowindows.push(customOverlay);
 
-    kakao.maps.event.addListener(marker, 'click', (function(infowindow, marker) {
-        return function() {
-            if (lastOpenedInfoWindow && lastOpenedInfoWindow === infowindow) {
-                // 같은 인포윈도우 클릭 시 닫기
-                infowindow.close();
-                lastOpenedInfoWindow = null;
-            } else {
-                // 다른 인포윈도우 열기 전에 기존 인포윈도우 닫기
-                if (lastOpenedInfoWindow) {
-                    lastOpenedInfoWindow.close();
-                }
-                infowindow.open(map, marker); // 새로운 인포윈도우 열기
-                lastOpenedInfoWindow = infowindow; // 현재 열린 인포윈도우 업데이트
-            }
-             // 지도 중심을 클릭된 마커의 위치로 이동
-            map.setCenter(marker.getPosition());
-            // 지도의 줌 레벨을 설정 (예: 5로 설정)
-            map.setLevel(1);
-        };
-    })(infowindow, marker));
-}
+    // 모든 인포윈도우를 열어줍니다.
+    customOverlay.setMap(map);
+
+    // 마커 클릭 이벤트에 대한 핸들러
+    kakao.maps.event.addListener(marker, 'click', function() {
+        infowindows.forEach(function(infowindow) {
+            infowindow.setMap(null); // 모든 인포윈도우를 닫음
+        });
+        customOverlay.setMap(map); // 해당 마커의 인포윈도우를 엶
+        map.setCenter(marker.getPosition()); // 마커 위치로 지도 중심을 이동
+        map.setLevel(2); // 지도 레벨 조정
+    });
+
+});
