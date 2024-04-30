@@ -84,10 +84,9 @@ header{
     height: 40px;
     display: flex;
     position: fixed;
-    border: 2px solid rgba(128, 128, 128, 0.6);
     justify-content: space-between;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 1px gray;
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.5);
     align-items: center;
     max-width: 550px;
     flex-wrap: wrap;
@@ -133,7 +132,7 @@ header{
     display: none;
     font-weight: bolder;
     text-align: center;
-    box-shadow: 0px 2px 2px 2px gray;
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.5);
     min-width: 288px;
     max-width: 550px;
     background-color: white;
@@ -232,7 +231,7 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
 	height: 35px;
-	margin: 0 0 5px 5px;
+	margin: 5px 0 5px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;
@@ -454,7 +453,7 @@ header > #searchbox > label > #menu{
     height: 50px;
     position: fixed;
     bottom: 35px;
-    right: -10px;
+    right: -5px;
     cursor: pointer;
     z-index: 100;
     border-radius: 8px;
@@ -468,7 +467,6 @@ header > #searchbox > label > #menu{
 
 #swiperbutton:checked + label{
     width: 30px;
-
 }
 
 #swiperbutton:checked + label img{
@@ -488,7 +486,6 @@ header > #searchbox > label > #menu{
 #list_button{
     position: fixed;
     bottom: 30px;
-    /* left: 38%; */
     width: 80px;
     height: 25px;
     border-radius: 10px;
@@ -534,15 +531,15 @@ input[type="checkbox"]{appearance: none;}
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
-  }
-  .bookmarkicon:checked{
+}
+.bookmarkicon:checked{
     background-image: url("../../info/source/bookmark_icon_blue.png")
-  }
-  div.swiper-text-area :nth-child(odd){color: #3A3A3A; font-weight: bold;}
-  div.swiper-text-area :nth-child(3){font-size: 0.9em;}
-  div.swiper-text-area >h2{font-size: 1.2em;}
-  div.swiper-text-area > p:nth-child(even) {color: #6D6D6D ; font-size: 0.8em;}
-  div.swiper-text-area > p:nth-child(n+3) {margin: 6px 0;} 
+}
+    div.swiper-text-area :nth-child(odd){color: #3A3A3A; font-weight: bold;}
+    div.swiper-text-area :nth-child(3){font-size: 0.9em;}
+    div.swiper-text-area >h2{font-size: 1.2em;}
+    div.swiper-text-area > p:nth-child(even) {color: #6D6D6D ; font-size: 0.8em;}
+    div.swiper-text-area > p:nth-child(n+3) {margin: 6px 0;} 
 /*끝-------------------------*/
 
 @media screen and (min-width:1024px) {
