@@ -18,24 +18,32 @@
         
         <header>
             <div id="searchbox">
-                <button type="submit" id="search-btn"><img src="../css/images/search_icon.svg" alt=""></button>
+
+                <button type="submit" id="search-btn"><img src="./css/images/search_icon.svg" alt="" class="searchbtn"></button>
                 <input id="search" type="text" placeholder="검색어를 입력하세요.">
 
                 <input type="checkbox" name="" id="search-filter-btn">
-                <label for="search-filter-btn"><img src="../css/images/options-outline.svg" alt="" id="menu"></label>
+                <label for="search-filter-btn"><img src="./css/images/options-outline.svg"alt="" id="menu" class="searchbtn" style="width: 30px; height: 30px;"></label>
 
                 <div id="search-filter">
                     <p>분류</p>
-                    <button class="search-btn"><img src="../css/images/cafe-outline.svg" alt="">카페</button>
-                    <button class="search-btn"><img src="../css/images/restaurant-outline.svg" alt="">식당</button>
-                    <button class="search-btn"><img src="../css/images/beer-outline.svg" alt="">주점</button>
-                    <br><button class="search-btn"><img src="../css/images/cube-outline.svg" alt="">급식소/납품업체</button>
+                    <input type="checkbox" id="cafe" class="search-check">
+                    <label for="cafe"><div class="search-btn"><img src="./css/images/cafe-outline.svg" alt="" style="width: 15px; height: 15px;">카페</div></label>
+                    <input type="checkbox" id="restaurant" class="search-check">
+                    <label for="restaurant"><div class="search-btn"><img src="./css/images/restaurant-outline.svg" alt="" style="width: 15px; height: 15px;"> 식당</div></label>
+                    <input type="checkbox" id="pub" class="search-check">
+                    <label for="pub"><div class="search-btn"><img src="./css/images/beer-outline.svg" alt="" style="width: 15px; height: 15px;">주점</div></label>
                     <p>위생등급</p>
-                    <button class="search-btn">⭐</button>
-                    <button class="search-btn">⭐⭐</button>
-                    <button class="search-btn">⭐⭐⭐</button><br>
-                    <button class="search-btn"><img src="../css/images/KakaoTalk_20240422_010835732.png" alt="" style="width: 40px; height: 40px;"></button>
-                    <br><button class="search-btn"><img src="../css/images/alert-circle-outline.svg" alt="">위생법 위반 업체</button>
+                    <input type="checkbox" id="⭐"  class="search-check">
+                    <label for="⭐"><div class="search-btn">⭐</div></label>
+                    <input type="checkbox" id="⭐⭐" class="search-check">
+                    <label for="⭐⭐"><div class="search-btn">⭐⭐</div></label>
+                    <input type="checkbox" id="⭐⭐⭐" class="search-check">
+                    <label for="⭐⭐⭐"><div class="search-btn">⭐⭐⭐</div></label>
+                    <input type="checkbox" id="Example" class="search-check">
+                    <label for="Example"><div class="search-btn"><img src="./css/images/KakaoTalk_20240422_010835732.png" alt="" style="width: 35px; height: 35px;"></div></label><br>
+                    <label for="search-filter-btn"><img src="./css/images/alert-circle-outline.svg" alt="" style="width: 20px; height: 20px;"></label>
+
                 </div>
             </div>
         </header>
@@ -43,17 +51,22 @@
         <div id="map" style="z-index: 0;position: absolute; top: 0px; width: 100%; height: 100%;;"></div>
         <ul id="footer">
             <input type="checkbox" name="footer-btn" id="footer-btn">
-            <li><a href="#"><img class="footer-img" src="../css/images/emergency.png" alt=""></a></li>
-            <li><a href="./list.html"><img class="footer-img" src="../css/images/list.png" alt="" id="home"></a></li>
-            <li><a href="./클린잇_로그인, 회원가입/index.html"><img class="footer-img" src="../css/images/user_icon.png" alt=""></a></li>
-            <label for="footer-btn"><img class="footer-img" src="../css/images/menu2.png" alt="" id="list_icon"></label>
+
+            <li style="margin-top: 10px;"><a href="https://www.foodsafetykorea.go.kr/portal/consumerNotify/customerNotifyStep1.do?rcptDvs=J&mobileFlag=1&menu_no=4897&menu_grp=MENU_MOB03"  target="_blank"><img class="footer-img" src="./css/images/emergency.png" alt="" style="width: 28px; height: 28px;"></a></li>
+            <li><a href="./list.html"><img class="footer-img" src="./css/images/clipboard_paper_document_icon.png" alt="" id="home" style="width: 30px; height: 30px;"></a></li>
+            <li><a href="#"><img class="footer-img" src="./css/images/member_person_profile_icon.png" alt="" id="loginbtn" style="width: 30px; height: 30px;"></a></li>
+            <label for="footer-btn"><img class="footer-img" src="./css/images/menu2.png" alt="" id="list_icon" style="width: 40px; height: 40px;"></label>
+
         </ul>
         
 
 
         <!-- swiper버튼 -->
         <input type="checkbox" name="" id="swiperbutton">
-        <label for="swiperbutton"><img src="../css/images/swipe_icon.png" alt=""></label>
+
+        <label for="swiperbutton">
+            <img src="./css/images/Vector 34.png" alt="" >
+        </label>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">Slide 1</div>
@@ -71,15 +84,19 @@
 
 
         <input type="checkbox" id="check"><!-- slide버튼 -->
-        <label for="check"><img src="../css/images/up_icon.svg" alt="" id="up"></label>
+
+
+        <label for="check"><img src="./css/images/up_icon.svg" alt="" id="up"></label>
         <div id="slide">
             <div id="slide-empty"></div>
             <div class="slide-content">
                 <img class="restaurant-img" src="../css/images/KakaoTalk_20240422_010835732_01.png" alt="">
                 <div class="slide-header">
-                    <img class="slide-in-logo" src="../css/images/KakaoTalk_20240422_010835732.png" alt="">
-                    <img class="bookmark" src="../css/images/bookmark-outline.svg" alt="">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <img class="bookmark" src="./css/images/bookmark-outline.svg" alt="">
+
                 </div>
+                <img class="restaurant-img" src="./css/images/KakaoTalk_20240422_010835732_01.png" alt="">
                 <div class="slide-info">
                     <h2>음식점이름</h2>
                     <p>한식</p>
@@ -87,14 +104,17 @@
                     <p>서울시 강남구 논현로 85길 43</p>
                     <p>02-043-0000</p>
                 </div>
-                <a href="./more.html"><img class="more-info" src="../css/images/add-circle-outline.svg" alt=""></a>
+
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
             </div>
             <div class="slide-content">
                 <img class="restaurant-img" src="../css/images/KakaoTalk_20240422_010835732_01.png" alt="">
                 <div class="slide-header">
-                    <img class="slide-in-logo" src="../css/images/KakaoTalk_20240422_010835732.png" alt="">
-                    <img class="bookmark" src="../css/images/bookmark-outline.svg" alt="">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <img class="bookmark" src="./css/images/bookmark-outline.svg" alt="">
+
                 </div>
+                <img class="restaurant-img" src="./css/images/KakaoTalk_20240422_010835732_01.png" alt="">
                 <div class="slide-info">
                     <h2>음식점이름</h2>
                     <p>한식</p>
@@ -102,14 +122,17 @@
                     <p>서울시 강남구 논현로 85길 43</p>
                     <p>02-043-0000</p>
                 </div>
-                <a href="./more.html"><img class="more-info" src="../css/images/add-circle-outline.svg" alt=""></a>
+
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
             </div>
             <div class="slide-content">
                 <img class="restaurant-img" src="../css/images/KakaoTalk_20240422_010835732_01.png" alt="">
                 <div class="slide-header">
-                    <img class="slide-in-logo" src="../css/images/KakaoTalk_20240422_010835732.png" alt="">
-                    <img class="bookmark" src="../css/images/bookmark-outline.svg" alt="">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <img class="bookmark" src="./css/images/bookmark-outline.svg" alt="">
+
                 </div>
+                <img class="restaurant-img" src="./css/images/KakaoTalk_20240422_010835732_01.png" alt="">
                 <div class="slide-info">
                     <h2>음식점이름</h2>
                     <p>한식</p>
@@ -117,11 +140,12 @@
                     <p>서울시 강남구 논현로 85길 43</p>
                     <p>02-043-0000</p>
                 </div>
-                <a href="./more.html"><img class="more-info" src="../css/images/add-circle-outline.svg" alt=""></a>
+
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
             </div>
         </div>
 
-        <a href="./list.html" id="list_button"><img src="../css/images/clipboard-outline.svg" style="width: 20px" alt="">
+        <a href="./list.html" id="list_button"><img src="./css/images/clipboard-outline.svg" style="width: 20px" alt="">
         </a>
 
     </div>
