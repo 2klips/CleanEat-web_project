@@ -1,0 +1,42 @@
+.custom-info-window {
+    width: 250px;
+    height: 100px;
+    position: relative;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
+.info-title {
+    font-weight: bold;
+}
+
+.info-rating {
+    color: #ffd700; /* gold color */
+}
+
+.info-address, .info-phone {
+    font-size: 0.8em;
+    color: #333;
+}
+
+.info-marker-icon {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    width: 20px; /* Size of your icon */
+}
+
+.info-image {
+    position: absolute;
+    top: 50%; /* Adjust as needed */
+    transform: translateY(-50%);
+    left: 10px; /* Adjust as needed */
+    width: 20px; /* Size of your image */
+}
+
+.info-text {
+    margin-left: 30px; /* Adjust as needed */
+}
