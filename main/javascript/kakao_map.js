@@ -12,7 +12,7 @@ map.setDraggable(true);
 // 인포윈도우의 내용을 생성하는 함수
 function createInfoWindowContent(title, address, phone, rating) {
     return `
-        <div class="custom-info-window">
+        <div class="custom-info-window" onclick="location.href='./more.html';">
             <h4 class="info-title">${title}</h4>
             <div class="info-address">${address}</div>
             <div class="info-phone">${phone}</div>
@@ -65,6 +65,7 @@ positions.forEach(function(position) {
         yAnchor: 1.5 // 인포윈도우를 마커 이미지의 아래에 위치하도록 조정
     });
 
+
     infowindows.push(customOverlay);
 
     // 모든 인포윈도우를 열어줍니다.
@@ -80,4 +81,11 @@ positions.forEach(function(position) {
         map.setLevel(2); // 지도 레벨 조정
     });
 
+    
+    // 인포윈도우 클릭 이벤트 추가
+    kakao.maps.event.addListener(customOverlay, 'click', function() {
+        // 상세페이지 URL로 리다이렉트
+        window.location.href = 'https://kloa.gg/merchant'; // 여기에 원하는 URL을 넣어주세요
+    });
 });
+
