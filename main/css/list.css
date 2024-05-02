@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 300;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+.nanumbarungothic * {
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
 :root{
     /* color */
     --white-color: white;
@@ -11,6 +23,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'NanumBarunGothic';
 }
 
 #container{
@@ -74,7 +87,8 @@ body, html{
 #search-btn > img{
     width: 23px;
     height: 23px;
-    margin-bottom: 5px;
+    margin-left: 5.5px;
+    margin-bottom: 3px;
 }
 
 #search-filter-btn + label{
