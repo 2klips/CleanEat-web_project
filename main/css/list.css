@@ -33,6 +33,8 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* 헤더 부분 */
@@ -340,4 +342,46 @@ header > #searchbox > label > #menu{
     width: 35px;
     height: 35px;
     cursor: pointer;
+}
+
+section{
+    width: 90%;
+    height: 100%;
+    overflow-y: scroll;
+    margin: 20px 30px 100px 30px;
+}
+.content{
+    text-align: left;
+    border-bottom: 1px solid #8AE9FF;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+section > .content > a > .more-info{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+section > .content  p,h2{
+    margin-top: 5px;
+}
+
+section > .content .star{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    margin-top: 0;
+    font-size: 13px;
+    display: flex;
+}
+
+section > .content  .star > h3 > img{
+    width: 50px;
+    height: 15px;
+    margin-left: 5px;
 }
