@@ -186,7 +186,7 @@ body, html{
     margin-right: 5px;
 }
 
-#search-filter label:nth-child(15) > div{
+#search-filter label:nth-child(16) > div{
     width: 150px;
     height: 30px;
     padding: 5px;
@@ -215,8 +215,7 @@ body, html{
     width: 80px;
 }
 #search-filter > div > .search-check:checked + label > div{
-    background-color: rgba(138, 233, 255, 0.4);
-    border-color: #8AE9FF;
+    border: 3px solid #8AE9FF;
 }
 
 .star{
