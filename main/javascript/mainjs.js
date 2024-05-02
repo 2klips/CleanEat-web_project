@@ -4,20 +4,22 @@ window.navermap_authFailure = function () {
     alert('클라이언트 인증 실패!')
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var introScreen = document.getElementById('introScreen');
+    var container = document.getElementById('container');
 
-// function changeherf(){
-//     const loginbtn = document.getElementById("loginbtn");
-//     if(logincheck){
-//         loginbtn.href = "../info/main.html";
-//     }else{
-//         loginbtn.href = "../login_regist/index.html";
-//     }
-// }
+    // sessionStorage에서 'introSeen' 값을 확인
+    if (!sessionStorage.getItem('introSeen')) {
+        introScreen.style.display = 'flex'; // 인트로 화면을 보여줍니다
+        container.style.display = 'none'; // 메인 컨텐츠를 숨깁니다
 
-
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-        document.getElementById('introScreen').style.display = 'none'; // 인트로 화면을 숨깁니다.
-        document.getElementById('mainContent').style.display = 'block'; // 메인 콘텐츠를 표시합니다.
-    }, 2200); // 2000 밀리초 후에 실행
+        setTimeout(() => {
+            introScreen.style.display = 'none'; // 인트로 화면을 숨깁니다
+            container.style.display = 'block'; // 메인 컨텐츠를 보여줍니다
+            sessionStorage.setItem('introSeen', 'true'); // sessionStorage에 방문 기록을 저장합니다
+        }, 2300); // 예를 들어 5초 후에 인트로 화면을 숨기고 메인 컨텐츠를 보여줍니다
+    } else {
+        introScreen.style.display = 'none'; // 인트로 화면을 숨깁니다
+        container.style.display = 'block'; // 메인 컨텐츠를 즉시 보여줍니다
+    }
 });
