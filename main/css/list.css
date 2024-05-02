@@ -385,3 +385,7 @@ section > .content  .star > h3 > img{
     height: 15px;
     margin-left: 5px;
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
