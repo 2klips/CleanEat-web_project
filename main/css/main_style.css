@@ -93,22 +93,14 @@ header{
     min-width: 288px;
     z-index: 100;
     background-color: white;
-    /* padding-top: 3px; */
-    padding: 3px 8px 3px 0px;
+    /* padding: 3px 8px 3px 0px; */
 }
-
-
-
-
-
-
 
 
 #search::placeholder{
     color: rgba(128, 128, 128, 0.5);
     font-weight: bolder;
 }
-
 
 
 #searchbox > #search::placeholder{
@@ -137,6 +129,7 @@ header{
     max-width: 550px;
     background-color: white;
     justify-content: center;
+    position: sticky;
 }
 
 #search-filter > p{
@@ -157,7 +150,6 @@ header{
 
 #search-filter > label{
     text-align: center;
-    padding: 0px;
     margin-bottom: 10px;
     margin-left: 0px;
     display: inline-block;
@@ -170,6 +162,9 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#search-filter > label > div > img{
+    margin-right: 5px;
 }
 
 #search-filter label:last-child{
@@ -196,6 +191,31 @@ header{
     padding: 7px;
     font-size: 13px;
     width: 80px;
+}
+#search-filter > div > label > div{
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+}
+#search-filter > div > .search-check:checked + label > div{
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+}
+
+.star{
+    display: flex;
+    justify-content: center;
+}
+
+.star :nth-child(4){
+    margin: 0 10px 10px 10px;
+}
+
+#search-filter label:nth-child(5){
+    margin: 0 5px 10px 5px;
 }
 
 
@@ -236,10 +256,11 @@ header > #searchbox > label > #menu{
 	border: none;
     cursor: pointer;
 }
+
 #search-btn > img{
     width: 23px;
     height: 23px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 #search-filter-btn + label{
@@ -263,8 +284,8 @@ header > #searchbox > label > #menu{
     justify-content: center;
     flex-wrap: wrap;
     position: absolute;
-    bottom: 25px;
-    left: 15px;
+    bottom: 30px;
+    left: 10px;
     z-index: 140;
     list-style: none;
     background-color: var(--skyblue-color);
@@ -306,41 +327,49 @@ header > #searchbox > label > #menu{
 
 /* 아래쪽 슬라이드 */
 #slide{
-    width: 99%;
+    width: 100%;
     height: 30px;
     background-color: white;
     position: fixed;
     z-index: 149;
-    bottom: -10px;
+    bottom: -20px;
     transition: all 300ms ease-in-out;
-    padding-top: 40px;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
     box-shadow: 0px 1px 10px 0px gray;
-    padding: 0px 15px;
-    border-radius: 30px;
-}
-#slide > #slide-empty{
-    width: 90%;
-    height: 30px;
-    position: fixed;
-    background-color: white;
-    z-index: 100;
-    border-radius: 30px;
+    padding: 0 15px 40px 15px;
+    border-radius: 30px 30px 0px 0px;
 }
 
+#slide > #slide-empty{
+    width: 100%;
+    height: 30px;
+    position: fixed;
+    left: 0;
+    background-color: white;
+    z-index: 100;
+    border-radius: 30px 30px 0px 0px;
+}
+.slide-info>h2{
+    font-size: 18px;
+    font-weight: bold;
+}
 #slide > .slide-content{
     width: 100%;
-    height: 135px;
-    margin-top: 30px;
-    padding: 5px;
-    border-top: 1px solid #55dfff;
+    height: 170px;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #55dfff;
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    
+}
+
+#slide > .slide-content > :first-child{
+    margin-top: 10px;
 }
 #slide > .slide-content > .slide-header{
-    width: 68%;
+    width: 61%;
     height: 35px;
     position: absolute;
     right: 0px;
@@ -348,20 +377,43 @@ header > #searchbox > label > #menu{
     display: flex;
     justify-content: space-between;
 }
+
+#slide > .slide-content > .slide-header  .header-bookmark{
+    width: 30px;
+    height: 100%;
+    display: inline-block;
+    margin-top: 0px;
+    cursor: pointer;
+}
+
 #slide > .slide-content > .slide-header > img{
     width: 30px;
     height: 100%;
 }
-#slide > .slide-content > .restaurant-img{
-    width: 100px;
-    height: 100px;
-    float: left;
-}
-#slide > .slide-content > .slide-info{
 
+#slide > .slide-content > .slide-header  .header-bookmark > .bookmarkicon{
+    width: 25px;
+    height: 100%;
+    margin: 0;
+}
+#slide > .slide-content > .restaurant-img{
+    width: 37%;
+    height: 100%;
+    float: left;
+    /* margin-top: 18px; */
+    margin-right: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+#slide div:nth-child(2){
+    margin-top: 30px;
+}
+
+#slide > .slide-content > .slide-info{
     position: absolute;
-    left: 110px;
-    top: 40px;
+    margin-top: 40px;
+    margin-left: 40%;
     display: inline-block;
 }
 #slide > .slide-content > .slide-info > p,h2,h3{
@@ -369,18 +421,17 @@ header > #searchbox > label > #menu{
     margin-top: 4px;
 }
 
-#slide > .slide-content > a> .more-info{
+#slide > .slide-content > a > .more-info{
     width: 30px;
     height: 30px;
     position: absolute;
-    right: 0px;
-    bottom: 5px;
+    right: 5px;
+    bottom: 10px;
     cursor: pointer;
 }
 #check{
     display: none;
 }
-
 
 /* 슬라이드 버튼 */
 #up{ 
@@ -388,7 +439,7 @@ header > #searchbox > label > #menu{
     width: 20px;
     position: fixed;
     bottom: 5px;
-    left: calc(50% - 14px);
+    left: calc(50% - 10px);
     transition: all 300ms ease-in-out;
     cursor: pointer;
     z-index: 150;
@@ -405,6 +456,7 @@ header > #searchbox > label > #menu{
     height: 420px;
     bottom: -30px;
     padding-bottom: 80px;
+    overflow-y: scroll;
 }
 
 
@@ -446,13 +498,13 @@ header > #searchbox > label > #menu{
 
 #swiperbutton{
     display: none;
-
 }
+
 #swiperbutton + label{
     width: 20px;
     height: 50px;
     position: fixed;
-    bottom: 35px;
+    bottom: 30px;
     right: -5px;
     cursor: pointer;
     z-index: 100;
@@ -484,9 +536,10 @@ header > #searchbox > label > #menu{
 
 
 #list_button{
-    position: fixed;
+    position: absolute;
     bottom: 30px;
     width: 80px;
+    left: calc(50% - 40px);
     height: 25px;
     border-radius: 10px;
     border: 1px solid var(--skyblue-color);

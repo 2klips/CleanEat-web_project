@@ -11,11 +11,11 @@ a>div:link, a>div:visited {
   text-decoration: none;
   color: #595959;
 }
-a>div:hover, a>div:active{
+/* a>div:hover, a>div:active{
   border: none;
   text-decoration: none;
   color: #8AE9FF;
-}
+} */
 
 hr{
   margin: 0px;
@@ -168,6 +168,8 @@ div#text > h1 {margin-left: 10px; font-size: 24px;font-weight: normal;}
   height: 120px;
   object-fit: cover;
   display: flex;
+  border-radius: 8px;
+  border: 1px solid black;
 }
 #clean_eat {
   margin: 0 auto;
