@@ -1,4 +1,10 @@
-let apidate = {
+const apikey = '70564c455773797334354d435a5050';
+const startindex = 1;
+const endindex = 1000;
+// let datas = [];
+let totaldata = 0;
+
+let apiurl = {
     // 강북구 모범음식점 (지정현황) 조회
     gangbuk:`http://openAPI.gangbuk.go.kr:8088/${apikey}/json/GbModelRestaurantDesignate/${startindex}/${endindex}/;`,
 
@@ -75,8 +81,65 @@ let apidate = {
     songpa:`http://openAPI.songpa.seoul.kr:8088/${apikey}/json/SpModelRestaurantDesignate/${startindex}/${endindex}/`,
 
     // 서울시 위생업소 전체 행정처분내역 현황
-    violation:`http://openapi.seoul.go.kr:8088/${apikey}/json/SeoulAdminMesure/${startindex}/${endindex}/`,
+    // violation:`http://openapi.seoul.go.kr:8088/${apikey}/json/SeoulAdminMesure/${startindex}/${endindex}/`,
 
-    // 식품접객업소 위생등급 지정현황
-    saferanked:`http://openapi.foodsafetykorea.go.kr/api/${apikey}/C004/json/${startindex}/${endindex}/`,
+    // // 식품접객업소 위생등급 지정현황
+    // saferanked:`http://openapi.foodsafetykorea.go.kr/api/3e9e3054028b4ee58ad5/C004/json/${startindex}/${endindex}/ADDR=서울`,
 }
+
+
+async function fetchData(apiurl, apiKey, startIndex, endIndex) {
+    const url = apiurl;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+};
+
+async function getData() {
+    let datas = [];
+    try {
+        for (const key in apiurl) {
+            const data = await fetchData(apiurl[key], apikey, startindex, endindex);
+            datas.push(data); // 각 API 호출 결과를 배열에 추가
+        }
+        return datas; // 모든 API 호출 결과를 포함한 배열 반환
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // 에러가 발생하면 이를 상위로 전파
+    }
+}
+
+
+
+// (async () => {
+//     try {
+//         const apidata = await getData();
+//         const rowData = apidata.map(item => {
+//             const key = Object.keys(item)[0];
+//             return { [key]: item[key].row };
+//         });
+//         console.log(rowData);
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// })();
+
+(async () => {
+    try {
+        const apidata = await getData();
+        const rowData = apidata.map(item => {
+            const key = Object.keys(item)[0];
+            const { row, ...rest } = item[key];
+            return { ...row };
+        });
+        console.log(...rowData);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+})();
+
