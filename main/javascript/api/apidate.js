@@ -89,15 +89,6 @@ const safetyRank = `http://openapi.foodsafetykorea.go.kr/api/3e9e3054028b4ee58ad
 
 
 
-// let requests = apiurl.map(url => fetch(url));
-// console.log(requests) // [Promise, Promise]
-
-// Promise.all은 모든 작업이 이행될 때까지 기다립니다.
-// JSON 형태의 응답 메시지는 파싱 되어 배열 'users'에 저장됩니다.
-// Promise.all(requests)
-// .then(responses =>Promise.all(responses.map(r => r.json())))
-//     .then(result => 
-//         result.map((users)=>console.log(users)));
 
 
 const requests = apiurl.map(url => fetch(url));
@@ -119,43 +110,3 @@ Promise.all(requests)
         console.error('Error:', error);
     });
 
-// Promise.all을 사용하여 모든 요청이 완료될 때까지 기다립니다.
-// Promise.all(requests)
-//     .then(responses => Promise.all(responses.map(r => r.json())))
-//     .then(usersData => {
-//         // for(key in usersData){
-//         //     console.log(usersData[key]);
-//         // }
-//         (async () => {
-//             try {
-//                 const apidata = usersData;
-//                 const rowData = apidata.map(item => {
-//                     const key = Object.keys(item)[0];
-//                     const { row, ...rest } = item[key];
-//                     return { ...row };
-//                 });
-//                 console.log(...rowData);
-//             } catch (error) {
-//                 console.error('Error:', error);
-//             }
-//         })();
-//     // return usersData;
-//     // usersData.forEach(users => console.log(users));
-//     })
-//     .catch(error => {
-//     console.error('Error:', error);
-// });
-
-// (async () => {
-//     try {
-//         const apidata = usersData;
-//         const rowData = apidata.map(item => {
-//             const key = Object.keys(item)[0];
-//             const { row, ...rest } = item[key];
-//             return { ...row };
-//         });
-//         console.log(...rowData);
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// })();

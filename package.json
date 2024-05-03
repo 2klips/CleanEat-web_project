@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "serve": "^11.2.0"
+
   },
   "main": "index.html",
   "name": "swiper-freemode",
@@ -10,5 +11,8 @@
   },
   "tags": [
     "swiper"
-  ]
+  ],
+  "dependencies": {
+    "mongodb": "^6.5.0"
+  }
 }
