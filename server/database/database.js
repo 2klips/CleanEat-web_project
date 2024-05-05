@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
-const config = require('../config.js');
+const config = require('../config');
+
 
 // MongoDB 서버 URI
 const uri =config.db.URI;
@@ -10,7 +11,7 @@ const client = new MongoClient(uri);
 // MongoDB 클라이언트 생성
 const dbName = config.db.DB_NAME;
 
-const datas = [];
+let datas = [];
 /**
  * 데이터베이스 연결합니다.
  * @returns {Promise} MongoDB 데이터베이스 연결 객체
@@ -55,7 +56,7 @@ async function searchAllDB(keyWord) {
         const result2 = await db.collection("ExemplaryRestaurantData").find({ $text: { $search: keyWord} }).toArray();
         const result3 = await db.collection("violationData").find({ $text: { $search: keyWord} }).toArray();
         console.log('검색완료')
-        await datas.push(result1,result2,result3);
+        datas = datas.concat(result1, result2, result3);
         console.log(datas);
         return datas;
     } catch (error) {
@@ -86,10 +87,66 @@ async function insertData(data, collecTion) {
     }
 }
 
-searchAllDB('강남구');
-module.exports = {
+
+
+
+// 아이디 중복검사
+async function findById(userid){
+    await connectMongoDB();
+    const db = await client.db(dbName);
+    const users = await db.collection('users')
+    return users.find({"userid": userid});
+}
+
+
+
+/**
+    로그인
+    @param {string} userid
+*/
+async function login(userid){
+    await connectMongoDB();
+    const db = await client.db(dbName);
+    const users = await db.collection('users')
+    const user = users.find({"userid": userid})
+    return user;
+}
+
+/**
+ * 회원가입
+ * @param {Object} user 사용자 정보 객체
+ * @param {string} user.username 사용자 아이디
+ * @param {string} user.password 사용자 비밀번호
+ * @param {string} user.name 사용자 이름
+ * @param {string} user.email 사용자 이메일
+ * @param {string} user.url 사용자 프로필 사진 URL
+ * @returns {string} 생성된 사용자의 아이디
+ */
+async function createUser(user){
+    const created = {...user }
+    insertData(users, created)
+    return created.username;
+}
+
+
+module.exports = { 
     connectMongoDB,
     searchDB,
     insertData,
-    searchAllDB
+    searchAllDB,
+    findById,
+    login,
+    createUser
 };
+
+// (async () => {
+//     try {
+//         const db = await connectMongoDB();
+//         await db.safetyRankData.updateMany({}, {$rename:{"HG_ASGN_LV":"rank","BSSH_NM":"name","ADDR":"addr","TELNO":"tel","HG_ASGN_YMD":"date","HG_ASGN_NO":"no"}});
+//         console.log('성공적으로 수행되었습니다.');
+//     } catch (error) {
+//         console.error('오류가 발생했습니다:', error);
+//     }
+// })();
+
+

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./css/kakaomap.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./javascript/mainjs.js"></script>
+    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=606cb3e160775ead960470f3b1a3b962"></script>
 </head>
 <body>
@@ -23,8 +23,8 @@
             <div id="searchbox">
 
 
-                <button type="submit" id="search-btn"><img src="./css/images/search_icon.svg" alt="" class="searchbtn"></button>
-                <input id="search" type="text" placeholder="검색어를 입력하세요.">
+                <button type="button" id="search-btn"><img src="./css/images/search_icon.svg" alt="" class="searchbtn"></button>
+                <input id="search" type="text" name="keyword" placeholder="검색어를 입력하세요.">
 
                 <input type="checkbox" name="" id="search-filter-btn">
                 <label for="search-filter-btn"><img src="./css/images/options-outline.svg" alt="" id="menu" class="searchbtn" style="width: 30px; height: 30px; margin-top: 4px;"></label>
@@ -40,14 +40,14 @@
                     <label for="pub"><div class="search-btn"><img src="./css/images/beer-outline.svg" alt="" style="width: 15px; height: 15px;"> 주점</div></label>
                     <p>위생등급</p>
                     <div class="star">
-                        <input type="checkbox" id="1star"  class="search-check">
+                        <input type="checkbox" id="1star"  class="search-check" value="safetyRankData">
                         <label for="1star"><div class="search-btn"><img src="./css/images/1star.svg" alt="" style="height: 17.76px;"></div></label>
-                        <input type="checkbox" id="2star" class="search-check">
+                        <input type="checkbox" id="2star" class="search-check" value="safetyRankData">
                         <label for="2star"><div class="search-btn"><img src="./css/images/2star.svg" alt="" style="height: 17.76px;"></div></label>
-                        <input type="checkbox" id="3star" class="search-check">
+                        <input type="checkbox" id="3star" class="search-check" value="safetyRankData">
                         <label for="3star"><div class="search-btn"><img src="./css/images/3star.svg" alt="" style="height: 17.76px;"></div></label>
                     </div>
-                    <input type="checkbox" id="Example" class="search-check">
+                    <input type="checkbox" id="Example" class="search-check" value="ExemplaryRestaurantData">
                     <label for="Example"><div class="search-btn"><img src="./css/images/KakaoTalk_20240422_010835732.png" alt="" style="width: 35px; height: 35px; margin: 0;"></div></label><br>
 
                     <label for="search-filter-btn"><img src="./css/images/triangle_up_icon.png" alt="" style="width: 20px; height: 20px; margin-top: 10px;"></label>
@@ -62,7 +62,7 @@
             <input type="checkbox" name="footer-btn" id="footer-btn">
 
             <li style="margin-top: 10px;"><a href="https://www.foodsafetykorea.go.kr/portal/consumerNotify/customerNotifyStep1.do?rcptDvs=J&mobileFlag=1&menu_no=4897&menu_grp=MENU_MOB03"  target="_blank"><img class="footer-img" src="./css/images/emergency.png" alt="" style="width: 28px; height: 28px;"></a></li>
-            <li><a href="./list.html"><img class="footer-img" src="./css/images/clipboard_paper_document_icon.png" alt="" id="home" style="width: 30px; height: 30px;"></a></li>
+            <li><a href="./list"><img class="footer-img" src="./css/images/clipboard_paper_document_icon.png" alt="" id="home" style="width: 30px; height: 30px;"></a></li>
             <li><a href="../login_regist/index.html" id="loginbtn"><img class="footer-img" src="./css/images/member_person_profile_icon.png" alt="" style="width: 30px; height: 30px;"></a></li>
             <label for="footer-btn"><img class="footer-img" src="./css/images/menu2.png" alt="" id="list_icon" style="width: 40px; height: 40px;"></label>
 
@@ -169,7 +169,7 @@
         <label for="check"><img src="./css/images/up_icon.svg" alt="" id="up"></label>
         <div id="slide">
             <div id="slide-empty"></div>
-            <div class="slide-content">
+            <!-- <div class="slide-content">
                 <div class="slide-header">
                     <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
                     <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark1" ></div>
@@ -303,7 +303,7 @@
                     <p>03-445-1375</p>
                 </div>
                 <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>;
-            </div>
+            </div> -->
         </div>
         <a href="./list.html" id="list_button"><img src="./css/images/clipboard-outline.svg" style="width: 18px; margin-top: 3px;" alt="">
         </a>
@@ -311,6 +311,7 @@
     </div>
     <!-- Initialize Swiper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./javascript/mainjs.js"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 3,

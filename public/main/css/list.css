@@ -369,6 +369,10 @@ section > .content > a > .more-info{
 section > .content  p,h2{
     margin-top: 5px;
 }
+section > .content  h2{
+    width: 40%;
+    font-size: 1.2em;
+}
 
 section > .content .star{
     position: absolute;

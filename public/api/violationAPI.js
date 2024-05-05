@@ -1,5 +1,5 @@
-const db = require('../database/database.js');
-const config = require('../config.js');
+const db = require('../../server/database/database.js');
+const config = require('../../server/config.js');
 
 
 const apikey = config.api.SEOUL_API_KEY;
@@ -17,7 +17,7 @@ async function fetchData(startindex) {
         const url = `${baseUrl}${startindex}/${endindex}/`
         const response = await fetch(url);
         const data = await response.json();
-        const filteredData = data.SeoulAdminMesure.row.filter(item => item.SNT_COB_NM.includes('급식'));
+        const filteredData = data.SeoulAdminMesure.row.filter(item => item.SNT_COB_NM.includes('음식점'));
         datas.push(...filteredData);
 
         return data.SeoulAdminMesure.list_total_count;
@@ -54,3 +54,11 @@ async function fetchDataLoop() {
 // fetchDataLoop()
 //     .then(() => db.insertData(datas, 'violation'))
 //     .catch(error => console.error('Error:', error));
+// (async () => {
+//     try {
+//         await fetchDataLoop();
+//         await db.insertData(datas, 'violation');
+//     } catch (error) {
+//         console.error('오류가 발생했습니다:', error);
+//     }
+// })();
