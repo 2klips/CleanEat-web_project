@@ -1,7 +1,5 @@
-
 const searchBtn = document.getElementById('search-btn');
 const searchbox = document.getElementById('search');
-const searchfilter = document.getElementById('search-btn');
 /**
  * 데이터를 화면에 표시하는 함수
  * @param {Object} datas 화면에 표시할 데이터 객체
@@ -28,16 +26,17 @@ async function displayData(datas) {
             itemElement.classList.add('content');
             // let itemHTML = '<div class="content">';
             let itemHTML = '<div class="content-info">';
-            itemHTML += `<h2>${item.name}</h2>`; // 식당명
-            itemHTML += `<p>${item.type}</p>`; // 업태명
-            itemHTML += `<p>${item.category}</p>`; // 업종
+            itemHTML += `<h2>${item.name || ''}</h2>`; // 식당명
+            itemHTML += `<p>${item.type || ''}</p>`; // 업태명
+            itemHTML += `<p>${item.category || ''}</p>`; // 업종
             itemHTML += rank; // 위생등급
-            itemHTML += `<p>${item.detail}</p><br>`                   
-            itemHTML += `<p>${item.name}</p><br>`                   
-            itemHTML += `<p>${item.penalty}</p><br>`                   
-            itemHTML += `<p>${item.date}</p><br>`; // 지정일자
-            itemHTML += `<p>${item.addr}</p><br>`; // 주소
-            itemHTML += `<p>${item.tel}</p><br>`; // 전화번호
+            itemHTML += `<p>${item.detail || ''}</p><br>`                   
+            itemHTML += `<p>${item.no || ''}</p><br>`                   
+            itemHTML += `<p>${item.penalty || ''}</p><br>`                   
+            itemHTML += `<p>${item.date || ''}</p><br>`; // 지정일자
+            itemHTML += `<p>${item.addr || ''}</p><br>`; // 주소
+            itemHTML += `<p>${item.tel || ''}</p><br>`; // 전화번호
+            itemHTML += '</div>';
             itemHTML += '</div>';
             itemElement.innerHTML = itemHTML;
             container.appendChild(itemElement);
@@ -47,13 +46,12 @@ async function displayData(datas) {
     }
 }
 
-
-
-
 async function search() {
+    scrollToTop()
     const keyword = searchbox.value;
-
     const checkboxes = document.querySelectorAll('.search-check:checked');
+    const rank = document.querySelectorAll('.rank:checked');
+    const ubtype = document.querySelectorAll('.ubtype:checked');
     // 체크된 체크박스의 값을 저장할 배열을 생성합니다.
     const collection = [];
     // 각 체크된 체크박스의 값을 배열에 추가합니다.
@@ -62,14 +60,53 @@ async function search() {
     });
     if (!keyword) {
         console.error('검색어를 입력하세요.');
-        return;
-    }else if (collection.length === 0) {
-        console.error('검색할 데이터를 선택하세요.');
+        alert('검색어를 입력하세요.');
         return;
     }
-    
+    let types = []
+    let rans = []
+    rank.forEach(rank => {
+        rans.push(rank.value);
+    });
+    ubtype.forEach(type => {
+        types.push(type.value);
+    });
+    let query = {
+        $and: [
+            {
+                $or: [
+                    { addr: { $regex: keyword, $options: 'i' } }, // 'i' 옵션은 대소문자 구분 없이 검색하도록 합니다.
+                    { name: { $regex: keyword, $options: 'i' } }
+                ]
+            },
+        ]
+    };
+    if (rans.length > 0) {
+        query.$and.push({ rank: { $in: rans } });
+    }
+    if (types.length > 0) {
+        if (types.length > 0) {
+            if (types.includes('음식점')) {
+                // '음식점'이 types 배열 안에 포함되어 있는 경우
+                query.$and.push({ type: { $not: { $regex: '급식',$options: 'i' } }, 
+                category: { $not: { $regex: '급식',$options: 'i' } } });  
+            } else if (types.includes('급식')) {
+                // '급식'이 types 배열 안에 포함되어 있는 경우
+                query.$and.push({ 
+                    $or: [
+                        { type: { $regex: '급식', $options: 'i' } },
+                        { category: { $regex: '급식', $options: 'i' } }
+                    ]
+                });
+            }
+        }
+    }else if (types.length >= 2){
+        alert('분류를 하나만 선택해주세요');
+    };
+    console.log(query, collection);
     try {
-        const response = await fetch(`/main/list/search?collection=${collection}&keyword=${keyword}`);
+        const queryString = encodeURIComponent(JSON.stringify(query));
+        const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
         if (!response.ok) {
             // 응답이 성공적이지 않을 경우 오류를 throw하여 catch 블록으로 이동
             throw new Error('서버 응답에 문제가 발생했습니다.');
@@ -88,7 +125,6 @@ async function search() {
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 
 
 // 검색 버튼 클릭 시 실행되는 이벤트 리스너

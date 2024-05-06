@@ -1,5 +1,5 @@
-const config = require('../config.js');
-const db = require('../database/database.js');
+const config = require('../../server/config.js');
+const db = require('../../server/database/database.js');
 const fs = require('fs');
 
 const apikey = config.api.SEOUL_API_KEY;
@@ -120,26 +120,44 @@ const requests = apiurl.map(url => fetch(url));
 //         });
 // }
 
+// function apiData() {
+//     return Promise.all(requests)
+//         .then(responses => Promise.all(responses.map(r => r.json())))
+//         .then(usersData => {
+//             // 각 응답 데이터에서의 row 배열을 객체로 변환하여 반환합니다.
+//             const convertedData = {};
+//             usersData.forEach(item => {
+//                 const key = Object.keys(item)[0];
+//                 // console.log(item[key].row)
+//                 convertedData[key] = item[key].row;
+//             });
+//             return convertedData;
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+// }
 function apiData() {
     return Promise.all(requests)
         .then(responses => Promise.all(responses.map(r => r.json())))
         .then(usersData => {
-            // 각 응답 데이터에서의 row 배열을 객체로 변환하여 반환합니다.
-            const convertedData = {};
+            // 모든 응답 데이터를 담을 배열 생성
+            const allData = [];
             usersData.forEach(item => {
                 const key = Object.keys(item)[0];
-                // console.log(item[key].row)
-                row = item[key].row;
+                // 각 응답 데이터의 row 배열을 allData에 추가
+                allData.push(...item[key].row);
             });
-            return row;
+            return allData; // 모든 응답 데이터가 담긴 배열 반환
         })
         .catch(error => {
             console.error('Error:', error);
+            return []; // 에러 발생 시 빈 배열 반환
         });
 }
-const obj = {};
-apiData()
-    .then(data => {
-        db.insertData(data, 'ExemplaryRestaurantData');
-    })
+// apiData()
+//     .then(data => {
+//         console.log(data);
+//         db.insertData(data, 'ExemplaryRestaurantData');
+//     })
 module.exports = apiData;

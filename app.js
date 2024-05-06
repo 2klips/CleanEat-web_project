@@ -4,7 +4,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 const routers = require("./server/router");
 const path = require("path");
+const db = require("./server/database/database.js");
 
+db.connectMongoDB();
 
 const app = express();
 app.use(cors());

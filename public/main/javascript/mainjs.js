@@ -40,7 +40,7 @@ async function displayData(datas) {
             itemHTML += `<p>${item.category || ''}</p>`; // 업종
             itemHTML += rank; // 위생등급
             itemHTML += `<p>${item.detail || ''}</p><br>`                   
-            itemHTML += `<p>${item.name || ''}</p><br>`                   
+            itemHTML += `<p>${item.no || ''}</p><br>`                   
             itemHTML += `<p>${item.penalty || ''}</p><br>`                   
             itemHTML += `<p>${item.date || ''}</p><br>`; // 지정일자
             itemHTML += `<p>${item.addr || ''}</p><br>`; // 주소
@@ -55,13 +55,22 @@ async function displayData(datas) {
     }
 }
 
-
-
-
+/**
+ * 검색어를 서버에 전송하여 데이터를 검색하는 함수
+ * @returns {Promise} 서버로부터 받은 데이터를 화면에 표시
+ * @throws {Error} 서버 통신 중 오류 발생 시 에러를 throw
+ * @function search
+ * @param {string} keyword 검색어
+ * @param {Array} collection 검색할 컬렉션
+ * @param {Object} query 검색할 쿼리
+ * @returns {Promise} 서버로부터 받은 데이터를 화면에 표시
+ * @throws {Error} 서버 통신 중 오류 발생 시 에러를 throw
+*/
 async function search() {
+    scrollToTop()
     const keyword = searchbox.value;
-
     const checkboxes = document.querySelectorAll('.search-check:checked');
+    const rank = document.querySelectorAll('.rank:checked');
     // 체크된 체크박스의 값을 저장할 배열을 생성합니다.
     const collection = [];
     // 각 체크된 체크박스의 값을 배열에 추가합니다.
@@ -72,14 +81,27 @@ async function search() {
         console.error('검색어를 입력하세요.');
         alert('검색어를 입력하세요.');
         return;
-    }else if (collection.length === 0) {
-        console.error('검색할 데이터를 선택하세요.');
-        alert('검색할 데이터를 선택하세요.');
-        return;
     }
-    
+    let rans = []
+    rank.forEach(rank => {
+        rans.push(rank.value);
+    });
+    let query = {
+        $and: [
+            {
+                $or: [
+                    { addr: { $regex: keyword, $options: 'i' } }, // 'i' 옵션은 대소문자 구분 없이 검색하도록 합니다.
+                    { name: { $regex: keyword, $options: 'i' } }
+                ]
+            },
+        ]
+    };
+    if (rans.length > 0) {
+        query.$and.push({ rank: { $in: rans } });
+    }
     try {
-        const response = await fetch(`/main/search?collection=${collection}&keyword=${keyword}`);
+        const queryString = encodeURIComponent(JSON.stringify(query));
+        const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
         if (!response.ok) {
             // 응답이 성공적이지 않을 경우 오류를 throw하여 catch 블록으로 이동
             throw new Error('서버 응답에 문제가 발생했습니다.');

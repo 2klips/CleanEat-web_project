@@ -31,16 +31,23 @@ async function connectMongoDB() {
 /** @module database
  * 데이터베이스에서 검색.
  * @param {string} collecTion - 검색할 컬렉션 이름
- * @param {string} keyWord - 검색할 키워드
+ * @param {Object} query - MongoDB 쿼리 객체
  * @returns {Array} 검색 결과 배열
  */
-async function searchDB(collecTion,keyWord) {
+async function searchDB(collecTion,query) {
+    if(!collecTion){
+        collecTion = "safetyRankData";
+    }
     try {
-        await connectMongoDB();
-        const db = await client.db(dbName);
-        const result = await db.collection(collecTion).find({ $text: { $search: keyWord} }).toArray();
-        console.log('검색완료')
-        return result;
+        const db = await connectMongoDB();
+        const result = await db.collection(collecTion).find(query).toArray();
+        if(result && result.length > 0){
+            console.log('검색완료')
+            return result;
+        }else{
+            console.log('검색결과 없음')
+        }
+
     } catch (error) {
         console.error('Error:', error);
     } finally {
@@ -48,24 +55,6 @@ async function searchDB(collecTion,keyWord) {
     }
 }
 
-async function searchAllDB(keyWord) {
-    try {
-        await connectMongoDB();
-        const db = await client.db(dbName);
-        const result1 = await db.collection("safetyRankData").find({ $text: { $search: keyWord} }).toArray();
-        const result2 = await db.collection("ExemplaryRestaurantData").find({ $text: { $search: keyWord} }).toArray();
-        const result3 = await db.collection("violationData").find({ $text: { $search: keyWord} }).toArray();
-        console.log('검색완료')
-        datas = datas.concat(result1, result2, result3);
-        console.log(datas);
-        return datas;
-    } catch (error) {
-        console.error('Error:', error);
-    } finally {
-        client.close();
-    }
-
-}
 
 /**
  * 데이터를 컬렉션에 삽입
@@ -133,20 +122,7 @@ module.exports = {
     connectMongoDB,
     searchDB,
     insertData,
-    searchAllDB,
     findById,
     login,
     createUser
 };
-
-// (async () => {
-//     try {
-//         const db = await connectMongoDB();
-//         await db.safetyRankData.updateMany({}, {$rename:{"HG_ASGN_LV":"rank","BSSH_NM":"name","ADDR":"addr","TELNO":"tel","HG_ASGN_YMD":"date","HG_ASGN_NO":"no"}});
-//         console.log('성공적으로 수행되었습니다.');
-//     } catch (error) {
-//         console.error('오류가 발생했습니다:', error);
-//     }
-// })();
-
-
