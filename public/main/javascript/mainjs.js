@@ -35,16 +35,16 @@ async function displayData(datas) {
             // let itemHTML = '<div class="content">';
             let itemHTML = '<div class="slide-header"><div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark1" ></div></div>'
             itemHTML += '<div class="content-info">';
-            itemHTML += `<h2>${item.name || ''}</h2>`; // 식당명
+            itemHTML += `<h2>식당명: ${item.name || ''}</h2>`; // 식당명
             itemHTML += `<p>${item.type || ''}</p>`; // 업태명
             itemHTML += `<p>${item.category || ''}</p>`; // 업종
             itemHTML += rank; // 위생등급
             itemHTML += `<p>${item.detail || ''}</p><br>`                   
             itemHTML += `<p>${item.no || ''}</p><br>`                   
             itemHTML += `<p>${item.penalty || ''}</p><br>`                   
-            itemHTML += `<p>${item.date || ''}</p><br>`; // 지정일자
-            itemHTML += `<p>${item.addr || ''}</p><br>`; // 주소
-            itemHTML += `<p>${item.tel || ''}</p><br>`; // 전화번호
+            itemHTML += `<p>지정일자: ${item.date || ''}</p><br>`; // 지정일자
+            itemHTML += `<p>도로명 주소: ${item.addr || ''}</p><br>`; // 주소
+            itemHTML += `<p>전화번호:${item.tel || ''}</p><br>`; // 전화번호
             itemHTML += '</div>';
             itemHTML += '</div>';
             itemElement.innerHTML = itemHTML;

@@ -20,22 +20,47 @@ async function displayData(datas) {
             }else if(item.rank == '좋음'){
                 rank = `<div class="star"><h3>위생등급: 좋음<img src="./css/images/1star.svg" class="1star"></h3></div>`;
             }
+            if (!item.detail){
+                item.detail = '';
+            }else if(item.detail){
+                item.detail = `위반내용: ` + item.detail
+            }
+            if (!item.no){
+                item.no = '';
+            } else if(item.no){
+                item.no = `지정번호: ` + item.no
+            }
+            if (!item.penalty){
+                item.penalty = '';
+            } else if(item.penalty){
+                item.penalty = `처벌내용: ` + item.penalty
+            }
+            if (!item.category){
+                item.category = '';
+            } else if(item.category){
+                item.category = `업종명: ` + item.category
+            }
+            if (!item.penalty){
+                item.penalty = '';
+            } else if(item.penalty){
+                item.penalty = `처벌내용: ` + item.penalty
+            }
 
             // 각 식당 정보를 화면에 출력합니다.
             const itemElement = document.createElement('div');
             itemElement.classList.add('content');
             // let itemHTML = '<div class="content">';
             let itemHTML = '<div class="content-info">';
-            itemHTML += `<h2>${item.name || ''}</h2>`; // 식당명
-            itemHTML += `<p>${item.type || ''}</p>`; // 업태명
-            itemHTML += `<p>${item.category || ''}</p>`; // 업종
+            itemHTML += `<h2>업체명: ${item.name || ''}</h2>`; // 식당명
+            itemHTML += `<p>업태명: ${item.type || ''}</p>`; // 업태명
+            itemHTML += `<p> ${item.category || ''}</p>`; // 업종
             itemHTML += rank; // 위생등급
             itemHTML += `<p>${item.detail || ''}</p><br>`                   
             itemHTML += `<p>${item.no || ''}</p><br>`                   
             itemHTML += `<p>${item.penalty || ''}</p><br>`                   
-            itemHTML += `<p>${item.date || ''}</p><br>`; // 지정일자
-            itemHTML += `<p>${item.addr || ''}</p><br>`; // 주소
-            itemHTML += `<p>${item.tel || ''}</p><br>`; // 전화번호
+            itemHTML += `<p>지정일자: ${item.date || ''}</p><br>`; // 지정일자
+            itemHTML += `<p>도로명 주소: ${item.addr || ''}</p><br>`; // 주소
+            itemHTML += `<p>전화번호: ${item.tel || ''}</p><br>`; // 전화번호
             itemHTML += '</div>';
             itemHTML += '</div>';
             itemElement.innerHTML = itemHTML;
@@ -58,6 +83,11 @@ async function search() {
     checkboxes.forEach(checkbox => {
         collection.push(checkbox.value);
     });
+    if (collection.length >= 2) {
+        console.error('위생등급은 하나만 선택하세요.');
+        alert('위생등급은 하나만 선택하세요.');
+        return;
+    }
     if (!keyword) {
         console.error('검색어를 입력하세요.');
         alert('검색어를 입력하세요.');
@@ -101,7 +131,7 @@ async function search() {
             }
         }
     }else if (types.length >= 2){
-        alert('분류를 하나만 선택해주세요');
+        return alert('분류를 하나만 선택해주세요');
     };
     console.log(query, collection);
     try {
