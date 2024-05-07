@@ -169,20 +169,21 @@ header{
 
 #search-filter label:last-child{
     margin: 0px;
+    margin-top: 10%;
     margin-bottom: 0px!important; 
 }
 
-#search-filter label:nth-child(16) > div{
-    width: 80px;
-    height: 45px;
+#search-filter label:nth-child(7) > div{
+    width: 150px;
+    height: 30px;
     padding: 5px;
 }
-
 
 #search-filter > .search-check:checked + label > div{
     background-color: rgba(138, 233, 255, 0.4);
     border-color: #8AE9FF;
 }
+
 
 #search-filter > label > div{
     background-color: white;
@@ -199,10 +200,12 @@ header{
     padding: 7px;
     font-size: 13px;
     width: 80px;
+    cursor: pointer;
 }
-#search-filter > div > .search-check:checked + label > div{
+#search-filter > div > .rank:checked + label > div{
     background-color: rgba(138, 233, 255, 0.4);
     border-color: #8AE9FF;
+    cursor: pointer;
 }
 
 .star{
@@ -214,7 +217,7 @@ header{
     margin: 0 10px 10px 10px;
 }
 
-#search-filter label:nth-child(5){
+#search-filter label:nth-child(6){
     margin: 0 5px 10px 5px;
 }
 
@@ -347,10 +350,45 @@ header > #searchbox > label > #menu{
     position: fixed;
     left: 0;
     background-color: white;
-    z-index: 100;
+    z-index: 150;
     border-radius: 30px 30px 0px 0px;
 }
-.slide-info>h2{
+
+
+.slide-content{
+    text-align: left;
+    border-bottom: 1px solid #8AE9FF;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+
+#silde > .slide-content  p,h2{
+    margin-top: 5px;
+}
+#slide > .slide-content  h2{
+    width: 40%;
+    font-size: 1.2em;
+}
+
+#slide > .slide-content .star{
+    position: absolute;
+    right: 5px;
+    top: 30px;
+    margin-top: 0;
+    font-size: 13px;
+    display: flex;
+}
+
+#slide > .slide-content  .star > h3 > img{
+    width: 50px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+
+/* .slide-info>h2{
     font-size: 18px;
     font-weight: bold;
 }
@@ -365,6 +403,22 @@ header > #searchbox > label > #menu{
     position: relative;
 }
 
+#slide > .slide-content .content-info .star{
+    position: absolute;
+    right: 5px;
+    top: 50px;
+    margin-top: 0;
+    font-size: 13px;
+    display: flex;
+}
+
+#slide > .slide-content .content-info  .star > h3 > img{
+    width: 50px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+
 #slide > .slide-content > :first-child{
     margin-top: 10px;
 }
@@ -373,7 +427,6 @@ header > #searchbox > label > #menu{
     height: 35px;
     position: absolute;
     right: 0px;
-    /* clear: both; */
     display: flex;
     justify-content: space-between;
 }
@@ -400,7 +453,6 @@ header > #searchbox > label > #menu{
     width: 37%;
     height: 100%;
     float: left;
-    /* margin-top: 18px; */
     margin-right: 10px;
     border-radius: 8px;
     border: 1px solid black;
@@ -428,7 +480,10 @@ header > #searchbox > label > #menu{
     right: 5px;
     bottom: 10px;
     cursor: pointer;
-}
+} */
+
+
+
 #check{
     display: none;
 }
