@@ -1,5 +1,5 @@
-const config = require('../../server/config.js');
-const db = require('../../server/database/database.js');
+const config = require('../config.js');
+const db = require('../database/database.js');
 const fs = require('fs');
 
 const apikey = config.api.SEOUL_API_KEY;
