@@ -39,7 +39,7 @@ async function searchDB(collecTion,query) {
         collecTion = "safetyRankData";
     }
     try {
-        const db = await connectMongoDB();
+        const db = client.db(dbName);
         const result = await db.collection(collecTion).find(query).toArray();
         if(result && result.length > 0){
             console.log('검색완료')
@@ -81,38 +81,14 @@ async function insertData(data, collecTion) {
         console.log("Inserted data:", result.insertedCount);
     } catch (error) {
         console.error("Failed to insert data", error);
-    } finally {
-        client.close();
     }
 }
 
 
 
 
-// 아이디 중복검사
-async function findById(userid){
-    await connectMongoDB();
-    const db = await client.db(dbName);
-    const users = await db.collection('users')
-    return users.find({"userid": userid});
-}
 
-
-
-/**
-    로그인
-    @param {string} userid
-*/
-async function login(userid){
-    await connectMongoDB();
-    const db = await client.db(dbName);
-    const users = await db.collection('users')
-    const user = users.find({"userid": userid})
-    return user;
-}
-
-/**
- * 회원가입
+/** 회원가입
  * @param {Object} user 사용자 정보 객체
  * @param {string} user.username 사용자 아이디
  * @param {string} user.password 사용자 비밀번호
@@ -126,6 +102,13 @@ async function createUser(user){
     insertData(users, created)
     return created.username;
 }
+
+// 필드 삭제
+// const db = client.db(dbName);
+// db.collection("ExemplaryRestaurantData").updateMany({}, { $unset: { "CGG_CODE": "", "ASGN_YY": "", "APPL_YMD": "", "SITE_ADDR": "", "PERM_NT_NO": "", "MAIN_EDF": "", "TRDP_AREA": "", "ADMDNG_NM": "", "GRADE_FACIL_GBN": "" } });
+// 필드 수정
+// const db = client.db(dbName);
+// db.collection("ExemplaryRestaurantData").updateMany({}, { $rename: { } });
 
 
 module.exports = { 

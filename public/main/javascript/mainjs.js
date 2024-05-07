@@ -28,6 +28,31 @@ async function displayData(datas) {
             }else if(item.rank == '좋음'){
                 rank = `<div class="star"><h3>위생등급: 좋음<img src="./css/images/1star.svg" class="1star"></h3></div>`;
             }
+            if (!item.detail){
+                item.detail = '';
+            }else if(item.detail){
+                item.detail = `위반내용: ` + item.detail
+            }
+            if (!item.no){
+                item.no = '';
+            } else if(item.no){
+                item.no = `지정번호: ` + item.no
+            }
+            if (!item.penalty){
+                item.penalty = '';
+            } else if(item.penalty){
+                item.penalty = `처벌내용: ` + item.penalty
+            }
+            if (!item.category){
+                item.category = '';
+            } else if(item.category){
+                item.category = `업종명: ` + item.category
+            }
+            if (!item.penalty){
+                item.penalty = '';
+            } else if(item.penalty){
+                item.penalty = `처벌내용: ` + item.penalty
+            }
 
             // 각 식당 정보를 화면에 출력합니다.
             const itemElement = document.createElement('div');
@@ -106,7 +131,6 @@ async function search() {
             // 응답이 성공적이지 않을 경우 오류를 throw하여 catch 블록으로 이동
             throw new Error('서버 응답에 문제가 발생했습니다.');
         }
-
         // JSON 형식으로 받은 응답 데이터를 파싱
         const data = await response.json();
         console.log(data);
