@@ -50,11 +50,21 @@ async function searchDB(collecTion,query) {
 
     } catch (error) {
         console.error('Error:', error);
-    } finally {
-        client.close();
-    }
+    } 
+    // finally {
+    //     client.close();
+    // }
 }
 
+async function disconnectMongoDB() {
+    try {
+        await client.close();
+        console.log('Disconnected from MongoDB');
+    } catch (error) {
+        console.error('Failed to disconnect from MongoDB', error);
+    }
+
+};
 
 /**
  * 데이터를 컬렉션에 삽입
@@ -124,5 +134,6 @@ module.exports = {
     insertData,
     findById,
     login,
-    createUser
+    createUser,
+    disconnectMongoDB
 };
