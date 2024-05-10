@@ -115,8 +115,5 @@ module.exports = {
     connectMongoDB,
     searchDB,
     insertData,
-    findById,
-    login,
-    createUser,
     disconnectMongoDB
 };
