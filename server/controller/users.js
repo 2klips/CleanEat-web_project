@@ -13,11 +13,11 @@ async function signup(req, res, next){
     let {name, password, email, addr1, addr2, hp, nickname} = req.body;
     const found = await userDB.findByEmail(email);
     if(found){
-        return res.status(409).json({message:`${username}이 이미 있습니다`});
+        return res.status(409).json({message:`${nickname}이 이미 있습니다`});
     }
     password = await bcrypt.hash(password, config.bcrypt.saltRounds);
-    const userInfo = await userDB.createUser({name, password, email, addr1, addr2, hp, nickname});
-    const token = createJwtToken(userInfo);
+    const user = await userDB.createUser({name, password, email, addr1, addr2, hp, nickname});
+    const token = createJwtToken(user.id);
     res.status(201).json({token, nickname});
 }
 
@@ -34,17 +34,19 @@ async function login(req, res, next){
     if(!isValidpassword){
         return res.status(401).json({message: `비밀번호가 틀렸음`});
     }
-    const token = createJwtToken(user.email);
-    res.status(200).json({token, nickname});
+    const token = createJwtToken(user.id);
+    res.status(200).json({token, nickname: user.nickname});
 }
 
 
 async function me(req, res, next){
-    const user = await userDB.findByEmail(email);
+    const user = await userDB.findByEmail(req.email);
     if(!user){
         return res.status(404).json({message: `일치하는 사용자가 없음`});
     }
-    res.status(200).json({token: req.token, nickname: user.nickname});
+    // res.sendFile(path.join(__dirname, '/info/main.html'));
+    // res.status(200).json({token: req.token, nickname: user.nickname});
+    res.redirect(`/me/mypage?token=${req.token}&nickname=${user.nickname}`);
 }
 
 

@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 const config = require('../config');
-
+const mongoose = require('mongoose');
 
 // MongoDB 서버 URI
 const uri =config.db.URI;
@@ -25,6 +25,14 @@ async function connectMongoDB() {
     // 이후 작업을 수행할 수 있습니다.
     } catch (error) {
     console.error('Failed to connect to MongoDB', error);
+    }
+}
+async function connectMongoose() {
+    try {
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, dbName: dbName});
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('Failed to connect to MongoDB', error);
     }
 }
 
@@ -118,5 +126,6 @@ module.exports = {
     disconnectMongoDB,
     createUser,
     getUsers,
-    useVirtualId
+    useVirtualId,
+    connectMongoose
 };

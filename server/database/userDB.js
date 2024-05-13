@@ -22,10 +22,13 @@ async function findByEmail(email){
     return User.findOne({email});
 }
 
+async function findById(id){
+    return User.findById(id);
+}
 
 
 async function createUser(user){
     return new User(user).save().then(data => data.id);
 }
 
-module.exports = {findByEmail, createUser};
+module.exports = {findByEmail, createUser, findById};

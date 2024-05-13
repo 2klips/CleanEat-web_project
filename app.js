@@ -7,6 +7,7 @@ const path = require("path");
 const db = require("./server/database/database.js");
 
 db.connectMongoDB();
+db.connectMongoose();
 
 const app = express();
 app.use(cors());
