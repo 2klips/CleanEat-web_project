@@ -1,33 +1,35 @@
 const jwt = require('jsonwebtoken');
-const database = require('../database/database');
-
+const userDB = require('../database/userDB.js');
+const config = require('../config.js');
 
 const AUTH_ERROR = {message: "인증에러"};
 
 
 const isAuth = async (req, res, next) => {
     const authHeader = req.get('Authorization');
-    console.log(authHeader);
-    if(!(authHeader && authHeader.startsWith('Bearer '))){
+    if(!authHeader){
+        return res.sendFile(path.join(__dirname, '../public/login_regis/index.html'));
+    }
+    if(authHeader.startsWith('Bearer ')){
         console.log('에러1');
         return res.status(401).json(AUTH_ERROR);
     }
     const token = authHeader.split(' ')[1];
     jwt.verify(
-        token, 'abcd1234%^&*', async(error, decoded) => {
+        token, config.jwt.secretKey, async(error, decoded) => {
             if(error){
                 console.log('에러2');
                 return res.status(401).json(AUTH_ERROR);
             }
-            const user = await database.findById(decoded.id);
+            const user = await userDB.findByEmail(decoded.email);
             if(!user){
                 console.log('에러3');
                 return res.status(401).json(AUTH_ERROR);
             }
-            req.userId = user.id;
+            req.userEmail = user.email;
             next();
         }
     );
 }
 
-module.exports = isAuth;
+module.exports = {isAuth};
