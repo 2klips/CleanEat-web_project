@@ -1,15 +1,12 @@
-var mapContainer = document.getElementById('map'),
-    mapOption = { 
-        center: new kakao.maps.LatLng(37.500716, 127.036539), 
-        level: 3
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(37.500716, 127.036539), // 초기 지도 중심 좌표
+        level: 3 // 지도 확대 레벨
     };
 
-var map = new kakao.maps.Map(mapContainer, mapOption);
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
+var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
 
-// 지도 드래그 기능을 활성화합니다
-map.setDraggable(true);
-
-// 인포윈도우의 내용을 생성하는 함수
 function createInfoWindowContent(title, address, phone, rating) {
     return `
         <div class="custom-info-window" onclick="location.href='./more.html';">
@@ -22,16 +19,14 @@ function createInfoWindowContent(title, address, phone, rating) {
     `;
 }
 
-{/* <img class="info-image" src="${imageSrc}" alt="Your Image" /> */}
-
 var positions = [
     {
-        title: '캘리포니아 피자키친', 
+        title: '캘리포니아 피자키친',
         latlng: new kakao.maps.LatLng(37.500049, 127.036743),
         content: createInfoWindowContent('캘리포니아 피자키친', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
     },
     {
-        title: '즐거운돈까스', 
+        title: '즐거운돈까스',
         latlng: new kakao.maps.LatLng(37.500816, 127.035493),
         content: createInfoWindowContent('즐거운돈까스', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
     },
@@ -47,45 +42,44 @@ var positions = [
     }
 ];
 
-var infowindows = [];
-
 positions.forEach(function(position) {
-    var markerImage = new kakao.maps.MarkerImage("./css/images/location-outline.svg", new kakao.maps.Size(50, 50)); // 원하는 이미지 경로와 크기로 수정하세요.
-
     var marker = new kakao.maps.Marker({
         map: map,
         position: position.latlng,
-        title: position.title,
-        image: markerImage // 커스텀 마커 이미지 설정
+        title: position.title
     });
 
     var customOverlay = new kakao.maps.CustomOverlay({
         content: position.content,
         position: marker.getPosition(),
-        yAnchor: 1.5 // 인포윈도우를 마커 이미지의 아래에 위치하도록 조정
+        yAnchor: 1.5
     });
 
-
-    infowindows.push(customOverlay);
-
-    // 모든 인포윈도우를 열어줍니다.
     customOverlay.setMap(map);
 
-    // 마커 클릭 이벤트에 대한 핸들러
     kakao.maps.event.addListener(marker, 'click', function() {
-        infowindows.forEach(function(infowindow) {
-            infowindow.setMap(null); // 모든 인포윈도우를 닫음
-        });
-        customOverlay.setMap(map); // 해당 마커의 인포윈도우를 엶
-        map.setCenter(marker.getPosition()); // 마커 위치로 지도 중심을 이동
-        map.setLevel(2); // 지도 레벨 조정
-    });
-
-    
-    // 인포윈도우 클릭 이벤트 추가
-    kakao.maps.event.addListener(customOverlay, 'click', function() {
-        // 상세페이지 URL로 리다이렉트
-        window.location.href = 'https://kloa.gg/merchant'; // 여기에 원하는 URL을 넣어주세요
+        // 모든 커스텀 오버레이를 제거하고, 현재 마커에 해당하는 오버레이만 표시
+        positions.forEach(p => p.customOverlay && p.customOverlay.setMap(null));
+        customOverlay.setMap(map);
     });
 });
 
+function searchAndDisplayAddress(address) {
+    geocoder.addressSearch(address, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
+            });
+            infowindow.open(map, marker);
+            map.setCenter(coords);
+        }
+    });
+}
+
+// 예시로 검색 함수 호출
+searchAndDisplayAddress('제주특별자치도 제주시 첨단로 242');
