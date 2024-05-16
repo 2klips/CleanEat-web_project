@@ -1,85 +1,58 @@
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+// kakao_map.js
+
+// localStorage에서 주소 데이터를 가져옵니다.
+const addresses = JSON.parse(localStorage.getItem('addresses')) || [];
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.500716, 127.036539), // 초기 지도 중심 좌표
-        level: 3 // 지도 확대 레벨
-    };
+        center: new kakao.maps.LatLng(37.566535, 126.97796919999996), // 초기 지도의 중심좌표 (서울시청)
+        level: 3 // 지도의 확대 레벨
+    };  
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
-var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-function createInfoWindowContent(title, address, phone, rating) {
-    return `
-        <div class="custom-info-window" onclick="location.href='./more.html';">
-            <h4 class="info-title">${title}</h4>
-            <div class="info-address">${address}</div>
-            <div class="info-phone">${phone}</div>
-            <div class="info-rating">${rating}</div>
-            <img class="info-marker-icon" src="./css/images/bookmark-full.svg" alt="마커 아이콘" style="width: 25px" />
-        </div>
-    `;
-}
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
 
-var positions = [
-    {
-        title: '캘리포니아 피자키친',
-        latlng: new kakao.maps.LatLng(37.500049, 127.036743),
-        content: createInfoWindowContent('캘리포니아 피자키친', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
-    },
-    {
-        title: '즐거운돈까스',
-        latlng: new kakao.maps.LatLng(37.500816, 127.035493),
-        content: createInfoWindowContent('즐거운돈까스', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
-    },
-    {
-        title: '수제팔도찹쌀순대', 
-        latlng: new kakao.maps.LatLng(37.500739, 127.034283),
-        content: createInfoWindowContent('수제팔도찹쌀순대', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐')
-    },
-    {
-        title: '오사무식당',
-        latlng: new kakao.maps.LatLng(37.499788, 127.034834),
-        content: createInfoWindowContent('오사무식당', '서울시 강남구 논현로 85길 43', '02-043-0000', '⭐⭐⭐', 'path/to/your/image1.jpg')
-    }
-];
+// 여러 개의 주소에 대해 마커를 표시합니다
+addresses.forEach(location => {
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(location.address, function(result, status) {
 
-positions.forEach(function(position) {
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: position.latlng,
-        title: position.title
-    });
-
-    var customOverlay = new kakao.maps.CustomOverlay({
-        content: position.content,
-        position: marker.getPosition(),
-        yAnchor: 1.5
-    });
-
-    customOverlay.setMap(map);
-
-    kakao.maps.event.addListener(marker, 'click', function() {
-        // 모든 커스텀 오버레이를 제거하고, 현재 마커에 해당하는 오버레이만 표시
-        positions.forEach(p => p.customOverlay && p.customOverlay.setMap(null));
-        customOverlay.setMap(map);
-    });
-});
-
-function searchAndDisplayAddress(address) {
-    geocoder.addressSearch(address, function(result, status) {
+        // 정상적으로 검색이 완료됐으면 
         if (status === kakao.maps.services.Status.OK) {
+
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
                 map: map,
                 position: coords
             });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">검색한 위치</div>'
+                content: `<div style="width:150px;text-align:center;padding:6px 0;">${location.name}</div>`
             });
-            infowindow.open(map, marker);
-            map.setCenter(coords);
-        }
+
+            kakao.maps.event.addListener(marker, 'click', function() {
+                closeAllInfoWindows();
+                infowindow.open(map, marker);
+            });
+
+            infowindows.push(infowindow);
+
+        } 
+    });    
+});
+
+// 인포윈도우 닫음
+function closeAllInfoWindows(){
+    infowindow.forEach(function(infowindow) {
+        infowindow.close();
     });
 }
 
-// 예시로 검색 함수 호출
-searchAndDisplayAddress('제주특별자치도 제주시 첨단로 242');
+// 인포윈도 임시 배열
+const infowindows = [];

@@ -13,6 +13,9 @@ async function displayData(datas) {
     empty.id = 'slide-empty'
     container.appendChild(empty);
 
+    // 카카오맵에 보낼 주소 저장
+    const addresses = [];
+
     if (datas && Array.isArray(datas)) {
         datas.forEach(item => {
             if (!item || Object.keys(item).length === 0) {
@@ -54,6 +57,10 @@ async function displayData(datas) {
                 item.penalty = `처벌내용: ` + item.penalty
             }
 
+            if (item.addr) {
+                addresses.push(item.addr);
+            }
+
             // 각 식당 정보를 화면에 출력합니다.
             const itemElement = document.createElement('div');
             itemElement.classList.add('slide-content');
@@ -75,6 +82,14 @@ async function displayData(datas) {
             itemElement.innerHTML = itemHTML;
             container.appendChild(itemElement);
         });
+
+        // localStorage에 주소 저장
+        localStorage.setItem('addresses', JSON.stringify(addresses));
+
+        // // 나머지 정보 전송할 부분
+        // const datas = []
+        // localStorage.setItem('datas' , JSON.stringify(datas));
+
     } else {
         console.error('데이터가 없습니다.');
     }
