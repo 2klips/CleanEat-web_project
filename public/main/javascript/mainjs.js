@@ -133,7 +133,6 @@ async function search() {
         }
         // JSON 형식으로 받은 응답 데이터를 파싱
         const data = await response.json();
-        console.log(data);
         // 화면에 데이터를 표시하는 함수 호출
         displayData(data);
     } catch (error) {
