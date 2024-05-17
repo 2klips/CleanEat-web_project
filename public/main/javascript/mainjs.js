@@ -14,7 +14,7 @@ async function displayData(datas) {
     container.appendChild(empty);
 
     // 새로운 검색 시 기존 마커들과 인포윈도우를 제거
-    clearMarkersAndInfoWindows();
+    clearMarkersAndOverlays();
 
     // 카카오맵에 보낼 주소 저장
     const addresses = [];
@@ -104,12 +104,12 @@ async function displayData(datas) {
 
 //--------------------------------------------------------------
 // 추가된 함수: 마커를 추가하는 함수
-function addMarkers(addresses) {
-    addresses.forEach(address => {
-        searchAndDisplayAddress(address);
+function addMarkers(addressData) {
+    clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
+    addressData.forEach(data => {
+        searchAndDisplayAddress(data);
     });
 }
-
 /**
  * 검색어를 서버에 전송하여 데이터를 검색하는 함수
  * @returns {Promise} 서버로부터 받은 데이터를 화면에 표시
@@ -194,17 +194,16 @@ searchBtn.addEventListener('click', async function() {
 
 // 검색어 입력 필드에서 Enter 키 입력 시 실행되는 이벤트 리스너
 searchbox.addEventListener('keypress', async function(event) {
-    if (searchBtn.disabled) {
-        console.log("서버 통신 중");
-        return;
-    };
-    searchBtn.disabled = true;
-    if (event.key === 13) {
+    if (event.key === 'Enter') {
+        if (searchBtn.disabled) {
+            console.log("서버 통신 중");
+            return;
+        }
+        searchBtn.disabled = true;
         await search();
+        searchBtn.disabled = false;
     }
-    searchBtn.disabled = false;
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
     var introScreen = document.getElementById('introScreen');

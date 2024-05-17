@@ -1,28 +1,37 @@
 .custom-info-window {
     width: 250px;
-    height: 100px;
     position: relative;
     background: white;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
     font-family: 'NanumBarunGothic', sans-serif;
-
+    word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈 */
+    white-space: normal; /* 줄바꿈을 허용 */
+    transform: translateY(-100%); /* 위치를 위로 조정 */
 }
-
-
 
 .info-title {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .info-rating {
     color: #ffd700; /* gold color */
+    font-size: 0.9rem;
 }
 
-.info-address, .info-phone {
+.info-address {
     font-size: 0.8em;
-    color: #333;
+
+    color: #7c7c7c;
+    margin-bottom: 5px;
+}
+
+.info-phone {
+    font-size: 0.8em;
+    color: #000000;
+    margin-bottom: 5px;
 }
 
 .info-marker-icon {
