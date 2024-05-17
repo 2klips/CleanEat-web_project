@@ -13,6 +13,9 @@ async function displayData(datas) {
     empty.id = 'slide-empty'
     container.appendChild(empty);
 
+    // 새로운 검색 시 기존 마커들과 인포윈도우를 제거
+    clearMarkersAndInfoWindows();
+
     // 카카오맵에 보낼 주소 저장
     const addresses = [];
 
@@ -58,9 +61,16 @@ async function displayData(datas) {
             }
 
             if (item.addr) {
-                addresses.push(item.addr);
+                addresses.push({
+                    addr: item.addr,
+                    name: item.name || '',
+                    rank: item.rank || '',
+                    tel: item.tel || ''
+                });
             }
 
+            console.log(addresses)
+            
             // 각 식당 정보를 화면에 출력합니다.
             const itemElement = document.createElement('div');
             itemElement.classList.add('slide-content');
@@ -85,14 +95,19 @@ async function displayData(datas) {
 
         // localStorage에 주소 저장
         localStorage.setItem('addresses', JSON.stringify(addresses));
-
-        // // 나머지 정보 전송할 부분
-        // const datas = []
-        // localStorage.setItem('datas' , JSON.stringify(datas));
+        addMarkers(addresses);
 
     } else {
         console.error('데이터가 없습니다.');
     }
+}
+
+//--------------------------------------------------------------
+// 추가된 함수: 마커를 추가하는 함수
+function addMarkers(addresses) {
+    addresses.forEach(address => {
+        searchAndDisplayAddress(address);
+    });
 }
 
 /**
@@ -141,16 +156,20 @@ async function search() {
     }
     try {
         const queryString = encodeURIComponent(JSON.stringify(query));
-        const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
+        const response = await fetch(`http://localhost:8080/main/search?collection=${collection}&query=${queryString}`);
         if (!response.ok) {
             // 응답이 성공적이지 않을 경우 오류를 throw하여 catch 블록으로 이동
             throw new Error('서버 응답에 문제가 발생했습니다.');
         }
         // JSON 형식으로 받은 응답 데이터를 파싱
         const data = await response.json();
-        console.log(data);
+        // location.reload();
+        
         // 화면에 데이터를 표시하는 함수 호출
         displayData(data);
+
+        console.log(data);
+
     } catch (error) {
         // 오류가 발생하면 콘솔에 오류 메시지 출력
         console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
