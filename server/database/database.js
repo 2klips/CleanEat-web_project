@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 const config = require('../config');
-
+const mongoose = require('mongoose');
 
 // MongoDB 서버 URI
 const uri =config.db.URI;
@@ -25,6 +25,14 @@ async function connectMongoDB() {
     // 이후 작업을 수행할 수 있습니다.
     } catch (error) {
     console.error('Failed to connect to MongoDB', error);
+    }
+}
+async function connectMongoose() {
+    try {
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, dbName: dbName});
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('Failed to connect to MongoDB', error);
     }
 }
 
@@ -84,23 +92,23 @@ async function insertData(data, collecTion) {
     }
 }
 
+function useVirtualId(schema){
+    schema.virtual('id').get(function(){
+        return this._id.toString();
+    });
+    schema.set('toJSN', {virtuals: true});
+    schema.set('toObject', {virtuals: true});
+}
 
 
-
-
-/** 회원가입
- * @param {Object} user 사용자 정보 객체
- * @param {string} user.username 사용자 아이디
- * @param {string} user.password 사용자 비밀번호
- * @param {string} user.name 사용자 이름
- * @param {string} user.email 사용자 이메일
- * @param {string} user.url 사용자 프로필 사진 URL
- * @returns {string} 생성된 사용자의 아이디
- */
 async function createUser(user){
     const created = {...user }
     insertData(users, created)
     return created.username;
+}
+
+function getUsers(){
+    return db.collection('users');
 }
 
 // 필드 삭제
@@ -115,8 +123,9 @@ module.exports = {
     connectMongoDB,
     searchDB,
     insertData,
-    findById,
-    login,
+    disconnectMongoDB,
     createUser,
-    disconnectMongoDB
+    getUsers,
+    useVirtualId,
+    connectMongoose
 };
