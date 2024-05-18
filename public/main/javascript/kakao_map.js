@@ -55,6 +55,15 @@ function createInfoWindowContent(name, addr, tel, rank) {
             rankText = '';
     }
     
+    // tel에 * 기호가 포함되어 있으면 공백으로 대체
+    if (tel.includes('*')) {
+        tel = '';
+    } else if (tel.startsWith('02')) {
+        // 02로 시작하는 경우 포맷 변경
+        tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+    }
+
+
     return `
         <div class="custom-info-window" onclick="location.href='./more.html';">
             <h4 class="info-title">${name}</h4>
@@ -84,8 +93,6 @@ function searchAndDisplayAddress(data) {
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-            console.log('Creating marker at:', coords);
-
             // 마커 이미지 설정
             var imageSrc = './css/images/map_marker.svg', // 마커 이미지 URL
                 imageSize = new kakao.maps.Size(44, 49), // 마커 이미지 크기
@@ -101,14 +108,12 @@ function searchAndDisplayAddress(data) {
             });
             markers.push(marker); // 마커를 배열에 저장
 
-            console.log('Marker created:', marker);
-
             var infowindowContent = createInfoWindowContent(data.name, data.addr, data.tel, data.rank); // 커스텀 인포윈도우 내용 생성
 
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: coords,
                 content: infowindowContent,
-                yAnchor: 0.7 // 인포윈도우의 Y축 앵커 조정
+                yAnchor: 0.9 // 인포윈도우의 Y축 앵커 조정
             });
             overlays.push(customOverlay); // 커스텀 오버레이를 배열에 저장
             customOverlay.setMap(map);
@@ -123,3 +128,71 @@ function searchAndDisplayAddress(data) {
 // searchAndDisplayAddress 함수를 전역으로 노출
 window.searchAndDisplayAddress = searchAndDisplayAddress;
 window.clearMarkersAndOverlays = clearMarkersAndOverlays;
+
+
+//--------------------------------------------------------------------------
+// 현재 위치를 저장할 변수
+let currentLocation = null;
+
+// 현재 위치를 표시할 원 요소 생성 및 스타일 설정
+var currentLocationOverlay = new kakao.maps.CustomOverlay({
+    position: new kakao.maps.LatLng(0, 0),
+    content: '<div id="current-location-circle"></div>',
+    yAnchor: 0.5,
+    xAnchor: 0.5
+});
+
+// 지도에 오버레이를 추가
+currentLocationOverlay.setMap(map);
+
+// 현재 위치를 지도 중심으로 다시 잡아주는 함수
+function recenterMap() {
+    if (currentLocation) {
+        map.setCenter(currentLocation);
+    } else {
+        console.error('Current location is not available.');
+    }
+}
+
+// 현재 위치를 지도에 표시하고 실시간으로 업데이트하는 함수
+function watchCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            currentLocation = new kakao.maps.LatLng(lat, lng);
+
+            currentLocationOverlay.setPosition(currentLocation);
+            map.setCenter(currentLocation);
+        }, function(error) {
+            console.error('Error occurred. Error code: ' + error.code);
+        }, {
+            enableHighAccuracy: true, // 높은 정확도로 위치를 가져옵니다.
+            maximumAge: 0, // 캐시된 위치 정보를 사용하지 않습니다.
+            timeout: Infinity // 위치 정보를 가져올 때까지 무한정 대기합니다.
+        });
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+    }
+}
+
+// 버튼 클릭 시 지도 중심을 현재 위치로 이동
+document.getElementById('recenter-btn').addEventListener('click', recenterMap);
+
+watchCurrentLocation(); // 실시간 위치 추적 시작
+
+// 버튼 클릭 시 지도 중심을 현재 위치로 이동
+document.getElementById('recenter-btn').addEventListener('click', recenterMap);
+
+
+kakao.maps.event.addListener(map, 'zoom_changed', updateLocationOverlay);
+kakao.maps.event.addListener(map, 'center_changed', updateLocationOverlay);
+
+// 위치 오버레이 업데이트 함수
+function updateLocationOverlay() {
+    var lat = parseFloat(currentLocationOverlay.getPosition().Ma);
+    var lng = parseFloat(currentLocationOverlay.getPosition().La);
+    var locPosition = new kakao.maps.LatLng(lat, lng);
+
+    currentLocationOverlay.setPosition(locPosition);
+}
