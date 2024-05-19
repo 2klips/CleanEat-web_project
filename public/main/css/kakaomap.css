@@ -84,3 +84,14 @@
     height: 40px; /* 원하는 이미지 크기로 조정 */
     filter: drop-shadow(1px 2px 1.2px rgba(0, 0, 0, 0.5));
 }
+
+
+#re-search-btn {
+    position: absolute;
+    top: 50.5%;
+    right: 15%;
+    z-index: 10;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

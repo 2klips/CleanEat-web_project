@@ -1,5 +1,4 @@
-// 기존 kakao_map.js 내용 임시 저장
-
+// kakao_map.js
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
@@ -10,36 +9,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
 var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
 
-var positions = [];
-
-positions.forEach(function(position) {
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: position.latlng,
-        title: position.title
-    });
-
-    var customOverlay = new kakao.maps.CustomOverlay({
-        content: position.content,
-        position: marker.getPosition(),
-        yAnchor: 1.5
-    });
-
-    customOverlay.setMap(map);
-
-    kakao.maps.event.addListener(marker, 'click', function() {
-        // 모든 커스텀 오버레이를 제거하고, 현재 마커에 해당하는 오버레이만 표시
-        positions.forEach(p => p.customOverlay && p.customOverlay.setMap(null));
-        customOverlay.setMap(map);
-    });
-});
-
 var markers = []; // 기존 마커들을 저장할 배열
 var overlays = []; // 기존 커스텀 오버레이를 저장할 배열
 
 // 인포윈도우 내용 생성
 function createInfoWindowContent(name, addr, tel, rank) {
-    // rank 값에 따라 텍스트를 변경합니다.
     let rankText;
     switch (rank) {
         case '매우우수':
@@ -55,14 +29,11 @@ function createInfoWindowContent(name, addr, tel, rank) {
             rankText = '';
     }
     
-    // tel에 * 기호가 포함되어 있으면 공백으로 대체
     if (tel.includes('*')) {
         tel = '';
     } else if (tel.startsWith('02')) {
-        // 02로 시작하는 경우 포맷 변경
         tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
     }
-
 
     return `
         <div class="custom-info-window" onclick="location.href='./more.html';">
@@ -73,9 +44,8 @@ function createInfoWindowContent(name, addr, tel, rank) {
         </div>
     `;
 }
-{/* <img class="info-marker-icon" src="./css/images/bookmark-full.svg" alt="마커 아이콘" style="width: 25px" /> */}
 
-// 기존 마커와 인포윈도우를 제거하는 함수
+// 기존 마커와 오버레이를 제거하는 함수
 function clearMarkersAndOverlays() {
     markers.forEach(marker => marker.setMap(null));
     overlays.forEach(overlay => overlay.setMap(null));
@@ -83,8 +53,8 @@ function clearMarkersAndOverlays() {
     overlays = [];
 }
 
-// 검색된 주소를 지도에 표시하는 함수
-function searchAndDisplayAddress(data) {
+// 마커와 오버레이를 생성하고 배열에 저장하는 함수
+function searchAndDisplayAddress(data, shouldRecenter) {
     if (!data.addr || data.addr.trim() === "") {
         console.error('Invalid address:', data.addr);
         return;
@@ -93,59 +63,96 @@ function searchAndDisplayAddress(data) {
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-            // 마커 이미지 설정
-            var imageSrc = './css/images/map_marker.svg', // 마커 이미지 URL
-                imageSize = new kakao.maps.Size(44, 49), // 마커 이미지 크기
-                imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커 이미지의 좌표와 일치할 위치
+            var imageSrc = './css/images/map_marker.svg',
+                imageSize = new kakao.maps.Size(44, 49),
+                imageOption = { offset: new kakao.maps.Point(27, 69) };
 
             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
             var marker = new kakao.maps.Marker({
                 map: map,
                 position: coords,
-                image: markerImage, // 마커 이미지 설정
-                title: data.name // 마커의 타이틀 설정
+                image: markerImage,
+                title: data.name
             });
-            markers.push(marker); // 마커를 배열에 저장
 
-            var infowindowContent = createInfoWindowContent(data.name, data.addr, data.tel, data.rank); // 커스텀 인포윈도우 내용 생성
+            var infowindowContent = createInfoWindowContent(data.name, data.addr, data.tel, data.rank);
 
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: coords,
                 content: infowindowContent,
-                yAnchor: 0.9 // 인포윈도우의 Y축 앵커 조정
+                yAnchor: 0.9
             });
-            overlays.push(customOverlay); // 커스텀 오버레이를 배열에 저장
-            customOverlay.setMap(map);
-            map.setCenter(coords);
+
+            markers.push(marker);
+            overlays.push(customOverlay);
+
+            if (shouldRecenter) {
+                map.setCenter(coords);
+            }
         } else {
             console.error('Failed to search address:', data.addr, status);
         }
     });
 }
 
+// 마커와 오버레이를 지도에 표시하는 함수
+function displayMarkersAndOverlays() {
+    markers.forEach(marker => marker.setMap(map));
+    overlays.forEach(overlay => overlay.setMap(map));
+}
 
-// searchAndDisplayAddress 함수를 전역으로 노출
-window.searchAndDisplayAddress = searchAndDisplayAddress;
-window.clearMarkersAndOverlays = clearMarkersAndOverlays;
+// 지도 중심 좌표를 반환하는 함수
+function getMapCenter() {
+    return map.getCenter();
+}
 
+// 두 지점 사이의 거리를 계산하는 함수
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the earth in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        0.5 - Math.cos(dLat) / 2 + 
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        (1 - Math.cos(dLon)) / 2;
 
-//--------------------------------------------------------------------------
-// 현재 위치를 저장할 변수
+    return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+// 검색 결과를 거리 기준으로 정렬하는 함수
+function sortResultsByDistance(results, center) {
+    return results.sort((a, b) => {
+        const distanceA = calculateDistance(center.getLat(), center.getLng(), a.lat, a.lng);
+        const distanceB = calculateDistance(center.getLat(), center.getLng(), b.lat, b.lng);
+        return distanceA - distanceB;
+    });
+}
+
+const MAX_MARKERS = 20; // 기본 최대 마커 수
+let zoomLevel = map.getLevel(); // 초기 줌 레벨
+let firstSearch = true; // 첫 번째 검색 여부
+
+// 오버레이의 가시성을 업데이트하는 함수
+function updateOverlaysVisibility() {
+    if (zoomLevel > 5) {
+        overlays.forEach(overlay => overlay.setMap(null)); // 줌 레벨이 높으면 인포윈도우 숨기기
+    } else {
+        overlays.forEach(overlay => overlay.setMap(map)); // 줌 레벨이 낮으면 인포윈도우 보이기
+    }
+}
+
+// 현재 위치를 표시하는 오버레이
 let currentLocation = null;
-
-// 현재 위치를 표시할 원 요소 생성 및 스타일 설정
 var currentLocationOverlay = new kakao.maps.CustomOverlay({
     position: new kakao.maps.LatLng(0, 0),
     content: '<div id="current-location-circle"></div>',
     yAnchor: 0.5,
     xAnchor: 0.5
 });
-
-// 지도에 오버레이를 추가
 currentLocationOverlay.setMap(map);
 
-// 현재 위치를 지도 중심으로 다시 잡아주는 함수
+// 지도를 현재 위치로 재설정하는 함수
 function recenterMap() {
     if (currentLocation) {
         map.setCenter(currentLocation);
@@ -154,7 +161,7 @@ function recenterMap() {
     }
 }
 
-// 현재 위치를 지도에 표시하고 실시간으로 업데이트하는 함수
+// 현재 위치를 지속적으로 추적하는 함수
 function watchCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(function(position) {
@@ -167,32 +174,59 @@ function watchCurrentLocation() {
         }, function(error) {
             console.error('Error occurred. Error code: ' + error.code);
         }, {
-            enableHighAccuracy: true, // 높은 정확도로 위치를 가져옵니다.
-            maximumAge: 0, // 캐시된 위치 정보를 사용하지 않습니다.
-            timeout: Infinity // 위치 정보를 가져올 때까지 무한정 대기합니다.
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: Infinity
         });
     } else {
         console.error('Geolocation is not supported by this browser.');
     }
 }
 
-// 버튼 클릭 시 지도 중심을 현재 위치로 이동
 document.getElementById('recenter-btn').addEventListener('click', recenterMap);
 
-watchCurrentLocation(); // 실시간 위치 추적 시작
+watchCurrentLocation();
 
-// 버튼 클릭 시 지도 중심을 현재 위치로 이동
-document.getElementById('recenter-btn').addEventListener('click', recenterMap);
+// 지도 줌 레벨 변경 시 오버레이 업데이트
+kakao.maps.event.addListener(map, 'zoom_changed', function() {
+    zoomLevel = map.getLevel();
+    updateOverlaysVisibility();
+});
 
+// 지도 중심 변경 시 오버레이 업데이트
+kakao.maps.event.addListener(map, 'center_changed', function() {
+    updateLocationOverlay();
+});
 
-kakao.maps.event.addListener(map, 'zoom_changed', updateLocationOverlay);
-kakao.maps.event.addListener(map, 'center_changed', updateLocationOverlay);
-
-// 위치 오버레이 업데이트 함수
 function updateLocationOverlay() {
-    var lat = parseFloat(currentLocationOverlay.getPosition().Ma);
-    var lng = parseFloat(currentLocationOverlay.getPosition().La);
-    var locPosition = new kakao.maps.LatLng(lat, lng);
-
-    currentLocationOverlay.setPosition(locPosition);
+    if (currentLocation) {
+        currentLocationOverlay.setPosition(currentLocation);
+    }
 }
+
+// "이 위치에서 재검색" 버튼 클릭 시 실행되는 함수
+document.getElementById('re-search-btn').addEventListener('click', function() {
+    const center = getMapCenter();
+    const bounds = map.getBounds(); // 현재 지도 범위 가져오기
+    const addresses = JSON.parse(localStorage.getItem('addresses'));
+    if (addresses) {
+        const filteredAddresses = addresses.filter(address => {
+            const position = new kakao.maps.LatLng(address.lat, address.lng);
+            return bounds.contain(position); // 지도 범위 내에 있는 주소 필터링
+        });
+        const sortedAddresses = sortResultsByDistance(filteredAddresses, center);
+        const limitedAddresses = sortedAddresses.slice(0, MAX_MARKERS);
+        clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
+        limitedAddresses.forEach(data => {
+            searchAndDisplayAddress(data, false);
+        });
+        displayMarkersAndOverlays(); // 마커와 오버레이 표시
+    } else {
+        console.error('저장된 주소 데이터가 없습니다.');
+    }
+});
+
+// 필요 함수들을 전역으로 노출
+window.searchAndDisplayAddress = searchAndDisplayAddress;
+window.clearMarkersAndOverlays = clearMarkersAndOverlays;
+window.displayMarkersAndOverlays = displayMarkersAndOverlays;
