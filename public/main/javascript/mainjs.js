@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+
     const searchBtn = document.getElementById('search-btn');
     const searchbox = document.getElementById('search');
-    const reSearchBtn = document.getElementById('re-search-btn');
+
+    // 페이지 로드 시 localStorage 초기화
+    localStorage.removeItem('searchResults');
+    localStorage.removeItem('searchKeyword');
+    localStorage.removeItem('searchCollection');
+    localStorage.removeItem('searchRank');
 
     // 데이터를 화면에 표시하는 함수
     async function displayData(datas) {
@@ -10,42 +16,37 @@ document.addEventListener('DOMContentLoaded', function() {
         const empty = document.createElement('div');
         empty.id = 'slide-empty';
         container.appendChild(empty);
-
-        // 새로운 검색 시 기존 마커들과 인포윈도우를 제거
-        clearMarkersAndOverlays();
-
-        // 카카오맵에 보낼 주소 저장
+    
+        clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
+    
         const addresses = [];
-
+    
         if (datas && Array.isArray(datas)) {
             datas.forEach(item => {
                 if (!item || Object.keys(item).length === 0) {
-                    // 데이터가 undefined이거나 비어 있는 경우 건너뜁니다.
                     return;
                 }
-
+    
                 if (item.addr) {
                     addresses.push({
                         addr: item.addr,
                         name: item.name || '',
                         rank: item.rank || '',
                         tel: item.tel || '',
-                        lat: item.lat, // 위도 추가
-                        lng: item.lng  // 경도 추가
+                        detail: item.detail || '',
+                        violation: item.detail ? true : false
                     });
                 }
             });
-
-            // 지도 중심 좌표 가져오기
+    
             const center = getMapCenter();
-            // 검색 결과를 거리 기준으로 정렬
             const sortedAddresses = sortResultsByDistance(addresses, center);
-            // 줌 레벨에 따른 최대 마커 수 계산
             const limitedAddresses = sortedAddresses.slice(0, MAX_MARKERS + zoomLevel * 5);
-
-            // localStorage에 주소 저장
+    
+            // localStorage에 마커와 인포윈도우 데이터를 저장
             localStorage.setItem('addresses', JSON.stringify(limitedAddresses));
-            addMarkers(limitedAddresses, true); // 첫 번째 마커 기준으로 지도 이동
+            addMarkers(limitedAddresses, true);
+            
         } else {
             console.error('데이터가 없습니다.');
         }
@@ -53,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 마커를 추가하는 함수
     function addMarkers(addressData, shouldRecenter) {
-        clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
+        clearMarkersAndOverlays();
         addressData.forEach((data, index) => {
-            searchAndDisplayAddress(data, shouldRecenter && index === 0); // 첫 번째 마커만 기준으로 지도 이동
+            searchAndDisplayAddress(data, shouldRecenter && index === 0);
         });
     }
 
@@ -105,6 +106,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 화면에 데이터를 표시하는 함수 호출
             displayData(data);
+
+            // 검색 결과와 조건을 localStorage에 저장
+            localStorage.setItem('searchResults', JSON.stringify(data));
+            localStorage.setItem('searchKeyword', keyword);
+            localStorage.setItem('searchCollection', JSON.stringify(collection));
+            localStorage.setItem('searchRank', JSON.stringify(rans));
+
+
         } catch (error) {
             // 오류가 발생하면 콘솔에 오류 메시지 출력
             console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
@@ -114,6 +123,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // 페이지 상단으로 스크롤하는 함수
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+
+    // 페이지 로드 시 localStorage 초기화
+    localStorage.removeItem('searchResults');
+    localStorage.removeItem('searchKeyword');
+    localStorage.removeItem('searchCollection');
+    localStorage.removeItem('searchRank');
+
+
+    // localStorage에서 검색 결과 복원
+    const savedResults = localStorage.getItem('searchResults');
+    const savedKeyword = localStorage.getItem('searchKeyword');
+    const savedCollection = localStorage.getItem('searchCollection');
+    const savedRank = localStorage.getItem('searchRank');
+    const savedAddresses = localStorage.getItem('addresses');
+
+
+    if (savedResults && savedKeyword && savedCollection && savedRank) {
+        const results = JSON.parse(savedResults);
+        const keyword = savedKeyword;
+        const collection = JSON.parse(savedCollection);
+        const rank = JSON.parse(savedRank);
+
+        searchbox.value = keyword;
+        // 복원된 검색 조건에 따라 체크박스 상태 업데이트
+        document.querySelectorAll('.search-check').forEach(checkbox => {
+            checkbox.checked = collection.includes(checkbox.value);
+        });
+        document.querySelectorAll('.rank').forEach(rankBox => {
+            rankBox.checked = rank.includes(rankBox.value);
+        });
+
+        displayData(results);
+    }
+
+    if (savedAddresses) {
+        const addresses = JSON.parse(savedAddresses);
+        addMarkers(addresses, true);
     }
 
     // 검색 버튼 클릭 시 실행되는 이벤트 리스너
@@ -140,30 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 searchBtn.disabled = true;
                 await search();
                 searchBtn.disabled = false;
-            }
-        });
-    }
-
-    // "이 위치에서 재검색" 버튼 클릭 시 실행되는 이벤트 리스너
-    if (reSearchBtn) {
-        reSearchBtn.addEventListener('click', function() {
-            const center = getMapCenter();
-            const bounds = map.getBounds(); // 현재 지도 범위 가져오기
-            const addresses = JSON.parse(localStorage.getItem('addresses'));
-            if (addresses) {
-                const filteredAddresses = addresses.filter(address => {
-                    const position = new kakao.maps.LatLng(address.lat, address.lng);
-                    return bounds.contain(position); // 지도 범위 내에 있는 주소 필터링
-                });
-                const sortedAddresses = sortResultsByDistance(filteredAddresses, center);
-                const limitedAddresses = sortedAddresses.slice(0, MAX_MARKERS);
-                clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
-                limitedAddresses.forEach(data => {
-                    searchAndDisplayAddress(data, false);
-                });
-                displayMarkersAndOverlays(); // 마커와 오버레이 표시
-            } else {
-                console.error('저장된 주소 데이터가 없습니다.');
             }
         });
     }

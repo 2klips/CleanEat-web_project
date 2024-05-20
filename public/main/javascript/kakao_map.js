@@ -13,7 +13,7 @@ var markers = []; // 기존 마커들을 저장할 배열
 var overlays = []; // 기존 커스텀 오버레이를 저장할 배열
 
 // 인포윈도우 내용 생성
-function createInfoWindowContent(name, addr, tel, rank) {
+function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
     let rankText;
     switch (rank) {
         case '매우우수':
@@ -28,22 +28,29 @@ function createInfoWindowContent(name, addr, tel, rank) {
         default:
             rankText = '';
     }
-    
+
     if (tel.includes('*')) {
         tel = '';
     } else if (tel.startsWith('02')) {
         tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
     }
 
+    const infoWindowClass = violation ? 'custom-info-window violation' : 'custom-info-window';
+
+    const detailImage = detail ? '<img src="./css/images/alert_circle_outline_icon_red.png" alt="Warning Icon" class="warning-icon">' : '';
+    const additionalImage = (!detail && !rankText) ? '<img src="./css/images/Logo.png" alt="Mobam Icon" class="mobam-icon">' : '';
+
     return `
-        <div class="custom-info-window" onclick="location.href='./more.html';">
-            <h4 class="info-title">${name}</h4>
+        <div class="${infoWindowClass}" onclick="location.href='./more.html';">
+            <h4 class="info-title">${name} ${detailImage} ${additionalImage}</h4>
             <div class="info-address">${addr}</div>
             <div class="info-phone">${tel}</div>
             <div class="info-rating">${rankText}</div>
+            <div class="info-detail">${detail}</div>
         </div>
     `;
 }
+
 
 // 기존 마커와 오버레이를 제거하는 함수
 function clearMarkersAndOverlays() {
@@ -63,9 +70,10 @@ function searchAndDisplayAddress(data, shouldRecenter) {
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-            var imageSrc = './css/images/map_marker.svg',
+            // detail 존재 여부에 따른 마커 이미지 경로 설정
+            var imageSrc = data.violation ? './css/images/violation_marker.svg' : './css/images/map_marker.svg',
                 imageSize = new kakao.maps.Size(44, 49),
-                imageOption = { offset: new kakao.maps.Point(27, 69) };
+                imageOption = { offset: new kakao.maps.Point(22, 49) };
 
             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
@@ -76,7 +84,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
                 title: data.name
             });
 
-            var infowindowContent = createInfoWindowContent(data.name, data.addr, data.tel, data.rank);
+            var infowindowContent = createInfoWindowContent(data.name, data.addr, data.tel, data.rank, data.detail, data.violation);
 
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: coords,
@@ -135,7 +143,7 @@ let firstSearch = true; // 첫 번째 검색 여부
 
 // 오버레이의 가시성을 업데이트하는 함수
 function updateOverlaysVisibility() {
-    if (zoomLevel > 5) {
+    if (zoomLevel > 7) {
         overlays.forEach(overlay => overlay.setMap(null)); // 줌 레벨이 높으면 인포윈도우 숨기기
     } else {
         overlays.forEach(overlay => overlay.setMap(map)); // 줌 레벨이 낮으면 인포윈도우 보이기
@@ -150,6 +158,7 @@ var currentLocationOverlay = new kakao.maps.CustomOverlay({
     yAnchor: 0.5,
     xAnchor: 0.5
 });
+
 currentLocationOverlay.setMap(map);
 
 // 지도를 현재 위치로 재설정하는 함수
@@ -204,27 +213,7 @@ function updateLocationOverlay() {
     }
 }
 
-// "이 위치에서 재검색" 버튼 클릭 시 실행되는 함수
-document.getElementById('re-search-btn').addEventListener('click', function() {
-    const center = getMapCenter();
-    const bounds = map.getBounds(); // 현재 지도 범위 가져오기
-    const addresses = JSON.parse(localStorage.getItem('addresses'));
-    if (addresses) {
-        const filteredAddresses = addresses.filter(address => {
-            const position = new kakao.maps.LatLng(address.lat, address.lng);
-            return bounds.contain(position); // 지도 범위 내에 있는 주소 필터링
-        });
-        const sortedAddresses = sortResultsByDistance(filteredAddresses, center);
-        const limitedAddresses = sortedAddresses.slice(0, MAX_MARKERS);
-        clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
-        limitedAddresses.forEach(data => {
-            searchAndDisplayAddress(data, false);
-        });
-        displayMarkersAndOverlays(); // 마커와 오버레이 표시
-    } else {
-        console.error('저장된 주소 데이터가 없습니다.');
-    }
-});
+
 
 // 필요 함수들을 전역으로 노출
 window.searchAndDisplayAddress = searchAndDisplayAddress;
