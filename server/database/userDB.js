@@ -2,7 +2,6 @@ const Mongoose = require('mongoose');
 const { useVirtualId } = require('./database.js');
 
 const userSchema = new Mongoose.Schema({
-    nickname: {type: String, required: true},
     name: {type: String, required: true},
     email: {type: String, required: true},
     password: {type: String, required: true},

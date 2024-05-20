@@ -33,14 +33,10 @@ router.get('/', (req, res, next) => {
     next();
 }, isAuth, userController.me);
 
-router.get('/mypage', (req, res) => {
-    const authHeader = req.get('Authorization');
-    if (!authHeader) {
-        // return res.send('로그인이 필요합니다');
-        return res.redirect('/me/login');
-    }
+router.get('/mypage', isAuth, (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/info/main.html'));
 });
+
 
 
 router.use(express.static(path.join(__dirname, '../../public/login_regist')));

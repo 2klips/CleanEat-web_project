@@ -156,6 +156,7 @@ color:#0ECFFF
 
 .popup-content {
     text-align: center;
+    width: 250px;
 }
 
 .close-popup {
@@ -177,4 +178,98 @@ color:#0ECFFF
     vertical-align: middle;
     margin-top: 57px;
     margin-left: 10px;
+}
+#RegisterSubmit {
+    width: 100px;
+    height: 36px;
+    margin-left: 35%;
+    margin-top: 50px;
+    background-color: #8AE9FF;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 17px;
+}
+#RegisterSubmit:hover{
+    background-color: #6dbfff;
+}
+/* 버튼 스타일 */
+.custom-button {
+    padding: 10px 20px;
+    background-color: white;
+    color: white;
+    border: 2px solid #8AE9FF;
+    border-radius: 30px;
+    position: relative;
+    height: 25px;
+    width: 64px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 활성화된 버튼의 배경색 */
+.custom-button.active {
+    background-color: #007bff;
+}
+
+/* 동그라미 아이콘 스타일 */
+.circle-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #8AE9FF;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    color: #007bff;
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    transition: right 0.3s ease;
+}
+
+.custom-button.active .circle-icon {
+    right: 5px;
+}
+
+.bottom{
+    text-align: center;
+
+}
+#confirmCode{
+    width: 70%;
+    padding: 20px 5px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #B4B4B4;
+    font-size: 16px; color:#0ECFFF;
+    outline: none;
+}
+#confirmCodeButton{
+    background-color: #8AE9FF;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 30px;
+}
+#confirmCodeButton:hover{
+    background-color: #6dbfff;
+}
+
+#duplicateCheck{
+    display: inline-block;
+    width: 80px; 
+    height: 29.9px;
+    font-weight: bold;
+}
+
+#signUpEmail{
+    width: 70%; 
+    max-width: 210px; 
+    display: inline-block; 
+    color:#0ECFFF
 }
