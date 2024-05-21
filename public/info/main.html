@@ -11,18 +11,17 @@
   <div id="container">
     <a href="../login_regist/index.html"><!--로그인 시 아래쪽처럼 값이 들어감. -->
       <div id="userinfo">
-        <img src="./source/avata.png" alt="avata">
+        <!-- <img src="./source/avata.png" alt="avata">
         <div id="user">
           <h2>로그인이 필요합니다</h2>
           <p></p>
-        </div>
-        <!--로그인시
+        </div> -->
+        <!-- 로그인시 -->
       <img src="./source/image.jpg" alt="강아지" id="userimg">
       <div id="user">
         <h2>ID</h2>
         <p>name</p>s
       </div>
-    -->
       </div>
   </a>
     <div id="alarm" class="section">
@@ -41,32 +40,6 @@
   </div>
   <p style="position:relative; bottom:70px; color:#595959">부정·불량 식품 신고는 국번없이 1399(무료)</p>
   <footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
-  <script>
-    async function fetchProtectedData() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = '/me/login';
-        return;
-    }
-
-    const response = await fetch('/me/mypage', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        },
-    });
-
-    if (response.ok) {
-        const data = await response.text();
-        console.log(data);
-    } else {
-        console.log('인증 실패');
-        window.location.href = '/me/login';
-    }
-}
-
-// 페이지 로드 시 fetchProtectedData 함수를 호출하여 보호된 데이터 요청
-document.addEventListener('DOMContentLoaded', fetchProtectedData);
-  </script>
+  <script src="./javascript/main.js"></script>
 </body>
 </html>

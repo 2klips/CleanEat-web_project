@@ -25,16 +25,12 @@ router.get('/login' , (req, res) => {
 
 // router.get('/', isAuth, userController.me);
 router.get('/', (req, res, next) => {
-    const authHeader = req.get('Authorization');
-    if (!authHeader) {
-        // return res.send('로그인이 필요합니다');
-        return res.redirect('/me/login');
-    }
-    next();
+    res.json({ message: 'Authenticated' });
 }, isAuth, userController.me);
 
 router.get('/mypage', isAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/info/main.html'));
+    const user = req.user;
+    res.json({ userData: user });
 });
 
 

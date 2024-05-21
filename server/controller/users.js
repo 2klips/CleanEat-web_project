@@ -41,13 +41,13 @@ async function login(req, res, next){
 
 
 async function me(req, res, next){
-    const user = await userDB.findByEmail(req.email);
+    const token = req.token;
+    const user = await userDB.findByEmail(req.user.email);
     if(!user){
         return res.status(404).json({message: `일치하는 사용자가 없음`});
     }
-    // res.sendFile(path.join(__dirname, '/info/main.html'));
-    // res.status(200).json({token: req.token, nickname: user.nickname});
-    res.redirect(`/me/mypage?token=${req.token}&nickname=${user.nickname}`);
+    // `/me/mypage?token=${req.token}`
+    res.status(200).json({token, name: user.name});
 }
 
 
