@@ -38,8 +38,55 @@
     </div></a>
     <hr>
   </div>
+  <button id="notifyBtn">알림 쿠키 생성</button>
   <p style="position:relative; bottom:70px; color:#595959">부정·불량 식품 신고는 국번없이 1399(무료)</p>
   <footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
   <script src="./javascript/main.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"; 
+    import { getMessaging, getToken} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-messaging.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDLwmwOZiprAUt16GYQNznmNBoOKJNCYG4",
+        authDomain: "easylogin-b519a.firebaseapp.com",
+        projectId: "easylogin-b519a",
+        storageBucket: "easylogin-b519a.appspot.com",
+        messagingSenderId: "270766993601",
+        appId: "1:270766993601:web:aa3199d115b3b816412440",
+        measurementId: "G-XM5967EN5W"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+
+    window.requestToken = () => {
+  function requestPermission() {
+    console.log('Requesting permission...');
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // Get registration token
+        getToken(messaging).then((currentToken) => {
+          if (currentToken) {
+            console.log('Received registration token:', currentToken);
+          } else {
+            console.log('No registration token available.');
+          }
+        }).catch((err) => {
+          console.log('An error occurred while retrieving token:', err);
+        });
+      } else {
+        console.log('Notification permission denied.');
+      }
+    });
+  }
+
+  // Call requestPermission function to request notification permission
+  requestPermission();
+};
+
+    document.getElementById('notifyBtn').addEventListener('click', requestToken);
+  </script>
 </body>
 </html>
