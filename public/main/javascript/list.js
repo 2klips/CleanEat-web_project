@@ -19,42 +19,67 @@ async function displayData(datas) {
             } else if(item.rank == '좋음'){
                 rank = `<div class="star"><h3>위생등급: 좋음<img src="./css/images/1star.svg" class="1star"></h3></div>`;
             }
+
             if (!item.detail){
                 item.detail = '';
-            } else if(item.detail){
+            } else {
                 item.detail = `위반내용: ` + item.detail;
             }
             if (!item.no){
                 item.no = '';
-            } else if(item.no){
+            } else {
                 item.no = `지정번호: ` + item.no;
             }
             if (!item.penalty){
                 item.penalty = '';
-            } else if(item.penalty){
+            } else {
                 item.penalty = `처벌내용: ` + item.penalty;
             }
             if (!item.category){
                 item.category = '';
-            } else if(item.category){
+            } else {
                 item.category = `업종명: ` + item.category;
+            }
+
+            // 전화번호 처리
+            let tel = item.tel || '';
+            if (tel.includes('*')) {
+                tel = '';
+            } else {
+                tel = tel.replace(/\s+/g, '-'); // 숫자 사이에 빈칸이 있으면 "-"로 대체
+                if (tel.startsWith('02')) {
+                    if (tel.length === 9) {
+                        tel = tel.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+                    } else {
+                        tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+                    }
+                } else if (tel.length <= 8) {
+                    tel = '';
+                }
             }
 
             const itemElement = document.createElement('div');
             itemElement.classList.add('content');
+            if (item.detail) {
+                itemElement.classList.add('violation');
+            }
             let itemHTML = '<div class="content-info">';
-            itemHTML += `<h2>업체명: ${item.name || ''}</h2>`; // 식당명
-            itemHTML += `<p>업태명: ${item.type || ''}</p>`; // 업태명
-            itemHTML += `<p> ${item.category || ''}</p>`; // 업종
+            itemHTML += `<h2>${item.name}`;
+
+            if (item.detail) {
+                itemHTML += ` <img src="./css/images/violation_icon.png" alt="위반" class="violation-icon">`;
+            } else if (!item.detail && !item.rank) {
+                itemHTML += ` <span class="exemplary-text"><img src="./css/images/exemplary_icon.png" alt="모범음식점" class="exemplary-icon"> 모범음식점</span>`;
+            }
+
+            itemHTML += `</h2>`;
             itemHTML += rank; // 위생등급
-            itemHTML += `<p>${item.detail || ''}</p><br>`;                   
-            itemHTML += `<p>${item.no || ''}</p><br>`;                   
-            itemHTML += `<p>${item.penalty || ''}</p><br>`;                   
+            itemHTML += `<p>${item.detail || ''}</p><br>`;                                                    
             itemHTML += `<p>지정일자: ${item.date || ''}</p><br>`; // 지정일자
-            itemHTML += `<p>도로명 주소: ${item.addr || ''}</p><br>`; // 주소
-            itemHTML += `<p>전화번호: ${item.tel || ''}</p><br>`; // 전화번호
-            itemHTML += '</div>';
-            itemHTML += '</div>';
+            itemHTML += `<p>${item.addr || ''}</p><br>`; // 주소
+            if (tel) {
+                itemHTML += `<p>전화번호: ${tel}</p><br>`; // 전화번호
+            }
             itemElement.innerHTML = itemHTML;
             container.appendChild(itemElement);
         });

@@ -59,20 +59,53 @@ document.addEventListener('DOMContentLoaded', function() {
                     let tel = item.tel || '';
                     if (tel.includes('*')) {
                         tel = '';
-                    } else if (tel.startsWith('02')) {
-                        tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+                    } else {
+                        tel = tel.replace(/\s+/g, '-'); // 숫자 사이에 빈칸이 있으면 "-"로 대체
+                        if (tel.startsWith('02')) {
+                            if (tel.length === 9) {
+                                tel = tel.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+                            } else {
+                                tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+                            }
+                        } else if (tel.length <= 8) {
+                            tel = '';
+                        }
                     }
 
                    // slide에 데이터 출력
                     const slideItem = document.createElement('div');
                     slideItem.classList.add('slide-content');
-                    slideItem.innerHTML = `
-                        <h2>${item.name}</h2>
-                        <p id="addr">${item.addr}</p>
-                        <p id="tel">${tel}</p>
-                        <p id="rank">위생등급 :${item.rank}</p>
-                        <img src="${starImg}" alt="${item.rank}" class="star-img">
-                    `;
+
+                    // detail 데이터가 있는 경우, 별도의 클래스를 추가
+                    if (item.detail) {
+                        slideItem.classList.add('violation');
+                    }
+
+
+                    let slideContent = `<h2>${item.name}`;
+
+                    if (item.detail) {
+                        slideContent += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
+                    } else if (!item.detail && !item.rank) {
+                        slideContent += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
+                    }
+
+                    slideContent += `</h2>
+                                    <p id="addr">${item.addr}</p>`;
+
+                    if (tel) {
+                        slideContent += `<p id="tel">연락처 : ${tel}</p>`;
+                    }
+                    if (item.rank) {
+                        slideContent += `<p id="rank">위생등급 : ${item.rank}</p>
+                                        <img src="${starImg}" alt="${item.rank}" class="star-img">`;
+                    }
+                    if (item.detail) {
+                        slideContent += `<p id="detail">위반내용 : ${item.detail}</p>`;
+                    }
+                    
+
+                    slideItem.innerHTML = slideContent;
                     container.appendChild(slideItem);
                 }
             });

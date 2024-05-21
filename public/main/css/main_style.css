@@ -384,7 +384,7 @@ header > #searchbox > label > #menu{
 
 #slide .slide-content #rank {
     font-size: 1em; /* 폰트 크기 조정 */
-    color: #666; /* 텍스트 색상 */
+    color: #000000; /* 텍스트 색상 */
     margin-bottom: 5px;
     line-height: 1.4; /* 줄 간격 조정 */
     display: inline; /* 텍스트와 이미지가 같은 줄에 위치하도록 설정 */
@@ -400,8 +400,50 @@ header > #searchbox > label > #menu{
     margin-bottom: 5px;
 }
 
+.exemplary-text {
+    font-weight: regular;
+    color: #55dfff; /* 원하는 색상으로 변경 */
+    font-size: 0.6em; /* 원하는 크기로 변경 */
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.exemplary-icon {
+    width: 30px; /* 아이콘의 크기 */
+    height: auto;
+    margin-right: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    vertical-align: middle;
+}
+
+/* detail 데이터가 있는 경우 */
+.slide-content.violation {
+    border-bottom: 1px solid red;
+}
+
+.slide-content.violation h2 {
+    color: #FF0000; /* 빨간색 텍스트 */
+}
+
+.slide-content.violation p {
+    color: #990000; /* 진한 빨간색 텍스트 */
+}
+
+.violation-icon {
+    width: 25px; /* 아이콘의 크기 */
+    height: auto;
+    margin-left: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
 
 
+#slide .slide-content #detail {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: red; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+}
 /* ------------------------------------------------------------------ */
 
 

@@ -10,23 +10,30 @@
     font-family: 'NanumBarunGothic', sans-serif;
 }
 
-:root{
+:root {
     /* color */
     --white-color: white;
     --whitesmoke-color: whitesmoke;
     --skyblue-color: #8AE9FF;
-
     --medium-font: 18px;
 }
 
-* { 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'NanumBarunGothic';
 }
 
-#container{
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -38,7 +45,7 @@
 }
 
 /* 헤더 부분 */
-header{
+header {
     padding-top: 40px;
     width: 100%;
     height: 100px;
@@ -46,16 +53,8 @@ header{
     justify-content: space-around;
 }
 
-body, html{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
 /* 검색창 */
-#searchbox{
+#searchbox {
     width: 85%;
     height: 40px;
     display: flex;
@@ -72,53 +71,40 @@ body, html{
     padding-top: 3px;
 }
 
-
-#search-btn{
+#search-btn {
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
-	height: 35px;
-	margin: 0 0 5px 5px;
-	padding: 0;
-	border: none;
+    height: 35px;
+    margin: 0 0 5px 5px;
+    padding: 0;
+    border: none;
     cursor: pointer;
     text-align: center;
     display: flex;
     align-items: center;
 }
 
-#search-btn > img{
+#search-btn > img {
     width: 23px;
     height: 23px;
     margin-left: 5.5px;
     margin-bottom: 3px;
 }
 
-#search-filter-btn + label{
-    margin: 0 3px 5px 0;
-}
-
-
-
-#search::placeholder{
+#search::placeholder {
     color: rgba(128, 128, 128, 0.5);
     font-weight: bolder;
-}
-
-
-
-#searchbox > #search::placeholder{
     font-size: 16px;
     font-weight: lighter;
     color: rgba(128, 128, 128, 1.2);
 }
 
-#search-filter-btn{
+#search-filter-btn {
     display: none;
 }
 
-
 /* 검색필터 */
-#search-filter{
+#search-filter {
     width: 100%;
     height: 350px;
     border-radius: 10px;
@@ -133,7 +119,7 @@ body, html{
     justify-content: center;
 }
 
-#search-filter > p{
+#search-filter > p {
     border-bottom: 1px solid var(--skyblue-color);
     margin-bottom: 10px;
     padding: 5px;
@@ -143,13 +129,11 @@ body, html{
     color: var(--skyblue-color);
 }
 
-
-
-#search-filter  input{
+#search-filter input {
     display: none;
 }
 
-#search-filter > label{
+#search-filter > label {
     text-align: center;
     padding: 0px;
     margin-bottom: 10px;
@@ -160,49 +144,34 @@ body, html{
 }
 
 #search-filter > label > div > img,
-#search-filter > label > div{
+#search-filter > label > div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#search-filter label:last-child{
+#search-filter label:last-child {
     margin: 0px;
-    margin-bottom: 0px!important; 
+    margin-bottom: 0px !important;
 }
 
-#search-filter label:nth-child(12) > div{
+#search-filter label:nth-child(12) > div,
+#search-filter label:nth-child(5) > div {
     width: 150px;
     height: 30px;
     padding: 5px;
 }
-#search-filter label:nth-child(5) > div{
-    width: 150px;
-    height: 30px;
-    padding: 5px;
-}
-#search-filter > div > .rank:checked + label > div{
+
+#search-filter > div > .rank:checked + label > div,
+#search-filter > div > .rank + label > div,
+#search-filter > .search-check:checked + label > div,
+#search-filter > .ubtype:checked + label > div {
     border: 3px solid #8AE9FF;
     cursor: pointer;
 }
-#search-filter > div > .rank + label > div{
-    cursor: pointer;
-}
 
-#search-filter > label > div > img{
-    margin-right: 5px;
-}
-
-
-
-#search-filter > .search-check:checked + label > div{
-    border: 3px solid #8AE9FF;
-}
-#search-filter > .ubtype:checked + label > div{
-    border: 3px solid #8AE9FF;
-}
-
-#search-filter > label > div{
+#search-filter > label > div,
+#search-filter > div > label > div {
     background-color: white;
     border: 1px solid rgba(128, 128, 128, 0.4);
     border-radius: 9px;
@@ -211,45 +180,30 @@ body, html{
     width: 80px;
 }
 
-#search-filter > div > label > div{
-    background-color: white;
-    border: 1px solid rgba(128, 128, 128, 0.4);
-    border-radius: 9px;
-    padding: 7px;
-    font-size: 13px;
-    width: 80px;
-}
-#search-filter > div > .search-check:checked + label > div{
-    border: 3px solid #8AE9FF;
-}
-
-.star{
+.star {
     display: flex;
     justify-content: center;
 }
 
-.star :nth-child(4){
+.star :nth-child(4) {
     margin: 0 10px 10px 10px;
 }
 
-
-
-
-#search-filter-btn:checked + label + #search-filter{
+#search-filter-btn:checked + label + #search-filter {
     display: block;
 }
 
-header > #searchbox > label > #menu{
+header > #searchbox > label > #menu {
     /* 메뉴 */
     width: 35px;
     height: 35px;
     background-color: var(--white-color);
     z-index: 110;
     border-radius: 100%;
-    cursor: pointer;;
+    cursor: pointer;
 }
 
-#search{
+#search {
     /* 검색창 */
     border: none;
     font-weight: bolder;
@@ -261,10 +215,7 @@ header > #searchbox > label > #menu{
     margin-bottom: 8px;
 }
 
-
-
-
-#map_button{
+#map_button {
     position: absolute;
     bottom: 30px;
     width: 80px;
@@ -277,18 +228,17 @@ header > #searchbox > label > #menu{
     text-decoration: none;
 }
 
-#map_button > img{
+#map_button > img {
     margin: 3px;
 }
 
-
-#search-btn > img{
+#search-btn > img {
     width: 23px;
     height: 23px;
 }
 
 /* 메뉴 */
-#footer{
+#footer {
     width: 45px;
     text-align: center;
     justify-content: center;
@@ -302,53 +252,53 @@ header > #searchbox > label > #menu{
     border-radius: 35px;
 }
 
-#footer-btn ~ label{
+#footer-btn ~ label {
     cursor: pointer;
     z-index: 150;
-
 }
 
-#footer > #footer-btn{
+#footer > #footer-btn {
     display: none;
 }
-#footer > label  img{
+
+#footer > label img {
     background-color: rgba(0, 0, 0, 0);
 }
-#footer > #footer-btn ~ li{
+
+#footer > #footer-btn ~ li {
     margin: 0;
-}
-
-
-#footer > #footer-btn ~ li{
     display: none;
 }
 
-#footer > #footer-btn:checked ~ li{
+#footer > #footer-btn:checked ~ li {
     display: block;
     height: 45px;
 }
 
-#footer > li > a > img{
+#footer > li > a > img {
     width: 35px;
     height: 35px;
     cursor: pointer;
 }
 
-section{
+section {
     width: 90%;
     height: 100%;
     overflow-y: scroll;
     margin: 20px 30px 100px 30px;
 }
-.content{
+
+.content {
     text-align: left;
     border-bottom: 1px solid #8AE9FF;
     margin-top: 20px;
     padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     position: relative;
 }
 
-section > .content > a > .more-info{
+section > .content > a > .more-info {
     width: 30px;
     height: 30px;
     position: absolute;
@@ -357,15 +307,17 @@ section > .content > a > .more-info{
     cursor: pointer;
 }
 
-section > .content  p,h2{
+section > .content p,
+section > .content h2 {
     margin-top: 5px;
 }
-section > .content  h2{
+
+section > .content h2 {
     width: 40%;
     font-size: 1.2em;
 }
 
-section > .content .star{
+section > .content .star {
     position: absolute;
     right: 5px;
     top: 0px;
@@ -374,7 +326,7 @@ section > .content .star{
     display: flex;
 }
 
-section > .content  .star > h3 > img{
+section > .content .star > h3 > img {
     width: 50px;
     height: 15px;
     margin-left: 5px;
@@ -382,4 +334,39 @@ section > .content  .star > h3 > img{
 
 *::-webkit-scrollbar {
     display: none;
+}
+
+/* 추가된 클래스 */
+.exemplary-text {
+    font-weight: bold;
+    color: #4CAF50; /* 원하는 색상으로 변경 */
+    font-size: 0.9em; /* 원하는 크기로 변경 */
+    display: inline-flex;
+    align-items: center;
+}
+
+.exemplary-icon {
+    width: 20px; /* 아이콘의 크기 */
+    height: auto;
+    margin-right: 5px; /* 텍스트와 아이콘 사이의 간격 */
+}
+
+/* detail 데이터가 있는 경우 */
+.content.violation {
+    border: 2px solid #FF0000; /* 빨간색 테두리 */
+    background-color: #FFF0F0; /* 연한 빨간색 배경 */
+}
+
+.content.violation h2 {
+    color: #FF0000; /* 빨간색 텍스트 */
+}
+
+.content.violation p {
+    color: #990000; /* 진한 빨간색 텍스트 */
+}
+
+.violation-icon {
+    width: 20px; /* 아이콘의 크기 */
+    height: auto;
+    margin-left: 5px; /* 텍스트와 아이콘 사이의 간격 */
 }
