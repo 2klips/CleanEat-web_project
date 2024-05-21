@@ -1,19 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const mainController = require('../controller/main.js');
+const path = require('path');
+
+router.use(express.static(path.join(__dirname, '../../public')));
 
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname,'../../public/index.html'));
 });
 
 router.get('/index', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '/main/index.html'));
+    res.sendFile(path.join(__dirname, '../../public/main/index.html'));
 });
 
 router.get('/list', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '/main/list.html'));
+    res.sendFile(path.join(__dirname, '../../public/main/list.html'));
 });
 
 

@@ -6,14 +6,6 @@ const path = require('path');
 const userController = require('../controller/users.js');
 const {body} = require('express-validator');
 
-// router.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../public/info/main.html'));
-// });
-
-
-
-
-
 
 router.post('/signup', userController.signup);
 
@@ -29,8 +21,17 @@ router.get('/', (req, res, next) => {
 }, isAuth, userController.me);
 
 router.get('/mypage', isAuth, (req, res) => {
-    const user = req.user;
-    res.json({ userData: user });
+    const userData = {
+        name: req.user.name,
+        email: req.user.email,
+        image: req.user.image,
+        hp: req.user.hp,
+        addr1: req.user.addr1,
+        addr2: req.user.addr2,
+        image: req.user.image,
+        bookmark: req.user.bookmark,
+    };
+    res.json({ userData: userData });
 });
 
 
