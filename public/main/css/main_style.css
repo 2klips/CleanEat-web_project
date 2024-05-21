@@ -313,6 +313,8 @@ header > #searchbox > label > #menu{
 }
 
 
+/* ----------------------------------------------------------------------------------- */
+
 /* 아래쪽 슬라이드 */
 #slide{
     width: 100%;
@@ -340,39 +342,67 @@ header > #searchbox > label > #menu{
 }
 
 
-.slide-content{
+.slide-content {
     text-align: left;
     border-bottom: 1px solid #8AE9FF;
     margin-top: 20px;
     padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     position: relative;
 }
 
 
-#silde > .slide-content  p,h2{
-    margin-top: 5px;
-}
-#slide > .slide-content  h2{
-    width: 40%;
-    font-size: 1.2em;
+#slide .slide-content h2 {
+    font-size: 1.5em; /* 폰트 크기 조정 */
+    color: #333; /* 텍스트 색상 */
+    margin-bottom: 10px;
 }
 
-#slide > .slide-content .star{
-    position: absolute;
-    right: 5px;
-    top: 30px;
-    margin-top: 0;
-    font-size: 13px;
-    display: flex;
+#slide .slide-content p {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    font-weight: bold;
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+    vertical-align: middle;
 }
 
-#slide > .slide-content  .star > h3 > img{
-    width: 50px;
-    height: 15px;
-    margin-left: 5px;
+#slide .slide-content #addr {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+}
+
+#slide .slide-content #tel {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+}
+
+#slide .slide-content #rank {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+    display: inline; /* 텍스트와 이미지가 같은 줄에 위치하도록 설정 */
+    vertical-align: middle; /* 텍스트가 이미지의 중간에 위치하도록 설정 */
+}
+
+#slide .slide-content .star-img {
+    width: auto; /* 이미지 크기 */
+    height: 17px;
+    display: inline; /* 텍스트와 이미지가 같은 줄에 위치하도록 설정 */
+    vertical-align: middle; /* 이미지가 텍스트의 중간에 위치하도록 설정 */
+    margin-left: 5px; /* 이미지와 텍스트 사이의 간격 */
+    margin-bottom: 5px;
 }
 
 
+
+/* ------------------------------------------------------------------ */
 
 
 

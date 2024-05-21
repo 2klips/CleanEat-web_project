@@ -45,15 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         violation: item.detail ? true : false
                     });
 
-                    // slide에 데이터 출력
+                    // Rank에 따른 이미지 선택
+                    let starImg = '';
+                    if (item.rank === '매우우수') {
+                        starImg = './css/images/3star.svg';
+                    } else if (item.rank === '우수') {
+                        starImg = './css/images/2star.svg';
+                    } else if (item.rank === '좋음') {
+                        starImg = './css/images/1star.svg';
+                    }
+
+                    // 전화번호 처리
+                    let tel = item.tel || '';
+                    if (tel.includes('*')) {
+                        tel = '';
+                    } else if (tel.startsWith('02')) {
+                        tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+                    }
+
+                   // slide에 데이터 출력
                     const slideItem = document.createElement('div');
-                    slideItem.classList.add('content');
+                    slideItem.classList.add('slide-content');
                     slideItem.innerHTML = `
                         <h2>${item.name}</h2>
-                        <p>${item.addr}</p>
-                        <p>${item.tel}</p>
-                        <p>${item.rank}</p>
-                        <p>${item.detail}</p>
+                        <p id="addr">${item.addr}</p>
+                        <p id="tel">${tel}</p>
+                        <p id="rank">위생등급 :${item.rank}</p>
+                        <img src="${starImg}" alt="${item.rank}" class="star-img">
                     `;
                     container.appendChild(slideItem);
                 }
