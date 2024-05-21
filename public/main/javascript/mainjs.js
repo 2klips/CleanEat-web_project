@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.removeItem('searchKeyword');
         localStorage.removeItem('searchCollection');
         localStorage.removeItem('searchRank');
+        localStorage.removeItem('addresses');
         sessionStorage.removeItem('searchResults');
         sessionStorage.removeItem('searchKeyword');
         sessionStorage.removeItem('searchCollection');
         sessionStorage.removeItem('searchRank');
+        sessionStorage.removeItem('addresses');
     }
 
     const searchBtn = document.getElementById('search-btn');
