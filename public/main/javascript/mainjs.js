@@ -1,13 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // 페이지 새로고침 여부 확인
+    if (performance.navigation.type === 1) { // 1은 새로고침을 의미함
+        localStorage.removeItem('searchResults');
+        localStorage.removeItem('searchKeyword');
+        localStorage.removeItem('searchCollection');
+        localStorage.removeItem('searchRank');
+        sessionStorage.removeItem('searchResults');
+        sessionStorage.removeItem('searchKeyword');
+        sessionStorage.removeItem('searchCollection');
+        sessionStorage.removeItem('searchRank');
+    }
+
     const searchBtn = document.getElementById('search-btn');
     const searchbox = document.getElementById('search');
-
-    // 페이지 로드 시 localStorage 초기화
-    localStorage.removeItem('searchResults');
-    localStorage.removeItem('searchKeyword');
-    localStorage.removeItem('searchCollection');
-    localStorage.removeItem('searchRank');
 
     // 데이터를 화면에 표시하는 함수
     async function displayData(datas) {
@@ -16,17 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const empty = document.createElement('div');
         empty.id = 'slide-empty';
         container.appendChild(empty);
-    
+
         clearMarkersAndOverlays(); // 기존 마커와 오버레이 제거
-    
+
         const addresses = [];
-    
+
         if (datas && Array.isArray(datas)) {
             datas.forEach(item => {
                 if (!item || Object.keys(item).length === 0) {
                     return;
                 }
-    
+
                 if (item.addr) {
                     addresses.push({
                         addr: item.addr,
@@ -36,17 +42,29 @@ document.addEventListener('DOMContentLoaded', function() {
                         detail: item.detail || '',
                         violation: item.detail ? true : false
                     });
+
+                    // slide에 데이터 출력
+                    const slideItem = document.createElement('div');
+                    slideItem.classList.add('content');
+                    slideItem.innerHTML = `
+                        <h2>${item.name}</h2>
+                        <p>${item.addr}</p>
+                        <p>${item.tel}</p>
+                        <p>${item.rank}</p>
+                        <p>${item.detail}</p>
+                    `;
+                    container.appendChild(slideItem);
                 }
             });
-    
+
             const center = getMapCenter();
             const sortedAddresses = sortResultsByDistance(addresses, center);
             const limitedAddresses = sortedAddresses.slice(0, MAX_MARKERS + zoomLevel * 5);
-    
+
             // localStorage에 마커와 인포윈도우 데이터를 저장
             localStorage.setItem('addresses', JSON.stringify(limitedAddresses));
             addMarkers(limitedAddresses, true);
-            
+
         } else {
             console.error('데이터가 없습니다.');
         }
@@ -66,9 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const keyword = searchbox.value;
         const checkboxes = document.querySelectorAll('.search-check:checked');
         const rank = document.querySelectorAll('.rank:checked');
-        // 체크된 체크박스의 값을 저장할 배열을 생성합니다.
         const collection = [];
-        // 각 체크된 체크박스의 값을 배열에 추가합니다.
         checkboxes.forEach(checkbox => {
             collection.push(checkbox.value);
         });
@@ -98,24 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const queryString = encodeURIComponent(JSON.stringify(query));
             const response = await fetch(`http://localhost:8080/main/search?collection=${collection}&query=${queryString}`);
             if (!response.ok) {
-                // 응답이 성공적이지 않을 경우 오류를 throw하여 catch 블록으로 이동
                 throw new Error('서버 응답에 문제가 발생했습니다.');
             }
-            // JSON 형식으로 받은 응답 데이터를 파싱
             const data = await response.json();
-            
+
+            // 검색 결과와 조건을 sessionStorage에 저장
+            sessionStorage.setItem('searchResults', JSON.stringify(data));
+            sessionStorage.setItem('searchKeyword', keyword);
+            sessionStorage.setItem('searchCollection', JSON.stringify(collection));
+            sessionStorage.setItem('searchRank', JSON.stringify(rans));
+
             // 화면에 데이터를 표시하는 함수 호출
             displayData(data);
-
-            // 검색 결과와 조건을 localStorage에 저장
-            localStorage.setItem('searchResults', JSON.stringify(data));
-            localStorage.setItem('searchKeyword', keyword);
-            localStorage.setItem('searchCollection', JSON.stringify(collection));
-            localStorage.setItem('searchRank', JSON.stringify(rans));
-
-
         } catch (error) {
-            // 오류가 발생하면 콘솔에 오류 메시지 출력
             console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
         }
     }
@@ -125,21 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-
-    // 페이지 로드 시 localStorage 초기화
-    localStorage.removeItem('searchResults');
-    localStorage.removeItem('searchKeyword');
-    localStorage.removeItem('searchCollection');
-    localStorage.removeItem('searchRank');
-
-
     // localStorage에서 검색 결과 복원
-    const savedResults = localStorage.getItem('searchResults');
-    const savedKeyword = localStorage.getItem('searchKeyword');
-    const savedCollection = localStorage.getItem('searchCollection');
-    const savedRank = localStorage.getItem('searchRank');
+    const savedResults = sessionStorage.getItem('searchResults');
+    const savedKeyword = sessionStorage.getItem('searchKeyword');
+    const savedCollection = sessionStorage.getItem('searchCollection');
+    const savedRank = sessionStorage.getItem('searchRank');
     const savedAddresses = localStorage.getItem('addresses');
-
 
     if (savedResults && savedKeyword && savedCollection && savedRank) {
         const results = JSON.parse(savedResults);

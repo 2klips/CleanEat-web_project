@@ -11,6 +11,7 @@ var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객�
 
 var markers = []; // 기존 마커들을 저장할 배열
 var overlays = []; // 기존 커스텀 오버레이를 저장할 배열
+let firstSearch = true; // 첫 번째 검색 여부
 
 // 인포윈도우 내용 생성
 function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
@@ -50,7 +51,6 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
         </div>
     `;
 }
-
 
 // 기존 마커와 오버레이를 제거하는 함수
 function clearMarkersAndOverlays() {
@@ -117,7 +117,7 @@ function getMapCenter() {
 
 // 두 지점 사이의 거리를 계산하는 함수
 function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Radius of the earth in km
+    const R = 6371; // 지구의 반지름 (km 단위)
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a = 
@@ -137,9 +137,8 @@ function sortResultsByDistance(results, center) {
     });
 }
 
-const MAX_MARKERS = 20; // 기본 최대 마커 수
+const MAX_MARKERS = 50; // 기본 최대 마커 수
 let zoomLevel = map.getLevel(); // 초기 줌 레벨
-let firstSearch = true; // 첫 번째 검색 여부
 
 // 오버레이의 가시성을 업데이트하는 함수
 function updateOverlaysVisibility() {
@@ -179,7 +178,10 @@ function watchCurrentLocation() {
             currentLocation = new kakao.maps.LatLng(lat, lng);
 
             currentLocationOverlay.setPosition(currentLocation);
-            map.setCenter(currentLocation);
+            if (firstSearch) {
+                map.setCenter(currentLocation);
+                firstSearch = false;
+            }
         }, function(error) {
             console.error('Error occurred. Error code: ' + error.code);
         }, {
@@ -212,8 +214,6 @@ function updateLocationOverlay() {
         currentLocationOverlay.setPosition(currentLocation);
     }
 }
-
-
 
 // 필요 함수들을 전역으로 노출
 window.searchAndDisplayAddress = searchAndDisplayAddress;

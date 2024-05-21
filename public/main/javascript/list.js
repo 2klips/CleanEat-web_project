@@ -12,7 +12,6 @@ async function displayData(datas) {
     if (datas && Array.isArray(datas)) {
         datas.forEach(item => {
             let rank = '';
-            console.log(item)
             if(item.rank == '매우우수'){
                 rank = `<div class="star"><h3>위생등급: 매우우수<img src="./css/images/3star.svg" class="3star"></h3></div>`;
             } else if(item.rank == '우수'){
@@ -40,13 +39,7 @@ async function displayData(datas) {
             } else if(item.category){
                 item.category = `업종명: ` + item.category;
             }
-            if (!item.penalty){
-                item.penalty = '';
-            } else if(item.penalty){
-                item.penalty = `처벌내용: ` + item.penalty;
-            }
 
-            // 각 식당 정보를 화면에 출력합니다.
             const itemElement = document.createElement('div');
             itemElement.classList.add('content');
             let itemHTML = '<div class="content-info">';
