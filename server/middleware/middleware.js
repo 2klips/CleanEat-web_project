@@ -7,6 +7,7 @@ const AUTH_ERROR = {message: "인증에러"};
 
 const isAuth = async (req, res, next) => {
     const authHeader = req.get('Authorization');
+    console.log(authHeader)
     if(!(authHeader && authHeader.startsWith('Bearer '))){
         console.log('에러1');
         return res.status(401).json(AUTH_ERROR);
@@ -24,7 +25,7 @@ const isAuth = async (req, res, next) => {
                 return res.status(401).json(AUTH_ERROR);
             }
             req.token = token;
-            req.email = user.email;
+            req.user = user;
             next();
         }
     );

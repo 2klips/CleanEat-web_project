@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
         }
+
     }
 
     // 페이지 상단으로 스크롤하는 함수

@@ -12,21 +12,10 @@ const {body} = require('express-validator');
 
 
 
-const validateLogin = [
-    body('email').trim().isEmail().withMessage('이메일 형식 확인하세요'),
-    body('password').trim().isLength({min:4}).withMessage('password는 최소 4자 이상 입력해주세요'),
-    validate
-]
-
-const validateSignup = [
-    ...validateLogin,
-    body('name').trim().notEmpty().withMessage('name을 입력하세요'),
-    body('email').trim().isEmail().withMessage('이메일 형식 확인하세요'),
-    validate
-]
 
 
-router.post('/signup', validateSignup, userController.signup);
+
+router.post('/signup', userController.signup);
 
 router.post('/login', userController.login);
 
@@ -36,22 +25,14 @@ router.get('/login' , (req, res) => {
 
 // router.get('/', isAuth, userController.me);
 router.get('/', (req, res, next) => {
-    const authHeader = req.get('Authorization');
-    if (!authHeader) {
-        // return res.send('로그인이 필요합니다');
-        return res.redirect('/me/login');
-    }
-    next();
+    res.json({ message: 'Authenticated' });
 }, isAuth, userController.me);
 
-router.get('/mypage', (req, res) => {
-    const authHeader = req.get('Authorization');
-    if (!authHeader) {
-        // return res.send('로그인이 필요합니다');
-        return res.redirect('/me/login');
-    }
-    res.sendFile(path.join(__dirname, '../../public/info/main.html'));
+router.get('/mypage', isAuth, (req, res) => {
+    const user = req.user;
+    res.json({ userData: user });
 });
+
 
 
 router.use(express.static(path.join(__dirname, '../../public/login_regist')));
