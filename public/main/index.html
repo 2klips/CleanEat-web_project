@@ -191,8 +191,31 @@
 
     <script src="./javascript/mainjs.js"></script>
     <script src="./javascript/kakao_map.js"></script>
+    <script>
+        // HTML 요소를 찾습니다.
+        const loginBtn = document.getElementById('loginbtn');
 
+    // 클릭 이벤트 리스너를 추가합니다.
+    loginBtn.addEventListener('click', myPage);
+
+    async function myPage() {
+        event.preventDefault();
+        const token = localStorage.getItem('token');
+        if (token) {
+            const response = await fetch('/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }})
+            if (response.ok) {
+                window.location.href = '../info/main.html';
+            } else {
+                console.error('서버 응답 실패:', response.statusText);
+            }
+        }
+        }
 </script>
+
 
     
 </body>
