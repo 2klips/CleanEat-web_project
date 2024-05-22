@@ -14,17 +14,31 @@
 
 .info-title {
     font-weight: bold;
+    font-size: 18px;
     margin-bottom: 5px;
 }
 
 .info-rating {
-    color: #ffd700; /* gold color */
+    color: black;
     font-size: 0.9rem;
+}
+
+.info-rating img {
+    width: auto; /* 이미지 크기를 조정하세요 */
+    height: 16px; /* 비율을 유지한 채 높이 조정 */
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+.rank-text {
+    font-size: 14px; /* 텍스트 크기 조정 */
+    font-weight: bold;
 }
 
 .info-address {
     font-size: 0.8em;
-
+    font-weight: bold;
     color: #7c7c7c;
     margin-bottom: 5px;
 }
