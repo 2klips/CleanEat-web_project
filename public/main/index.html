@@ -202,7 +202,7 @@
         event.preventDefault();
         const token = localStorage.getItem('token');
         if (token) {
-            const response = await fetch('/me', {
+            const response = await fetch('http://localhost:8080/me', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -214,7 +214,7 @@
                 console.error('서버 응답 실패:', response.statusText);
             }
         } else {
-            window.location.href = '../me/login';
+            window.location.href = 'http://localhost:8080/me/login';
         }
     }
 </script>

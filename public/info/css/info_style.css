@@ -246,3 +246,23 @@ footer > a {
 .bookmarkicon:checked{
   background-image: url("../source/bookmark_icon_blue.png")
 }
+
+#info2 {
+  color: black;
+  font-size: 16px;
+}
+
+#pt3 {
+  margin-bottom: 0px;
+  color: black;
+}
+
+#pt2 {
+  margin-bottom: 0px;
+  color: black;
+}
+
+#pt1 {
+  color: black;
+  margin-bottom: 30px;
+}
