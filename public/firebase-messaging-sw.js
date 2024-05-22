@@ -1,38 +1,31 @@
-import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging/sw";
-import { onBackgroundMessage } from "firebase/messaging/sw";
-// Initialize the Firebase app in the service worker by passing in
-// your app's Firebase config object.
-// https://firebase.google.com/docs/web/setup#config-object
-const firebaseApp = initializeApp({
-  apiKey: 'api-key',
-  authDomain: 'project-id.firebaseapp.com',
-  databaseURL: 'https://project-id.firebaseio.com',
-  projectId: 'project-id',
-  storageBucket: 'project-id.appspot.com',
-  messagingSenderId: 'sender-id',
-  appId: 'app-id',
-  measurementId: 'G-measurement-id',
+importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js');
+
+// Firebase 설정
+const firebaseConfig = {
+  apiKey: "AIzaSyDLwmwOZiprAUt16GYQNznmNBoOKJNCYG4",
+  authDomain: "easylogin-b519a.firebaseapp.com",
+  projectId: "easylogin-b519a",
+  storageBucket: "easylogin-b519a.appspot.com",
+  messagingSenderId: "270766993601",
+  appId: "1:270766993601:web:aa3199d115b3b816412440",
+  measurementId: "G-XM5967EN5W"
+};
+
+// Firebase 초기화
+firebase.initializeApp(firebaseConfig);
+
+// Firebase 메시징 초기화
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage((payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // 사용자 정의 알림 작성
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: '/firebase-logo.png'
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
-
-// Retrieve an instance of Firebase Messaging so that it can handle background
-// messages.
-const messaging = getMessaging(firebaseApp);
-
-onMessage(messaging, (payload) => {
-  console.log('Message received. ', payload);
-  // ...
-});
-
-onBackgroundMessage(messaging, (payload) => {
-    console.log('[firebase-messaging-sw.js] Received background message ', payload);
-    // Customize notification here
-    const notificationTitle = 'Background Message Title';
-    const notificationOptions = {
-      body: 'Background Message body.',
-      icon: '/firebase-logo.png'
-    };
-  
-    self.registration.showNotification(notificationTitle,
-      notificationOptions);
-  });

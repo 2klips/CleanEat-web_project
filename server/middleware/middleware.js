@@ -9,8 +9,8 @@ const isAuth = async (req, res, next) => {
     const authHeader = req.get('Authorization');
     console.log(authHeader)
     if(!(authHeader && authHeader.startsWith('Bearer '))){
-        console.log('에러1');
-        return res.status(401).json(AUTH_ERROR);
+        console.log('로그인이 필요합니다');
+        return res.redirect('me/login');;
     }
     const token = authHeader.split(' ')[1];
     jwt.verify(

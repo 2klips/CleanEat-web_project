@@ -208,12 +208,15 @@
                     'Authorization': 'Bearer ' + token
                 }})
             if (response.ok) {
+                console.log('서버 응답 성공:', response.statusText);
                 window.location.href = '../info/main.html';
             } else {
                 console.error('서버 응답 실패:', response.statusText);
             }
+        } else {
+            window.location.href = '../me/login';
         }
-        }
+    }
 </script>
 
 

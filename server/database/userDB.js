@@ -9,7 +9,6 @@ const userSchema = new Mongoose.Schema({
     addr1: {type: String, required: true},
     addr2: {type: String, required: true},
     image: {type: String, default: ''},
-    bookmark: {type: Array, default: []},
 });
 
 useVirtualId(userSchema);
