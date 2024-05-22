@@ -10,6 +10,10 @@
     font-family: 'NanumBarunGothic', sans-serif;
 }
 
+/* Add this at the end of the list.css file */
+#data-container {
+    margin-top: 100px; /* Adjust the value as needed */
+}
 
 :root{
     /* color */
@@ -229,7 +233,7 @@ header > #searchbox > label > #menu{
     height: 24px;
     position: sticky;
     z-index: 101;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 
@@ -238,7 +242,7 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
 	height: 35px;
-	margin: 5px 0 5px 5px;
+	margin: 5px 0 0px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;
@@ -322,7 +326,7 @@ section {
     text-align: left;
     border-bottom: 1px solid #8AE9FF;
     margin-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     position: relative;
@@ -337,14 +341,12 @@ section > .content > a > .more-info {
     cursor: pointer;
 }
 
-section > .content p,
-section > .content h2 {
-    margin-top: 5px;
+section > .content p{
 }
 
 section > .content h2 {
     width: 40%;
-    font-size: 1.2em;
+    font-size: 23px;
 }
 
 section > .content .star {
@@ -366,39 +368,75 @@ section > .content .star > h3 > img {
     display: none;
 }
 
+.date {
+    margin-left: 36px;
+    margin-top: -25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black; /* Adjust the color as needed */
+}
+
+.address {
+    margin-top: -6px;
+    font-weight: bold;
+    font-size: 17px;
+    color: black; /* Adjust the color as needed */
+}
+
+.tel {
+    margin-top: -6px;
+
+    font-size: 16px;
+    color: black; /* Adjust the color as needed */
+}
+
 /* 추가된 클래스 */
 .exemplary-text {
     font-weight: bold;
-    color: #4CAF50; /* 원하는 색상으로 변경 */
-    font-size: 0.9em; /* 원하는 크기로 변경 */
+    color: #55ddff; /* 원하는 색상으로 변경 */
+    font-size: 17px; /* 원하는 크기로 변경 */
     display: inline-flex;
     align-items: center;
+    margin-top: 10px;
 }
 
 .exemplary-icon {
-    width: 20px; /* 아이콘의 크기 */
+    width: 30px; /* 아이콘의 크기 */
     height: auto;
     margin-right: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    margin-bottom: 5px;
 }
 
 /* detail 데이터가 있는 경우 */
+.violation {
+    color: red;
+}
+
+
 .content.violation {
-    border: 2px solid #FF0000; /* 빨간색 테두리 */
-    background-color: #FFF0F0; /* 연한 빨간색 배경 */
+    border-bottom: solid 1px red;
 }
 
 .content.violation h2 {
-    color: #FF0000; /* 빨간색 텍스트 */
+    color: #000000; /* 빨간색 텍스트 */
 }
 
 .content.violation p {
-    color: #990000; /* 진한 빨간색 텍스트 */
+    color: #494949; /* 진한 빨간색 텍스트 */
+    font-weight: bold;
+}
+
+.content.violation #dtail {
+    color: red; /* 진한 빨간색 텍스트 */
+    font-weight: bold;
 }
 
 .violation-icon {
-    width: 20px; /* 아이콘의 크기 */
+    width: 30px; /* 아이콘의 크기 */
     height: auto;
     margin-left: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    vertical-align: middle;
+    margin-bottom: 5px;
 }
 
 
