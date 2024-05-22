@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (!item.detail){
                     item.detail = '';
-                } else {
-                    item.detail = `위반내용: ` + item.detail;
+                } else if(item.detail){
+                    item.detail = `<span class="violation">위반내용: ${item.detail}</span>`;
                 }
                 if (!item.no){
                     item.no = '';
@@ -51,8 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     } else if (tel.length <= 8) {
                         tel = '';
-                    }
+                    } else if (tel.startsWith('000')) {
+                        tel = '';
                 }
+            }
 
                 const itemElement = document.createElement('div');
                 itemElement.classList.add('content');
@@ -63,18 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 itemHTML += `<h2>${item.name}`;
 
                 if (item.detail) {
-                    itemHTML += ` <img src="./css/images/violation_icon.png" alt="위반" class="violation-icon">`;
+                    itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
                 } else if (!item.detail && !item.rank) {
-                    itemHTML += ` <span class="exemplary-text"><img src="./css/images/exemplary_icon.png" alt="모범음식점" class="exemplary-icon"> 모범음식점</span>`;
+                    itemHTML += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
                 }
 
                 itemHTML += `</h2>`;
                 itemHTML += rank; // 위생등급
-                itemHTML += `<p>${item.detail || ''}</p><br>`;                                                    
-                itemHTML += `<p>지정일자: ${item.date || ''}</p><br>`; // 지정일자
-                itemHTML += `<p>${item.addr || ''}</p><br>`; // 주소
+                itemHTML += `<p>${item.detail || ''}</p><br>`;                               
+                itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소
                 if (tel) {
-                    itemHTML += `<p>전화번호: ${tel}</p><br>`; // 전화번호
+                    itemHTML += `<p class="tel">전화번호: ${tel}</p><br>`; // 전화번호
                 }
                 itemElement.innerHTML = itemHTML;
                 container.appendChild(itemElement);

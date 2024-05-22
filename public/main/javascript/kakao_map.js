@@ -15,19 +15,19 @@ let firstSearch = true; // 첫 번째 검색 여부
 
 // 인포윈도우 내용 생성
 function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
-    let rankText;
+    let starImg = '';
     switch (rank) {
         case '매우우수':
-            rankText = '매우 우수 ⭐⭐⭐';
+            starImg = './css/images/3star.svg';
             break;
         case '우수':
-            rankText = '우수 ⭐⭐';
+            starImg = './css/images/2star.svg';
             break;
         case '좋음':
-            rankText = '좋음 ⭐';
+            starImg = './css/images/1star.svg';
             break;
         default:
-            rankText = '';
+            starImg = '';
     }
 
     if (tel.includes('*')) {
@@ -39,14 +39,17 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
     const infoWindowClass = violation ? 'custom-info-window violation' : 'custom-info-window';
 
     const detailImage = detail ? '<img src="./css/images/alert_circle_outline_icon_red.png" alt="Warning Icon" class="warning-icon">' : '';
-    const additionalImage = (!detail && !rankText) ? '<img src="./css/images/Logo.png" alt="Mobam Icon" class="mobam-icon">' : '';
+    const additionalImage = (!detail && !starImg) ? '<img src="./css/images/Logo.png" alt="Mobam Icon" class="mobam-icon">' : '';
 
     return `
         <div class="${infoWindowClass}" onclick="location.href='./more.html';">
             <h4 class="info-title">${name} ${detailImage} ${additionalImage}</h4>
             <div class="info-address">${addr}</div>
             <div class="info-phone">${tel}</div>
-            <div class="info-rating">${rankText}</div>
+            <div class="info-rating">
+                <span class="rank-text">${rank}</span>
+                <img src="${starImg}" alt="${rank}">
+            </div>
             <div class="info-detail">${detail}</div>
         </div>
     `;

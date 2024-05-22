@@ -66,6 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         } else if (tel.length <= 8) {
                             tel = '';
+                        } else if (tel.startsWith('000')) {
+                            tel = '';
                         }
                     }
 
