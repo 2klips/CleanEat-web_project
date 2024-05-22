@@ -5,7 +5,7 @@ const router = express.Router();
 const path = require('path');
 const userController = require('../controller/users.js');
 const {body} = require('express-validator');
-
+const bookmarkController = require('../controller/bookmark.js');
 
 router.post('/signup', userController.signup);
 
@@ -34,7 +34,11 @@ router.get('/mypage', isAuth, (req, res) => {
     res.json({ userData: userData });
 });
 
+router.post('/bookmark', isAuth, bookmarkController.insertBookmark);
 
+router.get('/bookmark', isAuth, bookmarkController.getBookmarks);
+
+router.delete('/bookmark', isAuth, bookmarkController.deleteBookmark);
 
 router.use(express.static(path.join(__dirname, '../../public/login_regist')));
 router.use(express.static(path.join(__dirname, '../../public/info')));
