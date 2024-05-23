@@ -133,6 +133,19 @@ async function insertData(data, collecTion) {
  * @param {string} user.url 사용자 프로필 사진 URL
  * @returns {string} 생성된 사용자의 아이디
  */
+
+
+
+
+/** 회원가입
+ * @param {Object} user 사용자 정보 객체
+ * @param {string} user.username 사용자 아이디
+ * @param {string} user.password 사용자 비밀번호
+ * @param {string} user.name 사용자 이름
+ * @param {string} user.email 사용자 이메일
+ * @param {string} user.url 사용자 프로필 사진 URL
+ * @returns {string} 생성된 사용자의 아이디
+ */
 async function createUser(user){
     const created = {...user }
     insertData(users, created)

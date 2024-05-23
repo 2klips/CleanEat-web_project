@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const database = require('../database/database');
 
+const database = require('../database/database');
+
 
 const AUTH_ERROR = {message: "인증에러"};
 
@@ -13,6 +15,7 @@ const isAuth = async (req, res, next) => {
     }
     const token = authHeader.split(' ')[1];
     jwt.verify(
+        token, 'abcd1234%^&*', async(error, decoded) => {
         token, 'abcd1234%^&*', async(error, decoded) => {
             if(error){
                 console.log('에러2');
@@ -30,4 +33,5 @@ const isAuth = async (req, res, next) => {
     );
 }
 
+module.exports = isAuth;
 module.exports = isAuth;
