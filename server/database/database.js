@@ -1,6 +1,6 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const config = require('../config');
-
+const mongoose = require('mongoose');
 
 // MongoDB 서버 URI
 const uri =config.db.URI;
@@ -25,6 +25,14 @@ async function connectMongoDB() {
     // 이후 작업을 수행할 수 있습니다.
     } catch (error) {
     console.error('Failed to connect to MongoDB', error);
+    }
+}
+async function connectMongoose() {
+    try {
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, dbName: dbName});
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('Failed to connect to MongoDB', error);
     }
 }
 
@@ -54,6 +62,34 @@ async function searchDB(collecTion,query) {
     // finally {
     //     client.close();
     // }
+}
+
+
+async function searchBy_id(id) {
+    try {
+        const db = client.db(dbName);
+        const Collection1 = db.collection('ExemplaryRestaurantData');
+        const Collection2 = db.collection('safetyRankData');
+        const Collection3 = db.collection('violation');
+        const objectId = new ObjectId(id);
+        const collections = [Collection1, Collection2, Collection3];
+        const results = await Promise.all(
+            collections.map(async (collection) => {
+                return await collection.findOne({ _id: objectId });
+            })
+        );
+        const resultsWithoutId = {};
+        results.forEach(result => {
+            if (result) {
+                const { _id, ...rest } = result;
+                Object.assign(resultsWithoutId, rest);
+            }
+        });
+        return resultsWithoutId;
+    } catch (error) {
+        console.error('Error searching by id:', error);
+        throw error;
+    }
 }
 
 async function disconnectMongoDB() {
@@ -97,6 +133,19 @@ async function insertData(data, collecTion) {
  * @param {string} user.url 사용자 프로필 사진 URL
  * @returns {string} 생성된 사용자의 아이디
  */
+
+
+
+
+/** 회원가입
+ * @param {Object} user 사용자 정보 객체
+ * @param {string} user.username 사용자 아이디
+ * @param {string} user.password 사용자 비밀번호
+ * @param {string} user.name 사용자 이름
+ * @param {string} user.email 사용자 이메일
+ * @param {string} user.url 사용자 프로필 사진 URL
+ * @returns {string} 생성된 사용자의 아이디
+ */
 async function createUser(user){
     const created = {...user }
     insertData(users, created)
@@ -115,5 +164,10 @@ module.exports = {
     connectMongoDB,
     searchDB,
     insertData,
-    disconnectMongoDB
+    disconnectMongoDB,
+    createUser,
+    getUsers,
+    useVirtualId,
+    connectMongoose,
+    searchBy_id
 };

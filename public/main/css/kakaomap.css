@@ -1,28 +1,52 @@
 .custom-info-window {
     width: 250px;
-    height: 100px;
     position: relative;
     background: white;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
     font-family: 'NanumBarunGothic', sans-serif;
+    word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈 */
+    white-space: normal; /* 줄바꿈을 허용 */
+    transform: translateY(-100%); /* 위치를 위로 조정 */
 
 }
-
-
 
 .info-title {
     font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
 .info-rating {
-    color: #ffd700; /* gold color */
+    color: black;
+    font-size: 0.9rem;
 }
 
-.info-address, .info-phone {
+.info-rating img {
+    width: auto; /* 이미지 크기를 조정하세요 */
+    height: 16px; /* 비율을 유지한 채 높이 조정 */
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-left: 3px;
+}
+
+.rank-text {
+    font-size: 14px; /* 텍스트 크기 조정 */
+    font-weight: bold;
+}
+
+.info-address {
     font-size: 0.8em;
-    color: #333;
+    font-weight: bold;
+    color: #7c7c7c;
+    margin-bottom: 5px;
+}
+
+.info-phone {
+    font-size: 0.8em;
+    color: #000000;
+    margin-bottom: 5px;
 }
 
 .info-marker-icon {
@@ -42,4 +66,65 @@
 
 .info-text {
     margin-left: 30px; /* Adjust as needed */
+}
+
+.custom-info-window .info-title .mobam-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: -3px;
+}
+
+.custom-info-window .info-title .warning-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: -5px;
+}
+
+
+.custom-info-window .info-detail {
+    font-size: 14px;
+    margin: 2px 0;
+    font-weight: bold;
+    color: red;
+}
+
+#current-location-circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgb(255, 0, 0);
+    border: 2px solid  white;
+    border-radius: 50%;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: rgb(0, 37, 250) 0px 0px 15px;
+}
+
+
+#recenter-btn {
+    position: absolute;
+    top: 12.5%;
+    right: 7%;
+    z-index: 10;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#recenter-btn img {
+    width: 40px; /* 원하는 이미지 크기로 조정 */
+    height: 40px; /* 원하는 이미지 크기로 조정 */
+    filter: drop-shadow(1px 2px 1.2px rgba(0, 0, 0, 0.5));
+}
+
+
+#re-search-btn {
+    position: absolute;
+    top: 50.5%;
+    right: 15%;
+    z-index: 10;
+    background: none;
+    border: none;
+    cursor: pointer;
 }

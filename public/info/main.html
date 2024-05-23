@@ -11,26 +11,35 @@
   <div id="container">
     <a href="../login_regist/index.html"><!--로그인 시 아래쪽처럼 값이 들어감. -->
       <div id="userinfo">
-        <img src="./source/avata.png" alt="avata">
+        <!-- <img src="./source/avata.png" alt="avata">
         <div id="user">
           <h2>로그인이 필요합니다</h2>
           <p></p>
-        </div>
-        <!--로그인시
+        </div> -->
+        <!-- 로그인시 -->
       <img src="./source/image.jpg" alt="강아지" id="userimg">
       <div id="user">
         <h2>ID</h2>
         <p>name</p>s
       </div>
-    -->
       </div>
   </a>
-    <div id="alarm" class="section">
-        <div><span class="font-ctrl">알림 수신</span></div>
-        <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="pushAlramSwitch()"></label></div>
-    </div>
+  <div id="alarm" class="section">
+    <div><span class="font-ctrl">알림 수신</span></div>
+    <div class="circleBtn">
+      <button class="custom-button" onclick="toggleBackground()">
+          <div class="circle-icon">
+              <i class="fas fa-circle"></i>
+          </div>
+      </button>
+  </div>
+</div>
+    <!-- <div id="alarm" class="section">
+      <div><span class="font-ctrl">알림 수신</span></div>
+      <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="toggleBackground()"></label></div>
+    </div> -->
     <hr>
-    <a href="./bookmark"><div id="bookmark" class="section"><span class="font-ctrl">북마크</span></div></a>
+    <a href="./bookmark.html"><div id="bookmark" class="section"><span class="font-ctrl">북마크</span></div></a>
     <hr>
     <a href="./info.html"><div id="introduce" class="section"><span class="font-ctrl">클린잇 소개 /위생등급 기준</span></div></a>
     <hr>
@@ -41,5 +50,10 @@
   </div>
   <p style="position:relative; bottom:70px; color:#595959">부정·불량 식품 신고는 국번없이 1399(무료)</p>
   <footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
+
+  <script src="./index.js"></script>
+  <script src="./javascript/main.js"></script>
+  <script type="module" src="toggle_button.js"></script>
+  
 </body>
 </html>

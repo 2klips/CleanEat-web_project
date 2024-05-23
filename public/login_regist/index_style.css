@@ -119,6 +119,7 @@ transition: all .5s ease;
 }
 
 .popup-content {
+    width: 250px;
     text-align: center;
     position: relative;
     margin-top: -40px;
@@ -141,5 +142,43 @@ transition: all .5s ease;
 }
 
 .close-popup:hover {
+    background-color: #6dbfff;
+}
+.loginpopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 60px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.loginpopup-content {
+    width: 250px;
+    text-align: center;
+    position: relative;
+    margin-top: -40px;
+}
+
+.close-loginpopup {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 40px;
+    background-color: #8AE9FF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.close-loginpopup:hover {
     background-color: #6dbfff;
 }

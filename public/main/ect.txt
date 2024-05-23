@@ -1,0 +1,146 @@
+<!-- <p>분류</p>
+                    <input type="checkbox" id="cafe" class="search-check">
+                    <label for="cafe"><div class="search-btn"><img src="./css/images/cafe-outline.svg" alt="" style="width: 15px; height: 15px;"> 카페</div></label>
+                    <input type="checkbox" id="restaurant" class="search-check">
+                    <label for="restaurant"><div class="search-btn"><img src="./css/images/restaurant-outline.svg" alt="" style="width: 15px; height: 15px;"> 식당</div></label>
+                    <input type="checkbox" id="pub" class="search-check">
+                    <label for="pub"><div class="search-btn"><img src="./css/images/beer-outline.svg" alt="" style="width: 15px; height: 15px;"> 주점</div></label> -->
+
+
+
+
+<!-- <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark1" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food1.jpg" alt="">
+                <div class="slide-info">
+                    <h2>최고 분식</h2>
+                    <p>분식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>01-234-5678</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt="" style="border-radius: 8px;"></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark2" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food2.jpg" alt="">
+                <div class="slide-info">
+                    <h2>칠성 부대찌개</h2>
+                    <p>한식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>04-246-3579</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark3" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food3.jpg" alt="">
+                <div class="slide-info">
+                    <h2>곰 아저씨 부엌</h2>
+                    <p>양식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>01-456-2345</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark4" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food4.jpg" alt="">
+                <div class="slide-info">
+                    <h2>이케멘스</h2>
+                    <p>양식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>04-246-3579</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark5" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food5.jpg" alt="">
+                <div class="slide-info">
+                    <h2>BABO Kitchen</h2>
+                    <p>일식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>02-456-2345</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark6" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food6.jpg" alt="">
+                <div class="slide-info">
+                    <h2>분식왕</h2>
+                    <p>분식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>02-789-0123</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark7" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food7.jpg" alt="">
+                <div class="slide-info">
+                    <h2>일품향</h2>
+                    <p>중식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>02-236-4345</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark8" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food8.jpg" alt="">
+                <div class="slide-info">
+                    <h2>달달고기</h2>
+                    <p>한식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>03-436-3355</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <img class="slide-in-logo" src="./css/images/KakaoTalk_20240422_010835732.png" alt="">
+                    <div class="header-bookmark"><input type="checkbox" class="bookmarkicon" id="bookmark9" ></div>
+                </div>
+                <img class="restaurant-img" src="./css/images/food9.jpg" alt="">
+                <div class="slide-info">
+                    <h2>돈가스의 정석</h2>
+                    <p>양식</p>
+                    <h3>위생등급: 매우 우수⭐⭐⭐</h3>
+                    <p>서울시 강남구 논현로 85길 43</p>
+                    <p>03-445-1375</p>
+                </div>
+                <a href="./more.html"><img class="more-info" src="./css/images/add-circle-outline.svg" alt=""></a>;
+            </div> -->

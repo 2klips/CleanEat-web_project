@@ -1,18 +1,3 @@
-/* @font-face {
-    font-family: 'NanumBarunGothic';
-    font-style: normal;
-    font-weight: 400;
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'NanumBarunGothic';
-    font-style: normal;
-    font-weight: 700;
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
-} */
 
 @font-face {
     font-family: 'NanumBarunGothic';
@@ -151,7 +136,7 @@ header{
 #search-filter > label{
     text-align: center;
     margin-bottom: 10px;
-    margin-left: 0px;
+    margin-left: -11px;
     display: inline-block;
     cursor: pointer;
     align-items: center;
@@ -245,7 +230,7 @@ header > #searchbox > label > #menu{
     height: 24px;
     position: sticky;
     z-index: 101;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 
@@ -254,7 +239,7 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
 	height: 35px;
-	margin: 5px 0 5px 5px;
+	margin: 5px 0 px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;
@@ -328,7 +313,11 @@ header > #searchbox > label > #menu{
 }
 
 
+/* ----------------------------------------------------------------------------------- */
+
 /* 아래쪽 슬라이드 */
+
+
 #slide{
     width: 100%;
     height: 30px;
@@ -355,132 +344,109 @@ header > #searchbox > label > #menu{
 }
 
 
-.slide-content{
+.slide-content {
     text-align: left;
     border-bottom: 1px solid #8AE9FF;
-    margin-top: 20px;
-    padding-bottom: 20px;
-    position: relative;
-}
-
-
-#silde > .slide-content  p,h2{
-    margin-top: 5px;
-}
-#slide > .slide-content  h2{
-    width: 40%;
-    font-size: 1.2em;
-}
-
-#slide > .slide-content .star{
-    position: absolute;
-    right: 5px;
-    top: 30px;
-    margin-top: 0;
-    font-size: 13px;
-    display: flex;
-}
-
-#slide > .slide-content  .star > h3 > img{
-    width: 50px;
-    height: 15px;
-    margin-left: 5px;
-}
-
-
-/* .slide-info>h2{
-    font-size: 18px;
-    font-weight: bold;
-}
-#slide > .slide-content{
-    width: 100%;
-    height: 170px;
-    margin-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #55dfff;
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-}
-
-#slide > .slide-content .content-info .star{
-    position: absolute;
-    right: 5px;
-    top: 50px;
-    margin-top: 0;
-    font-size: 13px;
-    display: flex;
-}
-
-#slide > .slide-content .content-info  .star > h3 > img{
-    width: 50px;
-    height: 15px;
-    margin-left: 5px;
-}
-
-
-#slide > .slide-content > :first-child{
-    margin-top: 10px;
-}
-#slide > .slide-content > .slide-header{
-    width: 61%;
-    height: 35px;
-    position: absolute;
-    right: 0px;
-    display: flex;
-    justify-content: space-between;
-}
-
-#slide > .slide-content > .slide-header  .header-bookmark{
-    width: 30px;
-    height: 100%;
-    display: inline-block;
-    margin-top: 0px;
-    cursor: pointer;
-}
-
-#slide > .slide-content > .slide-header > img{
-    width: 30px;
-    height: 100%;
-}
-
-#slide > .slide-content > .slide-header  .header-bookmark > .bookmarkicon{
-    width: 25px;
-    height: 100%;
-    margin: 0;
-}
-#slide > .slide-content > .restaurant-img{
-    width: 37%;
-    height: 100%;
-    float: left;
-    margin-right: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
-}
-
-#slide div:nth-child(2){
     margin-top: 30px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
 }
 
-#slide > .slide-content > .slide-info{
-    position: absolute;
-    margin-top: 40px;
-    margin-left: 40%;
-    display: inline-block;
-}
-#slide > .slide-content > .slide-info > p,h2,h3{
-    font-size: 14px;
-    margin-top: 4px;
+
+#slide .slide-content h2 {
+    font-size: 1.5em; /* 폰트 크기 조정 */
+    color: #333; /* 텍스트 색상 */
+    margin-bottom: 10px;
 }
 
-#slide > .slide-content > a > .more-info{
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    right: 5px;
-    bottom: 10px;
-    cursor: pointer;
-} */
+#slide .slide-content p {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    font-weight: bold;
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+    vertical-align: middle;
+}
+
+#slide .slide-content #addr {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+}
+
+#slide .slide-content #tel {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #666; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+}
+
+#slide .slide-content #rank {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: #000000; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+    display: inline; /* 텍스트와 이미지가 같은 줄에 위치하도록 설정 */
+    vertical-align: middle; /* 텍스트가 이미지의 중간에 위치하도록 설정 */
+}
+
+#slide .slide-content .star-img {
+    width: auto; /* 이미지 크기 */
+    height: 17px;
+    display: inline; /* 텍스트와 이미지가 같은 줄에 위치하도록 설정 */
+    vertical-align: middle; /* 이미지가 텍스트의 중간에 위치하도록 설정 */
+    margin-left: 5px; /* 이미지와 텍스트 사이의 간격 */
+    margin-bottom: 5px;
+}
+
+.exemplary-text {
+    font-weight: regular;
+    color: #55dfff; /* 원하는 색상으로 변경 */
+    font-size: 0.6em; /* 원하는 크기로 변경 */
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.exemplary-icon {
+    width: 30px; /* 아이콘의 크기 */
+    height: auto;
+    margin-right: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    vertical-align: middle;
+}
+
+/* detail 데이터가 있는 경우 */
+.slide-content.violation {
+    border-bottom: 1px solid red;
+}
+
+.slide-content.violation h2 {
+    color: #FF0000; /* 빨간색 텍스트 */
+}
+
+.slide-content.violation p {
+    color: #990000; /* 진한 빨간색 텍스트 */
+}
+
+.violation-icon {
+    width: 25px; /* 아이콘의 크기 */
+    height: auto;
+    margin-left: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+
+#slide .slide-content #detail {
+    font-size: 1em; /* 폰트 크기 조정 */
+    color: red; /* 텍스트 색상 */
+    margin-bottom: 5px;
+    line-height: 1.4; /* 줄 간격 조정 */
+}
+/* ------------------------------------------------------------------ */
 
 
 
@@ -633,6 +599,22 @@ header > #searchbox > label > #menu{
 .score-star{ font-size: 0.8rem;}
 input[type="checkbox"]{appearance: none;}
 .bookmarkicon{
+    z-index: 1;
+    cursor: pointer;
+    width: 25px;
+    height: 30px;
+    /* position:absolute; */
+    float:right;
+    right : 4.5%;
+    background-image: url('../css/images/bookmark-outline.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bookmarkicon:checked{
+    background-image: url("../../info/source/bookmark_icon_blue.png")
+}
+/* .bookmarkicon{
     margin-top: 5px;
     width: 120%;
     height: 120%;
@@ -644,7 +626,7 @@ input[type="checkbox"]{appearance: none;}
 }
 .bookmarkicon:checked{
     background-image: url("../../info/source/bookmark_icon_blue.png")
-}
+} */
     div.swiper-text-area :nth-child(odd){color: #3A3A3A; font-weight: bold;}
     div.swiper-text-area :nth-child(3){font-size: 0.9em;}
     div.swiper-text-area >h2{font-size: 1.2em;}
