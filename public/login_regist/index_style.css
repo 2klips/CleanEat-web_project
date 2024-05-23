@@ -1,0 +1,184 @@
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css');
+
+
+.ultra-light {
+    font-family: 'NanumBarunGothicUltraLight';
+}
+
+.light {
+    font-family: 'NanumBarunGothicLight';
+}
+
+.normal {
+    font-family: 'NanumBarunGothic';
+}
+
+.bold {
+    font-family: 'NanumBarunGothicBold';
+}
+
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+html {
+    background:#FFFFFF;
+}
+body {
+    font-family: 'NanumBarunGothic';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+#back-button{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.Register-form{
+    display:none;
+}
+.Login-form>h1{
+    font-size: 32px; color: #fff;
+    text-align: center;
+    margin-bottom: 60px;
+}
+.int-area {
+    width: 237px; 
+    position: relative;
+    margin-top: 20px;
+    align-items: center;
+    margin-left: 20px;
+}
+.int-area:first-child {margin-top: 0;}
+.int-area input {
+width: 100%;
+padding: 25px 10px 5px;
+background-color: transparent;
+border: none;
+border-bottom: 1px solid #8AE9FF;
+font-size: 18px; color: #8AE9FF;
+outline: none;
+}
+.int-area label{
+position: absolute; left: 10px; top: 0px;
+font-size: 15px; color: #8AE9FF;
+transition: all .5s ease;
+}
+/* .int-area input:focus + label{
+    top: 0;
+    font-size: 13px; color: #fffbfe} */
+.btn-area {
+    margin-top: 30px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-area>#signInButton {
+    width: 282px; height: 33.21px;
+    background: #FFFFFF;
+    color: #0ECFFF;
+    font-size: 14px;
+    border: 1px solid #0ECFFF;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-area>#registButton {
+    width: 282px; height: 33.21px;
+    margin-top: 15px;
+    background: #8AE9FF;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid #8AE9FF;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#Logosize{
+    width: 196px;
+    height: 196px;
+}
+#Logo{
+    text-align: center;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 60px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.popup-content {
+    width: 250px;
+    text-align: center;
+    position: relative;
+    margin-top: -40px;
+}
+
+.close-popup {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 40px;
+    background-color: #8AE9FF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.close-popup:hover {
+    background-color: #6dbfff;
+}
+.loginpopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 60px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.loginpopup-content {
+    width: 250px;
+    text-align: center;
+    position: relative;
+    margin-top: -40px;
+}
+
+.close-loginpopup {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 40px;
+    background-color: #8AE9FF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.close-loginpopup:hover {
+    background-color: #6dbfff;
+}

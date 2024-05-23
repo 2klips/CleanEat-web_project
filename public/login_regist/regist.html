@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regist</title>
+    <link rel="stylesheet" href="./regist_style.css">
+</head>
+<body>
+    
+    <div id="back-button"><a href="./index.html"><img src="../main/css/images/back_icon.svg"style="width: 18px;"></a></div>
+    <div class="container">
+    <form class="Register-form">
+
+        <div class="int-area">
+            <input type="email" id="signUpEmail" placeholder="아이디">
+            <button type="button" id="duplicateCheck" onclick="checkID()">중복 확인</button>
+            <p id="p6">이메일을 입력해주세요</p>
+
+        </div>
+
+        <div class="int-area">
+            <input type="password" id="signUpPassword" placeholder="비밀번호" oninput="checkPassword(); checkPasswordMatch()" style="width:230px">
+            
+            <!-- 비밀번호 부분 눈(off) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" id="svgButton" width="18px" height="18px" onclick="toggleToText()">
+                <path d="M432 448a15.92 15.92 0 01-11.31-4.69l-352-352a16 16 0 0122.62-22.62l352 352A16 16 0 01432 448zM255.66 384c-41.49 0-81.5-12.28-118.92-36.5-34.07-22-64.74-53.51-88.7-91v-.08c19.94-28.57 41.78-52.73 65.24-72.21a2 2 0 00.14-2.94L93.5 161.38a2 2 0 00-2.71-.12c-24.92 21-48.05 46.76-69.08 76.92a31.92 31.92 0 00-.64 35.54c26.41 41.33 60.4 76.14 98.28 100.65C162 402 207.9 416 255.66 416a239.13 239.13 0 0075.8-12.58 2 2 0 00.77-3.31l-21.58-21.58a4 4 0 00-3.83-1 204.8 204.8 0 01-51.16 6.47zM490.84 238.6c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.66 96a227.34 227.34 0 00-74.89 12.83 2 2 0 00-.75 3.31l21.55 21.55a4 4 0 003.88 1 192.82 192.82 0 0150.21-6.69c40.69 0 80.58 12.43 118.55 37 34.71 22.4 65.74 53.88 89.76 91a.13.13 0 010 .16 310.72 310.72 0 01-64.12 72.73 2 2 0 00-.15 2.95l19.9 19.89a2 2 0 002.7.13 343.49 343.49 0 0068.64-78.48 32.2 32.2 0 00-.1-34.78z"/><path d="M256 160a95.88 95.88 0 00-21.37 2.4 2 2 0 00-1 3.38l112.59 112.56a2 2 0 003.38-1A96 96 0 00256 160zM165.78 233.66a2 2 0 00-3.38 1 96 96 0 00115 115 2 2 0 001-3.38z"/>
+            </svg>
+            <!-- 비밀번호 부분 눈(on) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" id="svgButton2" width="18px" height="18px" onclick="toggleToPassword()">
+                <path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+            </svg>
+            
+            <p id="p2">최소 11자 이상, 대문자 및 특수기호가 포함되어야 합니다.</p>
+            
+            <input type="password" id="signUpPasswordRe" placeholder="비밀번호 확인" oninput="checkPasswordMatch()" style="width:230px">
+
+            <!-- 비밀번호 확인 부분 눈(off) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" id="svgButton3" width="18px" height="18px" onclick="toggleToText2()">
+                <path d="M432 448a15.92 15.92 0 01-11.31-4.69l-352-352a16 16 0 0122.62-22.62l352 352A16 16 0 01432 448zM255.66 384c-41.49 0-81.5-12.28-118.92-36.5-34.07-22-64.74-53.51-88.7-91v-.08c19.94-28.57 41.78-52.73 65.24-72.21a2 2 0 00.14-2.94L93.5 161.38a2 2 0 00-2.71-.12c-24.92 21-48.05 46.76-69.08 76.92a31.92 31.92 0 00-.64 35.54c26.41 41.33 60.4 76.14 98.28 100.65C162 402 207.9 416 255.66 416a239.13 239.13 0 0075.8-12.58 2 2 0 00.77-3.31l-21.58-21.58a4 4 0 00-3.83-1 204.8 204.8 0 01-51.16 6.47zM490.84 238.6c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.66 96a227.34 227.34 0 00-74.89 12.83 2 2 0 00-.75 3.31l21.55 21.55a4 4 0 003.88 1 192.82 192.82 0 0150.21-6.69c40.69 0 80.58 12.43 118.55 37 34.71 22.4 65.74 53.88 89.76 91a.13.13 0 010 .16 310.72 310.72 0 01-64.12 72.73 2 2 0 00-.15 2.95l19.9 19.89a2 2 0 002.7.13 343.49 343.49 0 0068.64-78.48 32.2 32.2 0 00-.1-34.78z"/><path d="M256 160a95.88 95.88 0 00-21.37 2.4 2 2 0 00-1 3.38l112.59 112.56a2 2 0 003.38-1A96 96 0 00256 160zM165.78 233.66a2 2 0 00-3.38 1 96 96 0 00115 115 2 2 0 001-3.38z"/>
+            </svg>
+            <!-- 비밀번호 확인 부분 눈(on) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" id="svgButton4" width="18px" height="18px" onclick="toggleToPassword2()">
+                <path d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="256" cy="256" r="80" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+            </svg>
+            <p id="p3" style="color:white">--</p>
+
+        </div>
+        
+</form>
+        <div class="individual">
+            <input type="text" placeholder="이름" id="userName" style="width: 210px;">
+        </div>
+        <div class="individual">
+            <input type="text" id="userAddress" placeholder="주소" class="addressSearch" style="width: 70%;" readonly>
+                <button type="button" style="width:80px; height:29.9px; font-weight: bold;" onclick="sample4_execDaumPostcode()">주소 검색</button>
+        </div>
+        <div class="individual">
+            <input type="text" placeholder="상세주소" class="addressSearch2" id="userAddressDetail" style="width: 70%;">
+        </div>
+        <div class="individual" id="EmailEX" style="display: none;">
+            <input type="email" id="signUpEmail" placeholder="전화번호" style="width: 70%; max-width: 210px; display: inline-block;">
+            <button type="button" style="display: inline-block; width: 80px; height:29.9px; font-weight: bold;" onclick="addInput() ">인증 요청</button>
+        </div>
+        <button id="googleLogin" style="display: none;">구글 아이디로 로그인</button>
+
+        <div class="individual" id="EmailEX">
+            <input id="phoneNumber" placeholder="전화번호" style="width: 70%;"/>
+            <button id="phoneNumberButton" style="display: inline-block; width: 80px; height:29.9px; font-weight: bold;" onclick="addInput()">인증 요청</button>
+        </div>
+
+        <form style>
+            <input placeholder="인증코드" id="confirmCode"/>
+            <button id="confirmCodeButton"style="display: inline-block; width: 80px; height:29.9px; font-weight: bold; border-radius: 12px;">코드 확인</button>
+        </form>
+
+        <div id="additionalInputs"></div>
+        
+        <button id="RegisterSubmit" onclick="getData()">회원가입</button>
+        
+        <div id="modal" class="popup" style="display: none;">
+            <div class="popup-content">
+                <p>회원가입이 완료되었습니다</p>
+                <button id="modalCloseButton" class="close-popup">확인</button>
+            </div>
+        </div>
+    
+<div id="additionalInputs"></div>
+
+
+
+<div class="bottom">
+    <div class="alarm">
+        <p style="text-align: center; margin-top: 60px; font-size: 14px;">클린잇의 소식을 알림으로 받기</p>
+        <button style="margin-left: 10px; display: none"><i class="fas fa-circle"></i></button>
+    </div>
+    
+    <div class="circleBtn">
+        <button class="custom-button" onclick="toggleBackground()">
+            <div class="circle-icon">
+                <i class="fas fa-circle"></i>
+            </div>
+        </button>
+    </div>
+    </div>
+</div>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+        <script>
+            async function getData() {
+                const email = document.getElementById('signUpEmail').value
+                const password = document.getElementById('signUpPassword').value
+                const addr1 = document.getElementById('userAddress').value
+                const addr2 = document.getElementById('userAddressDetail').value
+                const hp = document.getElementById('phoneNumber').value
+                const name = document.getElementById('userName').value
+                const userData = {
+                    email: email,
+                    password: password,
+                    addr1: addr1,
+                    addr2: addr2,
+                    hp: hp,
+                    name: name
+                }
+                console.log(userData)
+                try {
+                    const response = await fetch('/me/signup', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    console.log(response)
+                    const result = await response.json();
+                    if (response.ok) {
+                        window.location.href = result.redirectUrl; // 로그인 페이지로 리디렉션
+                        alert('회원가입이 완료되었습니다');
+                    } else {
+                        console.error(result.message);
+                        // 에러 메시지를 사용자에게 표시
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    // 에러 메시지를 사용자에게 표시
+                }
+            }
+        </script>
+    <script src="regist_script.js"></script>
+    <script type="module" src="regist_module_script.js"></script>
+</body>
+</html>

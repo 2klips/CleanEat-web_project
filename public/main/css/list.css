@@ -1,0 +1,545 @@
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 300;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+.nanumbarungothic * {
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
+/* Add this at the end of the list.css file */
+#data-container {
+    margin-top: 100px; /* Adjust the value as needed */
+}
+
+:root{
+    /* color */
+    --white-color: white;
+    --whitesmoke-color: whitesmoke;
+    --skyblue-color: #8AE9FF;
+
+    --medium-font: 18px;
+}
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'NanumBarunGothic';
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    
+}
+#container{
+    width: 100%;
+    height: 100%;
+    max-width: 1980px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+
+#map{
+    position: absolute;
+    z-index: 0;
+}
+
+/* 헤더 부분 */
+header{
+    padding-top: 40px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    position: absolute;
+}
+
+/* 검색창 */
+#searchbox{
+    width: 85%;
+    height: 40px;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.5);
+    align-items: center;
+    max-width: 550px;
+    flex-wrap: wrap;
+    min-width: 288px;
+    z-index: 100;
+    background-color: white;
+    /* padding: 3px 8px 3px 0px; */
+}
+
+
+#search::placeholder{
+    color: rgba(128, 128, 128, 0.5);
+    font-weight: bolder;
+}
+
+
+#searchbox > #search::placeholder{
+    font-size: 16px;
+    font-weight: lighter;
+    color: rgba(128, 128, 128, 1.2);
+}
+
+#search-filter-btn{
+    display: none;
+}
+
+
+/* 검색필터 */
+#search-filter{
+    width: 100%;
+    height: 280px;
+    border-radius: 10px;
+    z-index: 150;
+    padding: 10px 10px 0px 10px;
+    display: none;
+    font-weight: bolder;
+    text-align: center;
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.5);
+    min-width: 288px;
+    max-width: 550px;
+    background-color: white;
+    justify-content: center;
+    position: sticky;
+}
+
+#search-filter > p{
+    border-bottom: 1px solid var(--skyblue-color);
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
+}
+
+
+
+#search-filter > input{
+    display: none;
+}
+
+#search-filter > label{
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+}
+
+#search-filter > label > div > img,
+#search-filter > label > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#search-filter > label > div > img{
+    margin-right: 5px;
+}
+
+#search-filter label:last-child{
+    margin: 0px;
+    margin-top: 10%;
+    margin-bottom: 0px!important; 
+}
+
+#search-filter label:nth-child(7) > div{
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+}
+
+#search-filter > .search-check:checked + label > div{
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+}
+
+
+#search-filter > label > div{
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+}
+#search-filter > div > label > div{
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+    cursor: pointer;
+}
+#search-filter > div > .rank:checked + label > div{
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+    cursor: pointer;
+}
+
+.star{
+    display: flex;
+    justify-content: center;
+}
+
+.star :nth-child(4){
+    margin: 0 10px 10px 10px;
+}
+
+#search-filter label:nth-child(6){
+    margin: 0 5px 10px 5px;
+}
+
+
+#search-filter-btn:checked + label + #search-filter{
+    display: block;
+}
+
+header > #searchbox > label > #menu{
+    /* 메뉴 */
+    width: 35px;
+    height: 35px;
+    background-color: var(--white-color);
+    z-index: 110;
+    border-radius: 100%;
+    cursor: pointer;;
+}
+
+#search{
+    /* 검색창 */
+    border: none;
+    font-weight: bolder;
+    font-size: var(--medium-font);
+    width: 75%;
+    height: 24px;
+    position: sticky;
+    z-index: 101;
+    margin-bottom: 2px;
+}
+
+
+
+#search-btn{
+    background-color: rgba(0, 0, 0, 0);
+    width: 35px;
+	height: 35px;
+	margin: 5px 0 0px 5px;
+	padding: 0;
+	border: none;
+    cursor: pointer;
+}
+
+#search-btn > img{
+    width: 23px;
+    height: 23px;
+    margin-bottom: 2px;
+}
+
+#search-filter-btn + label{
+    margin: 0 3px 5px 0;
+}
+
+
+
+#map{
+    box-sizing: border-box;
+    width: 100%;
+    max-height: 1024px;
+    position: absolute;
+}
+
+
+/* 메뉴 */
+#footer{
+    width: 45px;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    z-index: 140;
+    list-style: none;
+    background-color: var(--skyblue-color);
+    border-radius: 35px;
+}
+
+#footer-btn ~ label{
+    cursor: pointer;
+    z-index: 150;
+
+}
+
+#footer > #footer-btn{
+    display: none;
+}
+#footer > label  img{
+    background-color: rgba(0, 0, 0, 0);
+}
+#footer > #footer-btn ~ li{
+    margin: 0;
+}
+
+
+#footer > #footer-btn ~ li{
+    display: none;
+}
+
+#footer > #footer-btn:checked ~ li{
+    display: block;
+    height: 45px;
+}
+
+#footer > li > a > img{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+section {
+    width: 90%;
+    height: 100%;
+    overflow-y: scroll;
+    margin: 20px 30px 100px 30px;
+}
+
+.content {
+    text-align: left;
+    border-bottom: 1px solid #8AE9FF;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+section > .content > a > .more-info {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+section > .content p{
+}
+
+section > .content h2 {
+    width: 40%;
+    font-size: 23px;
+}
+
+section > .content .star {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    margin-top: 0;
+    font-size: 13px;
+    display: flex;
+}
+
+section > .content .star > h3 > img {
+    width: 50px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.date {
+    margin-left: 36px;
+    margin-top: -25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black; /* Adjust the color as needed */
+}
+
+.address {
+    margin-top: -6px;
+    font-weight: bold;
+    font-size: 17px;
+    color: black; /* Adjust the color as needed */
+}
+
+.tel {
+    margin-top: -6px;
+
+    font-size: 16px;
+    color: black; /* Adjust the color as needed */
+}
+
+/* 추가된 클래스 */
+.exemplary-text {
+    font-weight: bold;
+    color: #55ddff; /* 원하는 색상으로 변경 */
+    font-size: 17px; /* 원하는 크기로 변경 */
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.exemplary-icon {
+    width: 30px; /* 아이콘의 크기 */
+    height: auto;
+    margin-right: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    margin-bottom: 5px;
+}
+
+/* detail 데이터가 있는 경우 */
+.violation {
+    color: red;
+}
+
+
+.content.violation {
+    border-bottom: solid 1px red;
+}
+
+.content.violation h2 {
+    color: #000000; /* 빨간색 텍스트 */
+}
+
+.content.violation p {
+    color: #494949; /* 진한 빨간색 텍스트 */
+    font-weight: bold;
+}
+
+.content.violation #dtail {
+    color: red; /* 진한 빨간색 텍스트 */
+    font-weight: bold;
+}
+
+.violation-icon {
+    width: 30px; /* 아이콘의 크기 */
+    height: auto;
+    margin-left: 5px; /* 텍스트와 아이콘 사이의 간격 */
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#map_button {
+    position: absolute;
+    bottom: 30px;
+    width: 80px;
+    left: calc(50% - 40px);
+    height: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--skyblue-color);
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+#map_button > img {
+    margin: 3px;
+}
+
+#search-btn > img {
+    width: 23px;
+    height: 23px;
+}
+
+
+
+
+/*내부 꾸미기용 추가 css*/
+.score-star{ font-size: 0.8rem;}
+input[type="checkbox"]{appearance: none;}
+.bookmarkicon{
+    margin-top: 5px;
+    width: 120%;
+    height: 120%;
+    cursor: pointer;
+    background-image: url('../css/images/bookmark-outline.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.bookmarkicon:checked{
+    background-image: url("../../info/source/bookmark_icon_blue.png")
+}
+    div.swiper-text-area :nth-child(odd){color: #3A3A3A; font-weight: bold;}
+    div.swiper-text-area :nth-child(3){font-size: 0.9em;}
+    div.swiper-text-area >h2{font-size: 1.2em;}
+    div.swiper-text-area > p:nth-child(even) {color: #6D6D6D ; font-size: 0.8em;}
+    div.swiper-text-area > p:nth-child(n+3) {margin: 6px 0;} 
+/*끝-------------------------*/
+
+@media screen and (min-width:1024px) {
+    #footer{
+        height: 100%;
+        width: 50px;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #footer > a:nth-child(3){
+        order: -1;
+    }
+    #slide{
+        height: 100%;
+        width: 52px;
+        left: 20px;
+        top: 0;
+    }
+    #slide > iframe{
+        display: none;
+    }
+    #up{
+        left: 48px;
+        top: 48%;
+        transform: rotate(90deg);
+    }
+    #check:checked + label #up{
+
+        transform: rotate(270deg);
+        left: 290px;
+        bottom: 370px;
+    }
+    
+    #check:checked ~ #slide{
+        width: 300px;
+        height: 100%;
+    }
+    #check:checked ~ #slide > iframe{
+        display: flex;
+        padding-left: 10px;
+    }
+
+}
