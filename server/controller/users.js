@@ -50,7 +50,18 @@ async function me(req, res, next){
     res.status(200).json({token, name: user.name});
 }
 
+async function setDeviceToken(req, res, next){
+    const {deviceToken} = req.body;
+    const user = req.user;
+    await userDB.setDeviceToken(user.email, deviceToken);
+    res.status(200).json({message: 'Device token updated'});
+}
+
+async function deleteDeviceToken(req, res, next){
+    const user = req.user;
+    await userDB.setDeviceToken(user.email, null);
+    res.status(200).json({message: 'Device token deleted'});
+}
 
 
-
-module.exports = {signup, login, me};
+module.exports = {signup, login, me, setDeviceToken, deleteDeviceToken};

@@ -29,7 +29,7 @@
         <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="pushAlramSwitch()"></label></div>
     </div>
     <hr>
-    <a href="./bookmark.html"><div id="bookmark" class="section"><span class="font-ctrl">북마크</span></div></a>
+    <a href="#"><div id="bookmark" class="section"><span class="font-ctrl">북마크</span></div></a>
     <hr>
     <a href="./info.html"><div id="introduce" class="section"><span class="font-ctrl">클린잇 소개 /위생등급 기준</span></div></a>
     <hr>
@@ -38,7 +38,7 @@
     </div></a>
     <hr>
   </div>
-  <button id="notifyBtn">알림 쿠키 생성</button>
+  <button id="notifyBtn">알림 토큰 생성</button>
   <p style="position:relative; bottom:70px; color:#595959">부정·불량 식품 신고는 국번없이 1399(무료)</p>
   <footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
   <script src="./javascript/main.js"></script>
@@ -106,5 +106,30 @@
 
     document.getElementById('notifyBtn').addEventListener('click', requestToken);
   </script>
+  <script>
+    document.getElementById('bookmark').addEventListener('click', async function() {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch('/info/bookmark', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('토큰이 유효하지 않습니다.');
+            }
+
+            const data = await response.json();
+            console.log(data);
+
+            // 북마크 페이지로 이동
+            window.location.href = '/info/bookmark.html';
+        } catch (error) {
+            console.error('북마크를 가져오는 중 오류 발생:', error);
+        }
+    });
+</script>
 </body>
 </html>
