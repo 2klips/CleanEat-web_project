@@ -57,10 +57,16 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
 
 // 기존 마커와 오버레이를 제거하는 함수
 function clearMarkersAndOverlays() {
-    markers.forEach(marker => marker.setMap(null));
-    overlays.forEach(overlay => overlay.setMap(null));
-    markers = [];
-    overlays = [];
+    console.log("clearMarkersAndOverlays 호출됨");
+    if (Array.isArray(markers)) {
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
+    }
+
+    if (Array.isArray(overlays)) {
+        overlays.forEach(overlay => overlay.setMap(null));
+        overlays = [];
+    }
 }
 
 // 마커와 오버레이를 생성하고 배열에 저장하는 함수
@@ -97,6 +103,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
 
             markers.push(marker);
             overlays.push(customOverlay);
+            
 
             if (shouldRecenter) {
                 map.setCenter(coords);
@@ -172,6 +179,22 @@ function recenterMap() {
     }
 }
 
+// 지도 중심을 이동시키는 함수
+function moveMapCenter(address) {
+    if (!address || address.trim() === "") {
+        console.error('Invalid address:', address);
+        return;
+    }
+    geocoder.addressSearch(address, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            map.setCenter(coords); // 지도 중심을 클릭된 주소로 이동
+        } else {
+            console.error('Failed to search address:', address, status);
+        }
+    });
+}
+
 // 현재 위치를 지속적으로 추적하는 함수
 function watchCurrentLocation() {
     if (navigator.geolocation) {
@@ -222,3 +245,4 @@ function updateLocationOverlay() {
 window.searchAndDisplayAddress = searchAndDisplayAddress;
 window.clearMarkersAndOverlays = clearMarkersAndOverlays;
 window.displayMarkersAndOverlays = displayMarkersAndOverlays;
+window.moveMapCenter = moveMapCenter;

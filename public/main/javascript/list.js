@@ -79,6 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 itemElement.innerHTML = itemHTML;
                 container.appendChild(itemElement);
+                window.clearMarkersAndOverlays();
+                
+                itemElement.addEventListener('click', function() {
+                    console.log('Saving selected location:', item.addr);
+                    // 클릭된 항목의 데이터를 sessionStorage에 저장
+                    sessionStorage.setItem('selectedLocation', item.addr);
+                    clearMarkersAndOverlays(); 
+                    // index.html로 이동
+                    window.location.href = 'index.html';
+                });
             });
         } else {
             console.error('데이터가 없습니다.');
@@ -98,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             searchBtn.disabled = true;
+            clearMarkersAndOverlays();
             await window.search('data-container');
             displayListData(JSON.parse(sessionStorage.getItem('searchResults')));
             searchBtn.disabled = false;
@@ -112,12 +123,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
                 searchBtn.disabled = true;
+                clearMarkersAndOverlays();;
                 await window.search('data-container');
                 displayListData(JSON.parse(sessionStorage.getItem('searchResults')));
                 searchBtn.disabled = false;
             }
         });
     }
+
+    function clearMarkersAndOverlays() {
+        console.log("clearMarkersAndOverlays 호출됨");
+        if (Array.isArray(markers)) {
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+        }
+        if (Array.isArray(overlays)) {
+            overlays.forEach(overlay => overlay.setMap(null));
+            overlays = [];
+        }
+    }
+
 
     // window.search 함수를 정의합니다.
     window.search = async function(containerId = 'data-container') {
@@ -162,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem('searchKeyword', keyword);
             sessionStorage.setItem('searchCollection', JSON.stringify(collection));
             sessionStorage.setItem('searchRank', JSON.stringify(rans));
+            window.clearMarkersAndOverlays();
 
             displayListData(data);
         } catch (error) {

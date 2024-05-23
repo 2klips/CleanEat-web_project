@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('searchCollection');
         sessionStorage.removeItem('searchRank');
         sessionStorage.removeItem('addresses');
+        sessionStorage.removeItem('selectedLocation');
     }
 
     const searchBtn = document.getElementById('search-btn');
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(empty);
 
         // 마커와 오버레이 제거 함수 호출
-        clearMarkersAndOverlays();
+        clearMarkersAndOverlays(); 
 
         const addresses = [];
 
@@ -102,6 +103,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     slideItem.innerHTML = slideContent;
                     container.appendChild(slideItem);
+                    clearMarkersAndOverlays();
+
+                    slideItem.addEventListener('click', () => {
+                        // 주소 검색 및 지도 중심 이동
+                        window.moveMapCenter(item.addr);
+                    });
                 }
             });
 
@@ -159,8 +166,9 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem('searchKeyword', keyword);
             sessionStorage.setItem('searchCollection', JSON.stringify(collection));
             sessionStorage.setItem('searchRank', JSON.stringify(rans));
-
+            
             displayData(data, containerId);
+            window.clearMarkersAndOverlays();
         } catch (error) {
             console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
         }
@@ -168,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 마커를 추가하는 함수
     function addMarkers(addressData, shouldRecenter) {
-        clearMarkersAndOverlays();
+        window.clearMarkersAndOverlays();
         addressData.forEach((data, index) => {
             searchAndDisplayAddress(data, shouldRecenter && index === 0);
         });
@@ -215,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             searchBtn.disabled = true;
             await search();
+            clearMarkersAndOverlays(); 
             searchBtn.disabled = false;
         });
     }
@@ -228,6 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 searchBtn.disabled = true;
                 await search();
+                clearMarkersAndOverlays(); 
                 searchBtn.disabled = false;
             }
         });
@@ -244,16 +254,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 마커와 오버레이를 제거하는 함수
     function clearMarkersAndOverlays() {
+        console.log("clearMarkersAndOverlays 호출됨");
         if (Array.isArray(markers)) {
             markers.forEach(marker => marker.setMap(null));
             markers = [];
+        } else {
+            markers = [];
         }
+    
         if (Array.isArray(overlays)) {
             overlays.forEach(overlay => overlay.setMap(null));
+            overlays = [];
+        } else {
             overlays = [];
         }
     }
 
+    // 데이터 초기화 및 지도 이동 처리
+    const selectedLocation = sessionStorage.getItem('selectedLocation');
+    console.log('Loaded selected location:', selectedLocation);
+    window.moveMapCenter(selectedLocation);
+    
+    
     window.search = search;
     window.displayData = displayData;
     window.clearMarkersAndOverlays = clearMarkersAndOverlays;
