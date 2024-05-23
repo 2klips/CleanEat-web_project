@@ -1,8 +1,9 @@
-importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js');
+// Firebase SDK 스크립트 로드
+importScripts('https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/9.1.0/firebase-messaging-compat.js');
 
-// Firebase 설정
-const firebaseConfig = {
+// Firebase 앱 초기화
+const firebaseConfig = ({
   apiKey: "AIzaSyDLwmwOZiprAUt16GYQNznmNBoOKJNCYG4",
   authDomain: "easylogin-b519a.firebaseapp.com",
   projectId: "easylogin-b519a",
@@ -10,22 +11,30 @@ const firebaseConfig = {
   messagingSenderId: "270766993601",
   appId: "1:270766993601:web:aa3199d115b3b816412440",
   measurementId: "G-XM5967EN5W"
-};
-
-// Firebase 초기화
+});
 firebase.initializeApp(firebaseConfig);
 
-// Firebase 메시징 초기화
 const messaging = firebase.messaging();
 
+// 백그라운드 메시지 처리
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // 사용자 정의 알림 작성
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
-  };
+  // FCM 메시지에서 제목과 내용 추출
+  const { title, body } = payload.notification;
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  if(!title && body){
+    return console.log("메세지 입력")
+  }
+  console.log('Title:', title);
+  console.log('Body:', body);
+
+  // // 알림 설정
+  // const notificationTitle = title || 'Default Title'; // 제목이 없으면 기본값 사용
+  // const notificationOptions = {
+  //   body: body || 'Default Body', // 내용이 없으면 기본값 사용
+  //   icon: '/firebase-logo.png'
+  // };
+
+  // 브라우저 알림 표시
+  self.registration.showNotification();
 });

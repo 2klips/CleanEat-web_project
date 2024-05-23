@@ -34,6 +34,10 @@ router.get('/mypage', isAuth, (req, res) => {
     res.json({ userData: userData });
 });
 
+router.put('/setDeviceToken', isAuth, userController.setDeviceToken);
+
+router.delete('/deleteDeviceToken', isAuth, userController.deleteDeviceToken);
+
 router.post('/bookmark', isAuth, bookmarkController.insertBookmark);
 
 router.get('/bookmark', isAuth, bookmarkController.getBookmarks);
