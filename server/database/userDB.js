@@ -17,6 +17,9 @@ useVirtualId(userSchema);
 const User = Mongoose.model('User', userSchema);
 
 
+async function findAll(){
+    return User.find();
+}
 
 // 이메일 중복검사
 async function findByEmail(email){
@@ -49,4 +52,4 @@ async function setDeviceToken(email, deviceToken){
     }
 }
 
-module.exports = {findByEmail, createUser, findById, setDeviceToken};
+module.exports = {findByEmail, createUser, findById, setDeviceToken, findAll};
