@@ -16,7 +16,6 @@ const isAuth = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
     jwt.verify(
         token, 'abcd1234%^&*', async(error, decoded) => {
-        token, 'abcd1234%^&*', async(error, decoded) => {
             if(error){
                 console.log('에러2');
                 return res.status(401).json(AUTH_ERROR);
