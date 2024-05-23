@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const config = require('../config');
 const mongoose = require('mongoose');
 
@@ -64,6 +64,34 @@ async function searchDB(collecTion,query) {
     // }
 }
 
+
+async function searchBy_id(id) {
+    try {
+        const db = client.db(dbName);
+        const Collection1 = db.collection('ExemplaryRestaurantData');
+        const Collection2 = db.collection('safetyRankData');
+        const Collection3 = db.collection('violation');
+        const objectId = new ObjectId(id);
+        const collections = [Collection1, Collection2, Collection3];
+        const results = await Promise.all(
+            collections.map(async (collection) => {
+                return await collection.findOne({ _id: objectId });
+            })
+        );
+        const resultsWithoutId = {};
+        results.forEach(result => {
+            if (result) {
+                const { _id, ...rest } = result;
+                Object.assign(resultsWithoutId, rest);
+            }
+        });
+        return resultsWithoutId;
+    } catch (error) {
+        console.error('Error searching by id:', error);
+        throw error;
+    }
+}
+
 async function disconnectMongoDB() {
     try {
         await client.close();
@@ -127,5 +155,6 @@ module.exports = {
     createUser,
     getUsers,
     useVirtualId,
-    connectMongoose
+    connectMongoose,
+    searchBy_id
 };

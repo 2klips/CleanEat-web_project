@@ -52,4 +52,21 @@ async function setDeviceToken(email, deviceToken){
     }
 }
 
-module.exports = {findByEmail, createUser, findById, setDeviceToken, findAll};
+async function deleteDeviceToken(email){
+    try {
+        const user = await User.findOneAndUpdate(
+            { email: email },
+            { deviceToken: '' },
+            { new: true, useFindAndModify: false }
+        );
+        if (!user) {
+            throw new Error('해당 이메일의 사용자를 찾을 수 없습니다.');
+        }
+        return user;
+    } catch (error) {
+        console.error('장치 토큰 삭제 중 오류 발생:', error);
+        throw error;
+    }
+}
+
+module.exports = {findByEmail, createUser, findById, setDeviceToken, findAll, deleteDeviceToken};

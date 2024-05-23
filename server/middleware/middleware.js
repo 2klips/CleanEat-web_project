@@ -7,7 +7,6 @@ const AUTH_ERROR = {message: "인증에러"};
 
 const isAuth = async (req, res, next) => {
     const authHeader = req.get('Authorization');
-    console.log(authHeader)
     if(!(authHeader && authHeader.startsWith('Bearer '))){
         console.log('로그인이 필요합니다');
         return res.redirect('me/login');;
@@ -24,7 +23,6 @@ const isAuth = async (req, res, next) => {
                 console.log('에러3');
                 return res.status(401).json(AUTH_ERROR);
             }
-            console.log(user)
             req.token = token;
             req.user = user;
             next();

@@ -59,7 +59,7 @@ async function setDeviceToken(req, res, next){
 
 async function deleteDeviceToken(req, res, next){
     const user = req.user;
-    await userDB.setDeviceToken(user.email, null);
+    await userDB.deleteDeviceToken(user.email);
     res.status(200).json({message: 'Device token deleted'});
 }
 
