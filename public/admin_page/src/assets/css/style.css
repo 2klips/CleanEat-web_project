@@ -25752,19 +25752,6 @@ table.dataTable tbody td.select-checkbox:after {
   margin: 8px;
 }
 
-/*줄인 정보 호버시 나오게 하기 */
-/* CSS 스타일 추가 */
-.abbhover:hover::after {
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #000;
-  padding: 5px;
-  z-index: 1000;
-  white-space: nowrap;
-}
-.upsoname:hover::after{
-content: attr(data-name);}
-
-.upsoaddr:hover::after {
-  content: attr(data-addr);
+.sortable{
+  display: none;
 }

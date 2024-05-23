@@ -104,18 +104,29 @@
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card position-relative">
                   <div class="card-body">
-                      <h4 class="card-title">업체 정보 리스트</h4>
+                    <h4 class="card-title">업체 정보 리스트</h4>
+                    <br>
+                    <div class="form-group" style="display: flex; justify-content:space-around;">
+                      <label for="exampleFormControlSelect3"></label>
+                      <select class="form-select form-select-sm" id="exampleFormControlSelect3" style="display: flex; width:10%"></select>
+                      <div class="input-group d-flex align-items-center" style="display: flex; width:85%">
+                        <input type="text" class="form-control form-control-sm" id="searchInput" placeholder="검색어를 입력하세요" aria-label="검색어를 입력하세요">
+                        <div class="input-group-append">
+                          <button class="btn btn-sm btn-primary ms-2" type="button" id="searchButton">검색</button>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
                         <div class="table-responsive">
                            <table class="table table-hover">
                             <thead id="usertablelavel">
                               <tr>
-                                <th>고유 식별 아이디 <input type="checkbox" class="sortable" data-column="_id" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
+                                <th>아이디 <input type="checkbox" class="sortable" data-column="_id" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
                                 <th>지정번호 <input type="checkbox"class="sortable" data-column="num" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
                                 <th>지정날짜</th>
                                 <th>업소 이름 <input type="checkbox"class="sortable" data-column="name" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
                                 <th>업태명</th>
-                                <th>등급  <input type="checkbox"class="sortable" data-column="rank" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
-                                <th>전화번호</th>
+                                <th>등급 <input type="checkbox"class="sortable" data-column="rank" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
                                 <th>업소 주소</th>
                               </tr>
                             </thead>
@@ -182,6 +193,7 @@
       element.checked = isChecked;
     }
     </script>
+    
     <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
     <script src="./js/upsotable.js"></script>
     <!-- End custom js for this page-->

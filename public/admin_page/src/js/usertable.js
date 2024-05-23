@@ -2,7 +2,8 @@ $(document).ready(function () {
     const page_max = 10; // 페이지 당 최대 정보
     let exData = []; // 전체 사용자 데이터
     let defaultPage = 1; // 기본 페이지
-
+    let filteredData = []; // 검색된 사용자 데이터
+  
     const pagesPerGroup = 10; // 한 번에 보여줄 페이지 번호 그룹의 크기
     let currentPageGroup = 1; // 현재 페이지 번호 그룹
 
@@ -166,4 +167,30 @@ $(document).ready(function () {
         setSelectedPage(); // 페이지 색상 재설정
         $(this).data('order', order === 'asc' ? 'desc' : 'asc'); // 정렬 순서 토글
     });
+
+   // 검색 버튼 클릭 이벤트
+$('#searchButton').click(function () {
+    // 선택된 열의 인덱스
+    const selectedIndex = $('#exampleFormControlSelect3').val();
+    // 검색어
+    const searchText = $('#searchInput').val().toLowerCase();
+
+    // 사용자 데이터를 검색어와 선택된 열을 기준으로 필터링
+    filteredData = exData.filter(user => {
+        // 선택된 열의 값을 소문자로 변환하여 검색어가 포함되는지 확인
+        return user[Object.keys(user)[selectedIndex]].toString().toLowerCase().includes(searchText);
+    });
+
+    // 검색 시 첫 페이지로 이동
+    defaultPage = 1;
+    // 페이지 그룹도 첫 번째 그룹으로 초기화
+    currentPageGroup = 1;
+    // 페이지 번호 설정
+    setPageNum();
+    // 검색 결과를 표에 표시
+    setPage(defaultPage);
+});
+
+
+
 });

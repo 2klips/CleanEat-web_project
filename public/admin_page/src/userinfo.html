@@ -106,29 +106,29 @@
                 <div class="card position-relative">
                   <div class="card-body">
                       <h4 class="card-title">가입자 정보 확인</h4>
-                      <br><br>
+                      <br>
+                      <!--
+                      <div class="form-group" style="display: flex; justify-content:space-around;">
+                        <label for="exampleFormControlSelect3"></label>
+                        <select class="form-select form-select-sm" id="exampleFormControlSelect3" style="display: flex; width:10%"></select>
+                        <div class="input-group d-flex align-items-center" style="display: flex; width:85%">
+                          <input type="text" class="form-control form-control-sm" id="searchInput" placeholder="검색어를 입력하세요" aria-label="검색어를 입력하세요">
+                          <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary ms-2" type="button" id="searchButton">검색</button>
+                            </div>
+                          </div>
+                        </div>-->
+                      <br>
                         <div class="table-responsive">
                            <table class="table table-hover">
-                            <thead>
+                            <thead id="usertablelavel">
                               <tr>
-                                <th>
-                                  고유 식별 아이디 <input type="checkbox" class="sortable" data-column="_id" data-order="asc" name="sort" onclick="checkOnlyOne(this)">
-                              </th>
-                              <th>
-                                  유저 이름 <input type="checkbox"class="sortable" data-column="name" data-order="asc" name="sort" onclick="checkOnlyOne(this)">
-                              </th>
-                              <th>
-                                  이메일 <input type="checkbox" class="sortable" data-column="email" data-order="asc" name="sort" onclick="checkOnlyOne(this)">
-                              </th>
-                              <th>
-                                  전화번호
-                              </th>
-                              <th>
-                                  주소
-                              </th>
-                              <th>
-                                  상세 주소
-                              </th>
+                                <th>고유 식별 아이디 <input type="checkbox" class="sortable" data-column="_id" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
+                              <th>유저 이름 <input type="checkbox"class="sortable" data-column="name" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
+                              <th>이메일 <input type="checkbox" class="sortable" data-column="email" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
+                              <th>전화번호</th>
+                              <th>주소</th>
+                              <th>상세 주소</th>
                               </tr>
                             </thead>
                             <tbody id="usertable">
@@ -178,7 +178,6 @@
     <!-- Custom js for this page-->
     <script src="./assets/js/jquery.cookie.js" type="text/javascript"></script>
     <script src="./assets/js/dashboard.js"></script>
-    <script src="./js/charts.js"></script>
     <script>
       function checkOnlyOne(element) {
       const checkboxes = document.getElementsByName("sort");
