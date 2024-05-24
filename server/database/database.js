@@ -166,8 +166,6 @@ module.exports = {
     insertData,
     disconnectMongoDB,
     createUser,
-    getUsers,
-    useVirtualId,
     connectMongoose,
     searchBy_id
 };

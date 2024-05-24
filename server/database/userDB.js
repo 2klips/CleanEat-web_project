@@ -1,5 +1,5 @@
 const Mongoose = require('mongoose');
-const { useVirtualId } = require('./database.js');
+
 
 const userSchema = new Mongoose.Schema({
     name: {type: String, required: true},
@@ -12,7 +12,6 @@ const userSchema = new Mongoose.Schema({
     deviceToken: {type: String, default: ''},
 });
 
-useVirtualId(userSchema);
 
 const User = Mongoose.model('User', userSchema);
 

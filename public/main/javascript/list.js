@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('북마크됨');
                 }
                 // 체크된 상태인지 확인하여 HTML에 추가
-                slideContent += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
+                itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
 
                 if (item.detail) {
