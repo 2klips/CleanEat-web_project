@@ -2,7 +2,7 @@ const database = require('../database/database.js');
 const config = require('../config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const userDB = require('../database/userDB.js');
 
 function createJwtToken(id){
     return jwt.sign({id}, config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec});
