@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const database = require('../database/database');
-
-const database = require('../database/database');
+const userDB = require('../database/userDB');
 
 
 const AUTH_ERROR = {message: "인증에러"};
@@ -32,5 +31,5 @@ const isAuth = async (req, res, next) => {
     );
 }
 
-module.exports = isAuth;
-module.exports = isAuth;
+
+module.exports = {isAuth};

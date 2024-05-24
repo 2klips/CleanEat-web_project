@@ -12,9 +12,7 @@ router.get('/login' , (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/login_regist/index.html'));
 });
 // router.get('/', isAuth, userController.me);
-router.get('/', (req, res, next) => {
-    res.json({ message: 'Authenticated' });
-}, isAuth, userController.me);
+router.get('/', isAuth, userController.me);
 
 router.get('/mypage', isAuth, (req, res) => {
     const userData = {
