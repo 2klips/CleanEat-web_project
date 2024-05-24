@@ -139,7 +139,7 @@ header{
 #search-filter > label{
     text-align: center;
     margin-bottom: 10px;
-    margin-left: -10px;
+    margin-left: 0px;
     display: inline-block;
     cursor: pointer;
     align-items: center;
