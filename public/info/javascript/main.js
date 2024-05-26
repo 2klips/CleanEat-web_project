@@ -43,5 +43,10 @@ async function displayUserInfo(data) {
     userInfo.appendChild(user);
 }
 
+async function logout() {
+    localStorage.removeItem('token');
+    window.location.href = '../login_regist/index.html';
+    alert('로그아웃 되었습니다.');
+}
 
 document.addEventListener('DOMContentLoaded', fetchProtectedData);

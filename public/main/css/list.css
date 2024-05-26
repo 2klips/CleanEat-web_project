@@ -377,7 +377,7 @@ section > .content .star > h3 > img {
 }
 
 .address {
-    margin-top: 6px;
+    margin-top: 10px;
     font-weight: bold;
     font-size: 17px;
     color: black; /* Adjust the color as needed */
@@ -397,7 +397,11 @@ section > .content .star > h3 > img {
     font-size: 17px; /* 원하는 크기로 변경 */
     display: inline-flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 10px;   
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    margin-top: 0;
 }
 
 .exemplary-icon {
@@ -440,7 +444,6 @@ section > .content .star > h3 > img {
 }
 
 
-
 #map_button {
     position: absolute;
     bottom: 30px;
@@ -477,7 +480,7 @@ input[type="checkbox"]{appearance: none;}
     position:absolute;
     /* float:right; */
     right : 4%;
-    top : 20px;
+    top : 25px;
     background-image: url('./images/bookmark-outline.svg');
     background-size: contain;
     background-repeat: no-repeat;

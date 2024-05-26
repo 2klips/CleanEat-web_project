@@ -204,11 +204,17 @@
         event.preventDefault();
         const token = localStorage.getItem('token');
         if (token) {
-            const response = await fetch('http://localhost:8080/me', {
+            const response = await fetch('/me', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }})
+
+            if (response.status === 401) {
+                console.error('Token expired or unauthorized. Redirecting to login.');
+                window.location.href = '/me/login'; // 로그인 페이지로 리디렉션
+                return;
+            }
             if (response.ok) {
                 console.log('서버 응답 성공:', response.statusText);
                 window.location.href = '../info/main.html';
@@ -216,7 +222,7 @@
                 console.error('서버 응답 실패:', response.statusText);
             }
         } else {
-            window.location.href = 'http://localhost:8080/me/login';
+            window.location.href = '/me/login';
         }
     }
 </script> 

@@ -17,6 +17,7 @@ const isAuth = async (req, res, next) => {
         token, 'abcd1234%^&*', async(error, decoded) => {
             if(error){
                 console.log('에러2');
+                console.log(error)
                 return res.status(401).json(AUTH_ERROR);
             }
             const user = await userDB.findById(decoded.id);

@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         try {
             const queryString = encodeURIComponent(JSON.stringify(query));
-            const response = await fetch(`http://localhost:8080/main/search?collection=${collection}&query=${queryString}`);
+            const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
             if (!response.ok) {
                 throw new Error('서버 응답에 문제가 발생했습니다.');
             }
