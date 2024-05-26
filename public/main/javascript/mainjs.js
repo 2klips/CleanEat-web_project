@@ -302,7 +302,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (searchBtn) {
         searchBtn.addEventListener('click', async function() {
-            getBookmark()
+            const token = localStorage.getItem('token');
+                if (token) {
+                    getBookmark()
+                }
             if (searchBtn.disabled) {
                 console.log("서버 통신 중");
                 return;
@@ -317,7 +320,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (searchbox) {
         searchbox.addEventListener('keypress', async function(event) {
             if (event.key === 'Enter') {
-                getBookmark()
+                const token = localStorage.getItem('token');
+                if (token) {
+                    getBookmark()
+                }
                 if (searchBtn.disabled) {
                     console.log("서버 통신 중");
                     return;
