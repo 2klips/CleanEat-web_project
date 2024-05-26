@@ -38,9 +38,22 @@ async function fetchDataLoop() {
 }
 
 
-
+async function fetchAll(startIndex, total) {
+    try {
+        const endindex = Math.min(startIndex + itemsPerPage - 1, total);
+        const url = `http://openapi.foodsafetykorea.go.kr/api/${apikey}/C004/json/${startIndex}/${endindex}/ADDR=서울`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.C004.row;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return [];
+    }
+}
 
 
 // fetchDataLoop()
 //     .then(db.insertData(datas, 'safetyRank'));
 //     .catch(error => console.error('Error:', error));
+
+module.exports = fetchAll;

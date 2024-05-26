@@ -142,6 +142,7 @@ footer{
 }
 
 
+
 #info2 {
   color: black;
   font-size: 16px;
@@ -208,6 +209,7 @@ footer{
 }
 
 
+
 /* 로그아웃 버튼 */
 #logout {
   display: inline-block;
@@ -231,3 +233,4 @@ footer{
   width: 15px;
   height: 15px;
 }
+

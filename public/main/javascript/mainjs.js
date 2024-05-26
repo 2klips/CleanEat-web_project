@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         container.style.display = 'block';
     }
-    
 
 
     if (performance.navigation.type === 1) {
@@ -25,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
         sessionStorage.removeItem('tutorialSeen');
+
     }
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
     document.addEventListener('click', async function(event) {

@@ -161,7 +161,7 @@ header{
 #search-filter > label{
     text-align: center;
     margin-bottom: 10px;
-    margin-left: 0px;
+    margin-left: -10px;
     display: inline-block;
     cursor: pointer;
     align-items: center;
@@ -464,7 +464,6 @@ section > .content .star > h3 > img {
     vertical-align: middle;
     margin-bottom: 5px;
 }
-
 
 #map_button {
     position: absolute;

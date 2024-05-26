@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+
             const bookmarkElement = await event.target.closest('.content-info'); // 부모 요소 중 가장 가까운 북마크 요소 찾기
             console.log(bookmarkElement);
             const checkbox = await bookmarkElement.querySelector('.bookmarkicon'); // 북마크 아이콘 체크박스 가져오기
@@ -131,11 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
 
+
+
+
                 if (item.detail) {
                     itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
                 } else if (!item.detail && !item.rank) {
                     itemHTML += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
-                }    
+                }
                 itemHTML += rank; // 위생등급
                 itemHTML += `<p>${item.detail || ''}</p><br>`;                               
                 itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소

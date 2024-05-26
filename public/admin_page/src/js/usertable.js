@@ -137,7 +137,6 @@ $(document).ready(function () {
         method: 'GET',
         success: function (data) {
             exData = data.users; // 예: { users: [{ username: 'user1', userid: '123', ... }, { ... }] }
-            console.log(exData);
             setPageNum(); // 페이지 번호 설정
             setPage(defaultPage); // 초기 페이지 설정
             setSelectedPage(); // 선택된 페이지 스타일 적용
