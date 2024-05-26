@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/info_style.css">
+  <link rel="stylesheet" href="./css/bookmark.css">
   <title>bookmark</title>
 </head>
 <body>
@@ -15,149 +15,9 @@
         <div id="back"><a href="./main.html"><img src="./source/back_icon.svg" alt="back" style="width: 18px;"></a></div>
     </header>
     <!--이 사이에 js로 추가하면 됌.-->
-  <div id="inside_container"> 
-      <!-- <div class="bookmark" id="no1">
-        <div class="bookmark_imgcont"><img src="./source/food1.jpg" alt="떡볶이" class="bookmark_img"></div>
-        <div class="bookmark_info">
-          <div class="info_header"><img src="./source/logo2.png" alt="logo">
-            <input type="checkbox" class="bookmarkicon" name="bookmarkicon1" id="bookmarkicon1" checked="on">
-          </div>
-          <div class="bookmark_text"><h2>최고 분식</h2><p class="category">분식</p><p>위생등급 : 매우 우수 <span class="star">★★★</span></p><p>서울시 강남구 논현로 85길 43<br>01-234-5678</p></div>
-        </div>
-      </div>
-      <hr> -->
-    <!--여기까지.-->
-    <!-- <div class="bookmark" id="no2">
-      <div class="bookmark_imgcont"><img src="./source/food2.jpg" alt="부찌" class="bookmark_img"></div>
-      <div class="bookmark_info">
-        <div class="info_header"><img src="./source/logo2.png" alt="logo">
-          <input type="checkbox" class="bookmarkicon" name="bookmarkicon1" id="bookmarkicon2" checked="on">
-        </div>
-        <div class="bookmark_text"><h2>칠성 부대찌개</h2><p class="category">한식</p><p>위생등급 : 매우 우수 <span class="star">★★★</span></p><p>서울시 강남구 논현로 85길 43<br>04-246-3579</p></div>
-      </div>
-    </div>
-    <hr> -->
-    <!--여기까지.-->
-    <!-- <div class="bookmark" id="no3">
-      <div class="bookmark_imgcont"><img src="./source/food3.jpg" alt="스파게티" class="bookmark_img"></div>
-      <div class="bookmark_info">
-        <div class="info_header"><img src="./source/logo2.png" alt="logo">
-          <input type="checkbox" class="bookmarkicon" name="bookmarkicon1" id="bookmarkicon3" checked="on">
-        </div>
-        <div class="bookmark_text"><h2>곰 아저씨 부엌</h2><p class="category">양식</p><p>위생등급 : 우수 <span class="star">★★</span></p><p>서울시 강남구 논현로 85길 43<br>01-456-2345</p></div>
-      </div>
-    </div>
-    <hr> -->
-    <!--여기까지.-->
-    <!-- <div class="bookmark" id="no4">
-      <div class="bookmark_imgcont"><img src="./source/food4.jpg" alt="라면" class="bookmark_img"></div>
-      <div class="bookmark_info">
-        <div class="info_header"><img src="./source/logo2.png" alt="logo">
-          <input type="checkbox" class="bookmarkicon" name="bookmarkicon1" id="bookmarkicon4" checked="on">
-        </div>
-        <div class="bookmark_text"><h2>이케멘스</h2><p class="category">일식</p><p>위생등급 : 우수 <span class="star">★★</span></p><p>서울시 강남구 논현로 85길 43<br>04-246-3579</p></div>
-      </div>
-    </div>
-    <hr> -->
-    <!--여기까지.-->
-    <!-- <div class="bookmark" id="no5">
-      <div class="bookmark_imgcont"><img src="./source/food5.jpg" alt="스테이크" class="bookmark_img"></div>
-      <div class="bookmark_info">
-        <div class="info_header"><img src="./source/logo2.png" alt="logo">
-          <input type="checkbox" class="bookmarkicon" name="bookmarkicon1" id="bookmarkicon5" checked="on">
-        </div>
-        <div class="bookmark_text"><h2>BABO Kitchen</h2><p class="category">일식</p><p>위생등급 : 매우 우수 <span class="star">★★★</span></p><p>서울시 강남구 논현로 85길 43<br>04-246-3579</p></div>
-      </div>
-    </div>
-    <hr> -->
-    <!--여기까지.-->
-    </div>    
+  <section id="inside_container"> 
+    </section>    
   </div><!--콘테이너 디브 닫음-->
-<footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
-<script>
-  window.onload = async function(){
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error('토큰이 없습니다.');
-      return;
-    }
-
-    try {
-      const response = await fetch('/info/bookmark', {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('서버 응답 성공:', data);
-
-        // HTML 출력 엘리먼트 선택
-        const bookmarkContainer = document.getElementById('inside_container');
-        // 서버 응답 데이터를 HTML로 변환하여 출력
-        data.bookmarks.forEach(bookmark => {
-            const bookmarkHTML = createBookmarkElement(bookmark);
-            bookmarkContainer.innerHTML += bookmarkHTML;
-        });
-      } else {
-        console.error('서버 응답 실패:', response.status, response.statusText);
-      }
-    } catch (error) {
-      console.error('요청 중 오류 발생:', error);
-    }
-  }
-
-  // HTML 출력을 위한 함수
-  function createBookmarkElement(bookmark) {
-    return `
-        <div class="bookmark">
-            <div class="bookmark_info">
-                <div class="info_header"><img src="./source/logo2.png" alt="logo">
-                    <input type="checkbox" class="bookmarkicon" name="bookmarkicon1" checked="on">
-                </div>
-                <div class="bookmark_text"><h2>${bookmark.name}</h2><p class="category">${bookmark.type}</p><p>${bookmark.addr}<br>${bookmark.tel}</p></div>
-              <p class="dataid" style="display:none">${bookmark.dataId}</p>
-            </div>
-        </div>
-        <hr>
-    `;
-  }
-
-  
-// 북마크 아이콘 클릭 시 북마크 삭제
-document.addEventListener('click', async function(event) {
-    if (event.target.classList.contains('bookmarkicon')) {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            console.error('토큰이 없습니다.');
-            return;
-        }
-
-        const bookmarkElement = event.target.closest('.bookmark'); // 부모 요소 중 가장 가까운 북마크 요소 찾기
-        const dataid = bookmarkElement.querySelector('.dataid').textContent; // 북마크 요소에서 dataId 가져오기
-        try {
-            const response = await fetch(`/info/bookmark`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({dataId:dataid})
-            });
-
-            if (response.ok) {
-                console.log('북마크 삭제 성공');
-                bookmarkElement.remove(); // 북마크 요소 삭제
-            } else {
-                console.error('북마크 삭제 실패:', response.status, response.statusText);
-            }
-        } catch (error) {
-            console.error('요청 중 오류 발생:', error);
-        }
-    }
-});
-</script>
+<script src="./javascript/bookmark.js"></script>
 </body>
 </html>

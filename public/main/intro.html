@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro</title>
+    <link rel="stylesheet" href="./css/intro.css">
+</head>
+<body>
+    <div id="introScreen">
+        <img src="../main/css/images/logo_name.png" alt="Intro Image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('introSeen')) {
+                window.location.href = 'tutorial.html';
+            } else {
+                setTimeout(() => {
+                    localStorage.setItem('introSeen', 'true');
+                    window.location.href = 'tutorial.html';
+                }, 2300); // 예: 2.3초 후에 tutorial.html로 이동
+            }
+        });
+    </script>
+</body>
+</html>

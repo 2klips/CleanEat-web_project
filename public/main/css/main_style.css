@@ -102,9 +102,9 @@ header{
 /* 검색필터 */
 #search-filter{
     width: 100%;
-    height: 280px;
+    height: 350px;
     border-radius: 10px;
-    z-index: 150;
+    z-index: 20;
     padding: 10px 10px 0px 10px;
     display: none;
     font-weight: bolder;
@@ -117,7 +117,7 @@ header{
     position: sticky;
 }
 
-#search-filter > p{
+#search-filter > #rank_line{
     border-bottom: 1px solid var(--skyblue-color);
     margin-bottom: 10px;
     padding: 5px;
@@ -125,6 +125,26 @@ header{
     text-align: left;
     font-size: 12px;
     color: var(--skyblue-color);
+}
+
+#search-filter > #example_line{
+    border-bottom: 1px solid var(--skyblue-color);
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
+}
+
+#search-filter > #violation_line{
+    border-bottom: 1px solid red;
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: red;
 }
 
 
@@ -152,13 +172,13 @@ header{
     margin-right: 5px;
 }
 
-#search-filter label:last-child{
+/* #search-filter label:last-child{
     margin: 0px;
     margin-top: 10%;
     margin-bottom: 0px!important; 
-}
+} */
 
-#search-filter label:nth-child(7) > div{
+#search-filter label:nth-child(9) > div{
     width: 150px;
     height: 30px;
     padding: 5px;

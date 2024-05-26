@@ -10,7 +10,7 @@ body, html {
     width: 100%;
     height: 100%;
     background: white; /* 배경은 항상 흰색 */
-    display: none;
+    display: flex; /* intro.html에서는 introScreen을 표시합니다 */
     justify-content: center;
     align-items: center;
     z-index: 1000;
