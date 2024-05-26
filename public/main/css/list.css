@@ -399,7 +399,7 @@ section > .content .star > h3 > img {
 }
 
 .address {
-    margin-top: -6px;
+    margin-top: 10px;
     font-weight: bold;
     font-size: 17px;
     color: black; /* Adjust the color as needed */
@@ -419,7 +419,11 @@ section > .content .star > h3 > img {
     font-size: 17px; /* 원하는 크기로 변경 */
     display: inline-flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 10px;   
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    margin-top: 0;
 }
 
 .exemplary-icon {
@@ -462,17 +466,6 @@ section > .content .star > h3 > img {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 #map_button {
     position: absolute;
     bottom: 30px;
@@ -502,14 +495,19 @@ section > .content .star > h3 > img {
 .score-star{ font-size: 0.8rem;}
 input[type="checkbox"]{appearance: none;}
 .bookmarkicon{
-    margin-top: 5px;
-    width: 120%;
-    height: 120%;
+    z-index: 1;
     cursor: pointer;
-    background-image: url('../css/images/bookmark-outline.svg');
+    width: 25px;
+    height: 30px;
+    position:absolute;
+    /* float:right; */
+    right : 4%;
+    top : 25px;
+    background-image: url('./images/bookmark-outline.svg');
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: center;
+    margin-bottom: 3px;
 }
 .bookmarkicon:checked{
     background-image: url("../../info/source/bookmark_icon_blue.png")

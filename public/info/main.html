@@ -24,12 +24,22 @@
       </div>
       </div>
   </a>
-    <div id="alarm" class="section">
-        <div><span class="font-ctrl">알림 수신</span></div>
-        <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="pushAlramSwitch()"></label></div>
-    </div>
+  <div id="alarm" class="section">
+    <div><span class="font-ctrl">알림 수신</span></div>
+    <div class="circleBtn">
+      <button class="custom-button" onclick="toggleBackground()">
+          <div class="circle-icon">
+              <i class="fas fa-circle"></i>
+          </div>
+      </button>
+  </div>
+</div>
+    <!-- <div id="alarm" class="section">
+      <div><span class="font-ctrl">알림 수신</span></div>
+      <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="toggleBackground()"></label></div>
+    </div> -->
     <hr>
-    <a href="#"><div id="bookmark" class="section"><span class="font-ctrl">북마크</span></div></a>
+    <a href="./bookmark.html"><div id="bookmark" class="section"><span class="font-ctrl">북마크</span></div></a>
     <hr>
     <a href="./info.html"><div id="introduce" class="section"><span class="font-ctrl">클린잇 소개 /위생등급 기준</span></div></a>
     <hr>
@@ -38,98 +48,15 @@
     </div></a>
     <hr>
   </div>
-  <button id="notifyBtn">알림 토큰 생성</button>
+
+  <button id="logout" onclick="logout()"><img src="source/logout.svg" alt="로그아웃버튼">로그아웃</button>
+
   <p style="position:relative; bottom:70px; color:#595959">부정·불량 식품 신고는 국번없이 1399(무료)</p>
   <footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
+
+  <script src="./index.js"></script>
   <script src="./javascript/main.js"></script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"; 
-    import { getMessaging, getToken} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-messaging.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyDLwmwOZiprAUt16GYQNznmNBoOKJNCYG4",
-        authDomain: "easylogin-b519a.firebaseapp.com",
-        projectId: "easylogin-b519a",
-        storageBucket: "easylogin-b519a.appspot.com",
-        messagingSenderId: "270766993601",
-        appId: "1:270766993601:web:aa3199d115b3b816412440",
-        measurementId: "G-XM5967EN5W"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const messaging = getMessaging(app);
-
-    window.requestToken = () => {
-  function requestPermission() {
-    console.log('Requesting permission...');
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        console.log('Notification permission granted.');
-        // Get registration token
-        getToken(messaging).then((currentToken) => {
-          if (currentToken) {
-            console.log('Received registration token:', currentToken);
-          } else {
-            console.log('No registration token available.');
-          }
-        }).catch((err) => {
-          console.log('An error occurred while retrieving token:', err);
-        });
-      } else {
-        console.log('Notification permission denied.');
-      }
-    });
-  }
-
-  // Call requestPermission function to request notification permission
-  requestPermission();
-
-};
-  export function registerServiceWorker() {
-  if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-          navigator.serviceWorker
-              .register("../firebase-messaging-sw.js")
-              .then(function (registration) {
-                  console.log(
-                      "Service Worker가 scope에 등록되었습니다.:",
-                      registration.scope
-                  );
-              })
-              .catch(function (err) {
-                  console.log("Service Worker 등록 실패:", err);
-              });
-      });
-  }
-}
-
-    document.getElementById('notifyBtn').addEventListener('click', requestToken);
-  </script>
-  <script>
-    document.getElementById('bookmark').addEventListener('click', async function() {
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch('/info/bookmark', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('토큰이 유효하지 않습니다.');
-            }
-
-            const data = await response.json();
-            console.log(data);
-
-            // 북마크 페이지로 이동
-            window.location.href = '/info/bookmark.html';
-        } catch (error) {
-            console.error('북마크를 가져오는 중 오류 발생:', error);
-        }
-    });
-</script>
+  <script type="module" src="toggle_button.js"></script>
+  
 </body>
 </html>

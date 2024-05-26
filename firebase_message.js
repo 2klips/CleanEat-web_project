@@ -8,7 +8,7 @@ admin.initializeApp({
   appName: 'clean-eat-app'
 });
 
-const registrationToken = 'eIwSufo-sW76f1C-0kjvxX:APA91bGE8eT_wIDZp4wp-d-Rd4BT9M-Q3MYpgg7t1n-wxrn6P-m-UpCCaD27nJ0kzK2FfHwPaugeoZ8mzQzK4w3Gh57GvvmyItRHHDXwYJ8sIcD5z3ZxJ6n7zSehYfasX1IoYFa1QNvD';
+const registrationToken = 'e_UwH3p7BgXqKLJAhJo4NR:APA91bGAcUSBqIcdSo49O1saZYlSgz-RjdU5dpsrOoV0em5f0NJ7OSxbOhoCOeVfwWvrRdOX8T_AD0UcY1RVNXGIxXkyiw-1quyXxTpGMoQBetATpggUXn5lu-tP4x5R8giq-NUa6Iz-';
 
 const message = {
   notification: {

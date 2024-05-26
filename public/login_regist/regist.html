@@ -64,9 +64,9 @@
         </div>
         <button id="googleLogin" style="display: none;">구글 아이디로 로그인</button>
 
-        <div class="individual" id="EmailEX">
+        <div class="individual" id="EmailEX" style="display: flex">
             <input id="phoneNumber" placeholder="전화번호" style="width: 70%;"/>
-            <button id="phoneNumberButton" style="display: inline-block; width: 80px; height:29.9px; font-weight: bold;" onclick="addInput()">인증 요청</button>
+            <button id="phoneNumberButton" style="display: inline-block; width: 80px; height:29.9px; font-weight: bold; margin-top: 30px; margin-left: 5px;">인증 요청</button>
         </div>
 
         <form style>
@@ -108,6 +108,7 @@
 
         <script>
             async function getData() {
+                const deviceToken = localStorage.getItem('currentToken');
                 const email = document.getElementById('signUpEmail').value
                 const password = document.getElementById('signUpPassword').value
                 const addr1 = document.getElementById('userAddress').value
@@ -120,7 +121,8 @@
                     addr1: addr1,
                     addr2: addr2,
                     hp: hp,
-                    name: name
+                    name: name,
+                    deviceToken: deviceToken
                 }
                 console.log(userData)
                 try {
@@ -134,6 +136,7 @@
                     console.log(response)
                     const result = await response.json();
                     if (response.ok) {
+                        localStorage.removeItem('currentToken');
                         window.location.href = result.redirectUrl; // 로그인 페이지로 리디렉션
                         alert('회원가입이 완료되었습니다');
                     } else {
@@ -148,5 +151,6 @@
         </script>
     <script src="regist_script.js"></script>
     <script type="module" src="regist_module_script.js"></script>
+    <script type="module" src="toggle_alarm.js"></script>
 </body>
 </html>

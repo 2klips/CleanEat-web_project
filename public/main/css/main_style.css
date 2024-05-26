@@ -619,6 +619,22 @@ header > #searchbox > label > #menu{
 .score-star{ font-size: 0.8rem;}
 input[type="checkbox"]{appearance: none;}
 .bookmarkicon{
+    z-index: 1;
+    cursor: pointer;
+    width: 25px;
+    height: 30px;
+    /* position:absolute; */
+    float:right;
+    right : 4.5%;
+    background-image: url('./images/bookmark-outline.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bookmarkicon:checked{
+    background-image: url("../../info/source/bookmark_icon_blue.png")
+}
+/* .bookmarkicon{
     margin-top: 5px;
     width: 120%;
     height: 120%;
@@ -630,7 +646,7 @@ input[type="checkbox"]{appearance: none;}
 }
 .bookmarkicon:checked{
     background-image: url("../../info/source/bookmark_icon_blue.png")
-}
+} */
     div.swiper-text-area :nth-child(odd){color: #3A3A3A; font-weight: bold;}
     div.swiper-text-area :nth-child(3){font-size: 0.9em;}
     div.swiper-text-area >h2{font-size: 1.2em;}

@@ -3,9 +3,10 @@ const router = express.Router();
 const path = require('path');
 const db = require('../../server/database/userDB.js');
 const db_upso = require('../../server/database/database.js');
+const firebase_message = require('../firebase_message.js');
 
 const app = express();
-
+app.use(express.json());
 
 /* 어드민 페이지 http://localhost:8080/admin/ */
 router.get('/', function(req, res, next) {
@@ -67,6 +68,9 @@ router.get('/api/violation', async (req, res) => {
 router.get('/user', async function(req, res, next) {
     res.sendFile(path.join(__dirname,'../../public/admin_page/src/userinfo.html'));
     });
+
+router.post('/send_message', firebase_message.send_message);
+
 
 router.use(express.static(path.join(__dirname, '../../public/admin_page/src')));
 app.use('/assets', express.static(path.join(__dirname, 'public/admin_page')));

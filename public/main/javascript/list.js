@@ -2,6 +2,60 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchBtn = document.getElementById('search-btn');
     const searchbox = document.getElementById('search');
 
+    // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
+    document.addEventListener('click', async function(event) {
+        if (event.target.classList.contains('bookmarkicon')) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('로그인이 필요합니다.');
+                return;
+            }
+            
+            const bookmarkElement = await event.target.closest('.content-info'); // 부모 요소 중 가장 가까운 북마크 요소 찾기
+            console.log(bookmarkElement);
+            const checkbox = await bookmarkElement.querySelector('.bookmarkicon'); // 북마크 아이콘 체크박스 가져오기
+            const dataid = await bookmarkElement.querySelector('.dataid').textContent; // 북마크 요소에서 dataId 가져오기
+
+            // 체크박스 상태에 따라 북마크 추가 또는 제거
+            try {
+                if (checkbox.checked) {
+                    const response = await fetch(`/info/bookmark`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                    },
+                            body: JSON.stringify({ id: dataid })
+                        });
+
+                        if (response.ok) {
+                            console.log('북마크 추가 성공');
+
+                        } else {
+                            console.error('북마크 추가 실패:', response.status, response.statusText);
+                        }
+                } else {
+                    const response = await fetch(`/info/bookmark`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify({ dataId: dataid })
+                    });
+
+                    if (response.ok) {
+                        console.log('북마크 삭제 성공');
+                    } else {
+                        console.error('북마크 삭제 실패:', response.status, response.statusText);
+                    }
+                    }
+            } catch (error) {
+                console.error('요청 중 오류 발생:', error);
+            }
+        }
+    });
+
     async function displayListData(datas) {
         const container = document.getElementById('data-container');
         container.innerHTML = ''; // 이전 데이터를 지웁니다.
@@ -62,15 +116,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     itemElement.classList.add('violation');
                 }
                 let itemHTML = '<div class="content-info">';
-                itemHTML += `<h2>${item.name}`;
+                itemHTML += `<h2>${item.name}</h2>`;
+
+                const itemId = item._id;
+                // 로컬 스토리지에서 북마크 데이터  가져오기
+                const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
+                // 객체를 배열로 변환
+                const bookmarksArray = Object.values(bookmarksObject);
+                const isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
+                if (isBookmarked) {
+                    console.log('북마크됨');
+                }
+                // 체크된 상태인지 확인하여 HTML에 추가
+                itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
+
 
                 if (item.detail) {
                     itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
                 } else if (!item.detail && !item.rank) {
                     itemHTML += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
-                }
-
-                itemHTML += `</h2>`;
+                }    
                 itemHTML += rank; // 위생등급
                 itemHTML += `<p>${item.detail || ''}</p><br>`;                               
                 itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소
@@ -82,12 +147,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.clearMarkersAndOverlays();
                 
                 itemElement.addEventListener('click', function() {
-                    console.log('Saving selected location:', item.addr);
-                    // 클릭된 항목의 데이터를 sessionStorage에 저장
-                    sessionStorage.setItem('selectedLocation', item.addr);
-                    clearMarkersAndOverlays(); 
-                    // index.html로 이동
-                    window.location.href = 'index.html';
+                    if (!event.target.classList.contains('bookmarkicon')) {
+                        console.log('Saving selected location:', item.addr);
+                        // 클릭된 항목의 데이터를 sessionStorage에 저장
+                        sessionStorage.setItem('selectedLocation', item.addr);
+                        clearMarkersAndOverlays(); 
+                        // index.html로 이동
+                        window.location.href = 'index.html';
+                    }
                 });
             });
         } else {
@@ -104,6 +171,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (searchBtn) {
         searchBtn.addEventListener('click', async function() {
             if (searchBtn.disabled) {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    getBookmark()
+                }
                 console.log("서버 통신 중");
                 return;
             }
@@ -118,6 +189,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (searchbox) {
         searchbox.addEventListener('keypress', async function(event) {
             if (event.key === 'Enter') {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    getBookmark()
+                }
                 if (searchBtn.disabled) {
                     console.log("서버 통신 중");
                     return;
@@ -177,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         try {
             const queryString = encodeURIComponent(JSON.stringify(query));
-            const response = await fetch(`http://localhost:8080/main/search?collection=${collection}&query=${queryString}`);
+            const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
             if (!response.ok) {
                 throw new Error('서버 응답에 문제가 발생했습니다.');
             }
@@ -194,4 +269,29 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
         }
     };
+
+    async function getBookmark() {
+        const token = localStorage.getItem('token');
+        if(token){
+            try {
+                const response = await fetch(`/info/bookmark`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                if(response.ok) {
+                    const data = await response.json(); // JSON 형태로 변환
+                    console.log(data);
+                    localStorage.setItem('bookmark', JSON.stringify(data)); // 문자열로 변환하여 저장
+                } else {
+                    console.error('Failed to fetch bookmark:', response.status);
+                }
+            } catch (error) {
+                console.error('Error fetching bookmark:', error);
+            }
+        }
+    }
+
 });

@@ -140,112 +140,7 @@ footer{
   bottom: 0;
   left: 0;
 }
-/* 이하 북마크 탭용 추가 css*/
-header{
-  z-index: 2;
-  width: 92%;
-  height: 78px;
-  display: flex;
-  margin: 0;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0%;
-  background-color: white;
-}
-h2#back{color: #8AE9FF;}
-.ionicon {
-  width: 24px;
-  stroke: #8AE9FF;
-}
-div#text {
-  display: flex;
-}
-div#text > h1 {margin-left: 10px; font-size: 24px;font-weight: normal;}
-.bookmark{margin: 15px;}
-.bookmark_img{
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  display: flex;
-  border-radius: 8px;
-  border: 1px solid black;
-}
-#clean_eat {
-  margin: 0 auto;
-  color:#8AE9FF;
-  text-align: center;
-  width: 80%;
-  word-break:keep-all;
-}
-#inside_container{
-  padding: 68px 0;
-}
 
-.bookmark{
-  margin: 20px 0;
-  display: flex;
-  justify-content:left;
-}
-#info_img{ 
-  margin-top: 25px;
-  display: flex;flex-direction: column;justify-content: center;
-align-items: center;}
-
-#info_img>img {
-  display: flex;
-  width: 45%;
-}
-div.info_header>img {
-  height: 20px;
-}
-.bookmark_info{
-  width: 100%;
-  height: 120px;
-  box-sizing: content-box;
-  margin-left:15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-div.info_header{
-  min-height: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-.bookmark_text > h2{margin: 4px 0 0 0; font-size: 19px;}
-.bookmark_text > p {margin: 0;font-size: 14px;}
-.bookmark_text :nth-child(n+3){margin-top: 6px;}
-.bookmark_text :nth-child(even) {
-  color: #B4B4B4;
-  font-size: 13px;
-}
-.star {color: #FFB11A; font-size: 16px;}
-footer > a {
-  top :35px;
-  margin-top: 15px;
-  display: inline-block;
-  align-self: center;
-}
-#tohome{
-  width: 40px;
-}
-.bookmarkicon{
-  z-index: 1;
-  cursor: pointer;
-  width: 25px;
-  height: 30px;
-  position:absolute;
-  float:right;
-  right : 4.5%;
-  background-image: url('../source/bookmark_icon_gray.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.bookmarkicon:checked{
-  background-image: url("../source/bookmark_icon_blue.png")
-}
 
 #info2 {
   color: black;
@@ -265,4 +160,74 @@ footer > a {
 #pt1 {
   color: black;
   margin-bottom: 30px;
+}
+
+
+.circleBtn{
+  display: inline-block;
+  vertical-align: middle;
+  margin-top:0px;
+  margin-right: 10px;
+}
+/* 버튼 스타일 */
+.custom-button {
+  padding: 10px 20px;
+  background-color: white;
+  color: white;
+  border: 2px solid #8AE9FF;
+  border-radius: 30px;
+  position: relative;
+  height: 35px;
+  width: 75px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 활성화된 버튼의 배경색 */
+.custom-button.active {
+  background-color: #007bff;
+}
+.custom-button.active .circle-icon {
+  right: 5px;
+}
+/* 동그라미 아이콘 스타일 */
+.circle-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #8AE9FF;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  color: #007bff;
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  transition: right 0.3s ease;
+}
+
+
+/* 로그아웃 버튼 */
+#logout {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: white;
+  color: #8AE9FF;
+  border: 2px solid #8AE9FF;
+  border-radius: 30px;
+  position: relative;
+  height: 40px;
+  width: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 30px;
+}
+#logout.active {
+  background-color: #007bff;
+}
+
+#logout img{
+  width: 15px;
+  height: 15px;
 }
