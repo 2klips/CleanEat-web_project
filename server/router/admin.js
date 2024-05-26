@@ -4,6 +4,9 @@ const path = require('path');
 const db = require('../../server/database/userDB.js');
 const db_upso = require('../../server/database/database.js');
 const firebase_message = require('../firebase_message.js');
+const fetchAll = require('../api/safetyRankAPI.js');
+const fetchData = require('../api/apidate.js');
+const config = require('../config.js');
 
 const app = express();
 app.use(express.json());
@@ -50,8 +53,46 @@ router.get('/api/upso', async (req, res) => {
   }
 });
 
-/* 위반 업소 db 불러오기 */
-router.get('/api/violation', async (req, res) => {
+router.get('/api/upsoapi', async (req, res) => {
+  try {
+    const total = 5952; // 가져올 전체 데이터의 개수
+    const datas = [];
+    let startIndex = 1;
+
+    while (startIndex <= total) {
+        const dataChunk = await fetchData(startIndex, total);
+        datas.push(...dataChunk);
+        startIndex += itemsPerPage;
+    }
+
+    res.json({ upso: datas });
+} catch (error) {
+    res.status(500).json({ message: error.message });
+}
+})
+
+
+router.get('/api/upsoapi/rank', async (req, res) => {
+  try {
+    const itemsPerPage = 1000; //페이지당 아이템 수 
+    const total = 5952; // 가져올 전체 데이터의 개수
+    const datas = [];
+    let startIndex = 1;
+
+    while (startIndex <= total) {
+        const dataChunk = await fetchAll(startIndex, total);
+        datas.push(...dataChunk);
+        startIndex += itemsPerPage;
+    }
+    
+    res.json({ upso: datas });
+} catch (error) {
+    res.status(500).json({ message: error.message });
+}
+});
+
+/* 위반 업소+업소 db 불러오기 */
+router.get('/api/upsoinfo', async (req, res) => {
   try {
     // 데이터베이스에서 사용자 데이터를 가져오기
     const upso = await db_upso.searchDB();
@@ -71,6 +112,7 @@ router.get('/user', async function(req, res, next) {
 
 router.post('/send_message', firebase_message.send_message);
 
+router.post('/send_update_message', firebase_message.send_update_message);
 
 router.use(express.static(path.join(__dirname, '../../public/admin_page/src')));
 app.use('/assets', express.static(path.join(__dirname, 'public/admin_page')));

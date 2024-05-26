@@ -10,17 +10,12 @@
     font-family: 'NanumBarunGothic', sans-serif;
 }
 
-/* Add this at the end of the list.css file */
-#data-container {
-    margin-top: 100px; /* Adjust the value as needed */
-}
 
 :root{
     /* color */
     --white-color: white;
     --whitesmoke-color: whitesmoke;
     --skyblue-color: #8AE9FF;
-
     --medium-font: 18px;
 }
 
@@ -32,13 +27,9 @@
 }
 
 body, html{
-    margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
     position: relative;
-    overflow: hidden;
-    
 }
 #container{
     width: 100%;
@@ -64,6 +55,7 @@ header{
     justify-content: center;
     z-index: 100;
     position: absolute;
+    background-color: white;
 }
 
 /* 검색창 */
@@ -105,7 +97,7 @@ header{
 /* 검색필터 */
 #search-filter{
     width: 100%;
-    height: 280px;
+    height: 350px;
     border-radius: 10px;
     z-index: 150;
     padding: 10px 10px 0px 10px;
@@ -120,7 +112,7 @@ header{
     position: sticky;
 }
 
-#search-filter > p{
+#search-filter > #rank_line{
     border-bottom: 1px solid var(--skyblue-color);
     margin-bottom: 10px;
     padding: 5px;
@@ -129,6 +121,28 @@ header{
     font-size: 12px;
     color: var(--skyblue-color);
 }
+
+#search-filter > #example_line{
+    border-bottom: 1px solid var(--skyblue-color);
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
+}
+
+#search-filter > #violation_line{
+    border-bottom: 1px solid red;
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: red;
+}
+
+
 
 
 
@@ -152,7 +166,7 @@ header{
     justify-content: center;
 }
 #search-filter > label > div > img{
-    margin-right: 5px;
+    margin-right: 2px;
 }
 
 #search-filter label:last-child{
@@ -161,7 +175,7 @@ header{
     margin-bottom: 0px!important; 
 }
 
-#search-filter label:nth-child(7) > div{
+#search-filter label:nth-child(9) > div{
     width: 150px;
     height: 30px;
     padding: 5px;
@@ -242,7 +256,7 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
 	height: 35px;
-	margin: 5px 0 0px 5px;
+	margin: 3px 3 0px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;
@@ -319,7 +333,7 @@ section {
     width: 90%;
     height: 100%;
     overflow-y: scroll;
-    margin: 20px 30px 100px 30px;
+    margin: 0px 30px 100px 30px;
 }
 
 .content {
@@ -339,9 +353,6 @@ section > .content > a > .more-info {
     right: 5px;
     bottom: 10px;
     cursor: pointer;
-}
-
-section > .content p{
 }
 
 section > .content h2 {
@@ -377,7 +388,7 @@ section > .content .star > h3 > img {
 }
 
 .address {
-    margin-top: -6px;
+    margin-top: 10px;
     font-weight: bold;
     font-size: 17px;
     color: black; /* Adjust the color as needed */
@@ -397,7 +408,11 @@ section > .content .star > h3 > img {
     font-size: 17px; /* 원하는 크기로 변경 */
     display: inline-flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 10px;   
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    margin-top: 0;
 }
 
 .exemplary-icon {
@@ -439,18 +454,6 @@ section > .content .star > h3 > img {
     margin-bottom: 5px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 #map_button {
     position: absolute;
     bottom: 30px;
@@ -480,14 +483,19 @@ section > .content .star > h3 > img {
 .score-star{ font-size: 0.8rem;}
 input[type="checkbox"]{appearance: none;}
 .bookmarkicon{
-    margin-top: 5px;
-    width: 120%;
-    height: 120%;
+    z-index: 1;
     cursor: pointer;
-    background-image: url('../css/images/bookmark-outline.svg');
+    width: 25px;
+    height: 30px;
+    position:absolute;
+    /* float:right; */
+    right : 4%;
+    top : 25px;
+    background-image: url('./images/bookmark-outline.svg');
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: center;
+    margin-bottom: 3px;
 }
 .bookmarkicon:checked{
     background-image: url("../../info/source/bookmark_icon_blue.png")

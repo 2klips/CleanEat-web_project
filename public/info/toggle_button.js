@@ -30,7 +30,7 @@ import { getMessaging, getToken, deleteToken} from "https://www.gstatic.com/fire
                 'Content-Type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('token')}`,
               },
-              body: JSON.stringify({ token: currentToken }),
+              body: JSON.stringify({ deviceToken: currentToken }),
             });
           } else {
             console.log('No registration token available.');
