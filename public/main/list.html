@@ -26,16 +26,16 @@
                     <!-- <p>분류</p> -->
                     <p>위생등급</p>
                     <div class="star">
-                        <input type="checkbox" id="1star"  class="rank" value="좋음">
+                        <input type="checkbox" id="1star"  class="rank filter_btn" value="좋음">
                         <label for="1star"><div class="search-btn"><img src="./css/images/1star.svg" alt="" style="height: 17.76px;"></div></label>
-                        <input type="checkbox" id="2star" class="rank" value="우수">
+                        <input type="checkbox" id="2star" class="rank filter_btn" value="우수">
                         <label for="2star"><div class="search-btn"><img src="./css/images/2star.svg" alt="" style="height: 17.76px;"></div></label>
-                        <input type="checkbox" id="3star" class="rank" value="매우우수">
+                        <input type="checkbox" id="3star" class="rank filter_btn" value="매우우수">
                         <label for="3star"><div class="search-btn"><img src="./css/images/3star.svg" alt="" style="height: 17.76px;"></div></label>
                     </div>
-                    <input type="checkbox" id="Example" class="search-check" value="ExemplaryRestaurantData">
+                    <input type="checkbox" id="Example" class="search-check filter_btn Example" value="ExemplaryRestaurantData">
                     <label for="Example"><div class="search-btn"><img src="./css/images/KakaoTalk_20240422_010835732.png" alt="" style="width: 35px; height: 35px; margin: 0;"></div></label><br>
-                    <input type="checkbox" id="violation" class="search-check" value="violation">
+                    <input type="checkbox" id="violation" class="search-check filter_btn violation"  value="violation">
                     <label for="violation"><div class="search-btn"><img src="./css/images/alert_circle_outline_icon_red.png" alt="" style="width: 20px; height: 20px;"> 위생법 위반 업체</div></label><br>
                     <label for="search-filter-btn"><img src="./css/images/triangle_up_icon.png" alt="" style="width: 20px; height: 20px; margin-top: 10px;"></label>
                 </div>
@@ -53,5 +53,35 @@
     </div>
 
     <script src="./javascript/kakao_map.js"></script>
+    <script>
+            // filter 버튼 중 하나가 선택 되면 다른 버튼들은 비활성화 시켜주는 함수
+    const filter_btns = document.querySelectorAll('.filter_btn');
+    const Example_btn = document.getElementById('Example');
+    const violation_btn = document.getElementById('violation');
+    const rank_btns = document.querySelectorAll('.rank');
+    filter_btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtnDisable(btn);
+        });
+    });
+    function filterBtnDisable(btn) {
+        if (btn.checked) {
+            if (btn.id === 'Example') {
+                violation_btn.checked = false;
+                rank_btns.forEach(rank => {
+                    rank.checked = false;
+                });
+            } else if (btn.id === 'violation') {
+                Example_btn.checked = false;
+                rank_btns.forEach(rank => {
+                    rank.checked = false;
+                });
+            } else {
+                Example_btn.checked = false;
+                violation_btn.checked = false;
+            }
+        }
+    }
+    </script>
 </body>
 </html>
