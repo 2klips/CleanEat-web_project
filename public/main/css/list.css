@@ -12,7 +12,7 @@
 
 /* Add this at the end of the list.css file */
 #data-container {
-    margin-top: 100px; /* Adjust the value as needed */
+    margin-top: 0px; /* Adjust the value as needed */
 }
 
 :root{
@@ -152,7 +152,7 @@ header{
     justify-content: center;
 }
 #search-filter > label > div > img{
-    margin-right: 5px;
+    margin-right: 2px;
 }
 
 #search-filter label:last-child{
@@ -242,7 +242,7 @@ header > #searchbox > label > #menu{
     background-color: rgba(0, 0, 0, 0);
     width: 35px;
 	height: 35px;
-	margin: 5px 0 0px 5px;
+	margin: 3px 3 0px 5px;
 	padding: 0;
 	border: none;
     cursor: pointer;

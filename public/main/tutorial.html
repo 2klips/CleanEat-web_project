@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>튜토리얼</title>
+    <link rel="stylesheet" href="./css/tutorial.css">
+</head>
+<body>
+    <div id="tutorialScreen">
+        <div class="overlay"></div>
+        <img src="../main/css/images/tutorial-logo.png" alt="Logo" id="tutorial-logo">
+        <header>
+            <div id="searchbox">
+                <button type="" id="search-btn"><img src="./css/images/search_icon.svg" alt="" class="searchbtn"></button>
+                <input id="search" type="text" name="keyword" placeholder="음식점 이름을 입력해보세요.">
+                <input type="checkbox" name="" id="search-filter-btn">
+                <label for="search-filter-btn"><img src="./css/images/options-outline.svg" alt="" id="menu" class="searchbtn" style="width: 30px; height: 30px; margin-top: 4px;"></label>
+                <div id="search-filter">
+                </div>
+            </div>
+            <div class="tutorial-text tutorial-category">
+                <p>검색필터</p>
+                <img src="./css/images/arrow.svg" alt="arrow">
+            </div>
+        </header>
+
+        <div class="tutorial-text tutorial-search">
+            <p>위생등급 / 모범음식점 지정 음식점 검색</p>
+            <img src="./css/images/arrow.svg" alt="arrow">
+        </div>
+
+        <div class="tutorial-text tutorial-list">
+            <img src="./css/images/arrow.svg" alt="arrow" class="arrow-up">
+            <p>리스트 / 지도변환</p>
+        </div>
+
+        <div class="tutorial-text tutorial-expand">
+            <img src="./css/images/arrow.svg" alt="arrow" class="arrow-up">
+            <p>검색결과 펼치기</p>
+        </div>
+
+        <div class="tutorial-text tutorial-menu">
+            <img src="./css/images/arrow.svg" alt="arrow" class="arrow-up">
+            <p>더보기 메뉴</p>
+        </div>
+
+        <div id="slide">
+            <div id="slide-empty"></div>
+            <img src="./css/images/up_icon.svg" alt="" id="up">
+        </div>
+        
+        <a id="list_button"><img src="./css/images/clipboard-outline.svg" style="width: 18px; margin-top: 3px;" alt=""></a>
+
+        <ul id="footer">
+            <input type="checkbox" name="footer-btn" id="footer-btn">
+            <label for="footer-btn"><img class="footer-img" src="./css/images/menu2.png" alt="" id="list_icon" style="width: 40px; height: 40px;"></label>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tutorialScreen = document.getElementById('tutorialScreen');
+            const introSeen = localStorage.getItem('introSeen');
+            const tutorialSeen = localStorage.getItem('tutorialSeen');
+            
+            if (!introSeen) {
+                window.location.href = 'intro.html';
+            } else if (!tutorialSeen) {
+                tutorialScreen.style.display = 'flex';
+                setTimeout(() => {
+                    localStorage.setItem('tutorialSeen', 'true');
+                    window.location.href = 'index.html';
+                }, 60000); // 예: 2.3초 후에 index.html로 이동
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    
+        document.getElementById('tutorialScreen').addEventListener('click', function() {
+            localStorage.setItem('tutorialSeen', 'true');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
