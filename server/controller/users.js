@@ -53,7 +53,7 @@ async function me(req, res, next){
 async function setDeviceToken(req, res, next){
     const {deviceToken} = req.body;
     const user = req.user;
-    await userDB.setDeviceToken(user.email, deviceToken);
+    const result = await userDB.setDeviceToken(user.email, deviceToken);
     res.status(200).json({message: 'Device token updated'});
 }
 

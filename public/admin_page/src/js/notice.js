@@ -38,6 +38,12 @@ $(document).ready(function () {
     
         // 다른 데이터가 있을 경우 메시지 표시
         if (differentResults.length > 0) {
+            fetch('/admin/send_update_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             displayDifferentDataMessage(differentResults.length);
         }
     }

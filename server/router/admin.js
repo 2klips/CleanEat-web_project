@@ -112,6 +112,7 @@ router.get('/user', async function(req, res, next) {
 
 router.post('/send_message', firebase_message.send_message);
 
+router.post('/send_update_message', firebase_message.send_update_message);
 
 router.use(express.static(path.join(__dirname, '../../public/admin_page/src')));
 app.use('/assets', express.static(path.join(__dirname, 'public/admin_page')));
