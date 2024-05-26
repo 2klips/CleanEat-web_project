@@ -137,10 +137,10 @@
                     <div class="card-body">
                       <h4 class="card-title">알림 전송</h4>
                       
-                      <form class="notificationform">
+                      <form class="notificationform" action="/admin/send_message" method="post" id="notificationForm">
                         <div class="form-group">
                           <label for="notificationName">알림 이름</label>
-                          <input type="text" class="form-control" id="notificationName" placeholder="이곳에 알림명을 적으세요">
+                          <input type="text" class="form-control" name="notificationName" id="notificationName" placeholder="이곳에 알림명을 적으세요">
                         </div>
 
                         <!--
@@ -157,13 +157,41 @@
                         </div>-->
 
                         <div class="form-group">
-                          <label for="exampleTextarea1">알림 내용</label>
-                          <textarea class="form-control" id="notificationText" rows="4" placeholder="전달할 알림 내용을 입력하세요."></textarea>
+                          <label for="exampleTextarea1">Textarea</label>
+                          <textarea class="form-control" name="notificationText" id="notificationText" rows="4" placeholder="전달할 알림 내용을 입력하세요."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary me-2">알림 전송</button>
+                        <button type="button" class="btn btn-primary me-2" id="submitButton">알림 전송</button>
                         <button type="button" class="btn btn-light" id="cancelButton">취소</button>
                       </form>
-
+  <script>
+    document.getElementById("submitButton").addEventListener("click", async function() {
+      const formElement = document.getElementById('notificationForm'); // 폼 요소 선택
+      const formData = {
+        title: formElement.notificationName.value,
+        body: formElement.notificationText.value
+      } // 폼 데이터 생성
+      document.getElementById('notificationName').value = '';
+      document.getElementById('notificationText').value = '';
+      try {
+        const response = await fetch('/admin/send_message', {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log('서버 응답 성공:', data);
+          alert(data.message); // 성공 메시지 표시
+        } else {
+          console.error('서버 응답 실패:', response.status, response.statusText);
+        }
+      } catch (error) {
+        console.error('요청 중 오류 발생:', error);
+      }
+    });
+    </script>
 
                     </div>
                   </div>

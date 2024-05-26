@@ -14,7 +14,24 @@ const firebaseConfig = {
     messagingSenderId: "1000946770228",
     appId: "1:1000946770228:web:1fd78b916dd2dd308e4561",
     measurementId: "G-ZY0HKETRMZ"
-};
+  };
+
+
+
+// 회원가입에서 번호인증 할 때는 아래의 const firebaseConfig를 적용할 것.
+
+
+/* const firebaseConfig = {
+    apiKey: "AIzaSyCMBEKr3tiM0Uy0TcBkcL7FKHhHpcLMP5Q",
+    authDomain: "longin-edit.firebaseapp.com",
+    projectId: "longin-edit",
+    storageBucket: "longin-edit.appspot.com",
+    messagingSenderId: "1000946770228",
+    appId: "1:1000946770228:web:1fd78b916dd2dd308e4561",
+    measurementId: "G-ZY0HKETRMZ"
+  };
+ */
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -87,15 +104,30 @@ window.recaptchaVerifier = new RecaptchaVerifier
         confirmationResult.confirm(code).then((result) => {
         // User signed in successfully.
         const user = result.user;
-        console.log(result)
+        console.log(result);
+        showModal("인증이 완료되었습니다");
         // ...
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
+            showModal("인증번호를 확인해주세요");
+            confirmCode.value = '';
         // User couldn't sign in (bad verification code?)
         // ...
         });
 
-    })
+    });
+
+    function showModal(message) {
+        const modal = document.getElementById('modal');
+        const modalContent = modal.querySelector('.popup-content');
+        modalContent.querySelector('p').innerText = message;
+        modal.style.display = 'block';
+    
+        const modalCloseButton = modalContent.querySelector('.close-popup');
+        modalCloseButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
 
 document.getElementById('RegisterSubmit').addEventListener('click', (event) => {
     event.preventDefault()
@@ -116,7 +148,7 @@ document.getElementById('RegisterSubmit').addEventListener('click', (event) => {
             let errorMessage;
 
             if (error.code === 'auth/email-already-in-use') {
-                errorMessage = '이미 사용 중인 이메일 주소입니다.';
+                errorMessage = '모든 칸을 입력해주세요.';
             } else {
                 errorMessage = '모든 칸을 입력해주세요';
             }
@@ -137,6 +169,7 @@ document.getElementById('RegisterSubmit').addEventListener('click', (event) => {
             });
         });
             });
+
     document.getElementById('signInButton').addEventListener('click', (event) => {
         event.preventDefault()
         const signInEmail = document.getElementById('signInEmail').value
@@ -161,5 +194,3 @@ document.getElementById('RegisterSubmit').addEventListener('click', (event) => {
                 document.getElementById('errorMessage').innerText = errorMessage;
             });
             });
-    
-            

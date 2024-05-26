@@ -1,11 +1,10 @@
 .gitignore
 node_modules/
-<<<<<<< HEAD
-easylogin-b519a-firebase-adminsdk-m2qdu-a49bdfe71c.json
-=======
-.env
+
 
 easylogin-b519a-firebase-adminsdk-m2qdu-a49bdfe71c.json
 
 easylogin.json
->>>>>>> 0f9fc23e0cc37e370e7f82730c62629346a939d7
+
+
+.env

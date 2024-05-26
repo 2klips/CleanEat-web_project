@@ -1,8 +1,8 @@
-const userDB = require('../database/userDB.js');
+const database = require('../database/database.js');
 const config = require('../config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const userDB = require('../database/userDB.js');
 
 function createJwtToken(id){
     return jwt.sign({id}, config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec});
@@ -59,7 +59,7 @@ async function setDeviceToken(req, res, next){
 
 async function deleteDeviceToken(req, res, next){
     const user = req.user;
-    await userDB.setDeviceToken(user.email, null);
+    await userDB.deleteDeviceToken(user.email);
     res.status(200).json({message: 'Device token deleted'});
 }
 

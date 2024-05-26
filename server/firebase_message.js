@@ -8,26 +8,32 @@ admin.initializeApp({
   appName: 'clean-eat-app'
 });
 
-const registrationToken = 'eYKRxyA7G0DSyrhjCnZuzI:APA91bHVTBi_VuRoFZ-yutnabcN9Wt_LyBAbk6oeOmMdNRGzo5QJ5k-5RoX5Nz71r1vcerLtiExmCxaQuz-LaR0JDPYGcqdsEBXCKz69IwhJoqCjyPrw_S11HSxt6vYR0jTZ--_Q-Uio';
+const registrationToken = 'e_UwH3p7BgXqKLJAhJo4NR:APA91bGAcUSBqIcdSo49O1saZYlSgz-RjdU5dpsrOoV0em5f0NJ7OSxbOhoCOeVfwWvrRdOX8T_AD0UcY1RVNXGIxXkyiw-1quyXxTpGMoQBetATpggUXn5lu-tP4x5R8giq-NUa6Iz-';
+async function send_message (req, res, next) {
+  const { title, body } = req.body;
+  const message = {
+    notification: {
+      title: title,
+      body: body,
+    },
+    data: {
+      title: 'text',
+      message: 'python fcm test',
+      mode: 'test',
+      data: '12345',
+    },
+    token: registrationToken,
+  };
 
-const message = {
-  notification: {
-    title: 'clean-eat',
-    body: '관심식당의 위생정보가 업데이트 되었습니다.',
-  },
-  data: {
-    title: 'text',
-    message: 'python fcm test',
-    mode: 'test',
-    data: '12345',
-  },
-  token: registrationToken,
-};
-
-admin.messaging().send(message)
-  .then((response) => {
-    console.log('Successfully sent message:', response);
+  admin.messaging().send(message)
+  .then(() => {
+    console.log('Successfully sent message');
+    res.status(200).send({ message: '알림 전송 성공' });
   })
   .catch((error) => {
     console.error('Error sending message:', error);
+    res.status(500).send({ message: '알림 전송 실패' });
   });
+}
+
+module.exports = { send_message };
