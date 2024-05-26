@@ -1,19 +1,15 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-     // sessionStorage에서 'introSeen' 값을 확인
-     if (!sessionStorage.getItem('introSeen')) {
-        introScreen.style.display = 'flex'; // 인트로 화면을 보여줍니다
-        container.style.display = 'none'; // 메인 컨텐츠를 숨깁니다
+    const container = document.getElementById('container');
 
-        setTimeout(() => {
-            introScreen.style.display = 'none'; // 인트로 화면을 숨깁니다
-            container.style.display = 'block'; // 메인 컨텐츠를 보여줍니다
-            sessionStorage.setItem('introSeen', 'true'); // sessionStorage에 방문 기록을 저장합니다
-        }, 2300); // 예를 들어 5초 후에 인트로 화면을 숨기고 메인 컨텐츠를 보여줍니다
+    if (!localStorage.getItem('introSeen')) {
+        window.location.href = 'intro.html';
+    } else if (!localStorage.getItem('tutorialSeen')) {
+        window.location.href = 'tutorial.html';
     } else {
-        introScreen.style.display = 'none'; // 인트로 화면을 숨깁니다
-        container.style.display = 'block'; // 메인 컨텐츠를 즉시 보여줍니다
+        container.style.display = 'block';
     }
+    
 
 
     if (performance.navigation.type === 1) {
@@ -28,8 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('searchRank');
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
-            
-
+        sessionStorage.removeItem('tutorialSeen');
     }
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
     document.addEventListener('click', async function(event) {

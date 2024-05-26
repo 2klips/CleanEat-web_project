@@ -42,7 +42,7 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
     const additionalImage = (!detail && !starImg) ? '<img src="./css/images/Logo.png" alt="Mobam Icon" class="mobam-icon">' : '';
 
     return `
-        <div class="${infoWindowClass}" onclick="location.href='./more.html';">
+        <div class="${infoWindowClass}";">
             <h4 class="info-title">${name} ${detailImage} ${additionalImage}</h4>
             <div class="info-address">${addr}</div>
             <div class="info-phone">${tel}</div>
@@ -103,7 +103,11 @@ function searchAndDisplayAddress(data, shouldRecenter) {
 
             markers.push(marker);
             overlays.push(customOverlay);
-            
+
+            // 기존 마커와 오버레이를 맵에 추가
+            marker.setMap(map);
+            customOverlay.setMap(map);
+                        
 
             if (shouldRecenter) {
                 map.setCenter(coords);
