@@ -259,13 +259,13 @@ header > #searchbox > label > #menu {
     margin-bottom: 30px;
 }
 
-#slide {
+#slide{
     width: 100%;
     height: 10px;
     background-color: white;
     position: fixed;
     z-index: 149;
-    bottom: -30px;
+    bottom: -20px;
     transition: all 300ms ease-in-out;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -274,15 +274,14 @@ header > #searchbox > label > #menu {
     border-radius: 30px 30px 0px 0px;
 }
 
-#slide > #slide-empty {
+#slide > #slide-empty{
     width: 100%;
     height: 10px;
     position: fixed;
     left: 0;
-    margin-bottom: -30px;
     background-color: white;
     z-index: 150;
-    border-radius: 50px 50px 0px 0px;
+    border-radius: 30px 30px 0px 0px;
 }
 
 #slide > #up {
@@ -345,29 +344,34 @@ header > #searchbox > label > #menu {
 .tutorial-text {
     position: absolute;
     color: white;
-    font-size: 19px;
+    font-size: 17px;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     z-index: 150;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    
+}
+
+.tutorial-text > p{
+    margin-top: -10px;
 }
 
 .tutorial-text > img {
     width: auto;
-    height: 150px;
-    margin-top: 1px; /* 화살표와 텍스트 간격 */
+    height: 100px;
+    margin-top: -10px; /* 화살표와 텍스트 간격 */
 }
 
 .tutorial-search {
-    top: 70px;
+    top: 90px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .tutorial-category {
     position: fixed;
-    top: 80px;
+    top: 90px;
     right: calc(50% - 350px);
     transform: translateX(-50%);
     text-align: center;
@@ -375,7 +379,7 @@ header > #searchbox > label > #menu {
     flex-direction: column-reverse;
     align-items: center;
     color: white;
-    font-size: 19px;
+    font-size: 17px;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 .tutorial-list, .tutorial-expand, .tutorial-menu {
@@ -389,11 +393,11 @@ header > #searchbox > label > #menu {
 
 .tutorial-list {
     bottom: 75px;
-    left: calc(50% - 68px);
+    left: calc(50% - 60px);
 }
 
 .tutorial-expand {
-    bottom: 10px;
+    bottom: 20px;
     left: 80%;
     transform: translateX(-50%);
 }
@@ -407,7 +411,7 @@ header > #searchbox > label > #menu {
 @media (max-width: 700px) {
     .tutorial-category {
         position: fixed;
-        top: 120px;
+        top: 90px;
         left: 89%;
         transform: translateX(-50%);
     }

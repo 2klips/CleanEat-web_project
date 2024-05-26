@@ -9,7 +9,7 @@
 <body>
     <div id="tutorialScreen">
         <div class="overlay"></div>
-        <img src="../main/css/images/tutorial-logo.png" alt="Logo" id="tutorial-logo">
+        <img src="../main/css/images/tutorial-logo.png" alt="Logo" class="tutorial-logo">
         <header>
             <div id="searchbox">
                 <button type="" id="search-btn"><img src="./css/images/search_icon.svg" alt="" class="searchbtn"></button>
@@ -71,7 +71,7 @@
                 setTimeout(() => {
                     localStorage.setItem('tutorialSeen', 'true');
                     window.location.href = 'index.html';
-                }, 60000); // 예: 2.3초 후에 index.html로 이동
+                }, 600000); // 예: 2.3초 후에 index.html로 이동
             } else {
                 window.location.href = 'index.html';
             }
