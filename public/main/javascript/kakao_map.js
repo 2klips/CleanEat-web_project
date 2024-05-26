@@ -103,7 +103,11 @@ function searchAndDisplayAddress(data, shouldRecenter) {
 
             markers.push(marker);
             overlays.push(customOverlay);
-            
+
+            // 기존 마커와 오버레이를 맵에 추가
+            marker.setMap(map);
+            customOverlay.setMap(map);
+                        
 
             if (shouldRecenter) {
                 map.setCenter(coords);

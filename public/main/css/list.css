@@ -12,7 +12,7 @@
 
 /* Add this at the end of the list.css file */
 #data-container {
-    margin-top: 0px; /* Adjust the value as needed */
+    margin-top: 100px; /* Adjust the value as needed */
 }
 
 :root{
