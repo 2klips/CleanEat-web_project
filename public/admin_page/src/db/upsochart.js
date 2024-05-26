@@ -9,7 +9,6 @@ $(document).ready(function(){
       method: 'GET',
       success: function(data) {
         tableData = data.upso; 
-        console.log(tableData);
 
         /*표에 쓰일 배열들 생성*/
          // rank와 addr에 대한 객체 생성

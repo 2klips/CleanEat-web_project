@@ -606,7 +606,7 @@ input[type="checkbox"]{appearance: none;}
     /* position:absolute; */
     float:right;
     right : 4.5%;
-    background-image: url('../css/images/bookmark-outline.svg');
+    background-image: url('./images/bookmark-outline.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

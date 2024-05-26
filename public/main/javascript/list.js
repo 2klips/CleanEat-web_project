@@ -118,6 +118,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 let itemHTML = '<div class="content-info">';
                 itemHTML += `<h2>${item.name}`;
 
+
+
+
+                if (item.detail) {
+                    itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
+                } else if (!item.detail && !item.rank) {
+                    itemHTML += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
+                }
+
+
+                itemHTML += `</h2>`;
+
+                
                 const itemId = item._id;
                 // 로컬 스토리지에서 북마크 데이터  가져오기
                 const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
@@ -131,13 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
 
-                if (item.detail) {
-                    itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
-                } else if (!item.detail && !item.rank) {
-                    itemHTML += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
-                }
 
-                itemHTML += `</h2>`;
                 itemHTML += rank; // 위생등급
                 itemHTML += `<p>${item.detail || ''}</p><br>`;                               
                 itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소
@@ -170,8 +177,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (searchBtn) {
         searchBtn.addEventListener('click', async function() {
-            getBookmark()
             if (searchBtn.disabled) {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    getBookmark()
+                }
                 console.log("서버 통신 중");
                 return;
             }
@@ -185,8 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (searchbox) {
         searchbox.addEventListener('keypress', async function(event) {
-            getBookmark()
             if (event.key === 'Enter') {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    getBookmark()
+                }
                 if (searchBtn.disabled) {
                     console.log("서버 통신 중");
                     return;

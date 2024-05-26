@@ -39,7 +39,6 @@ $(document).ready(function(){
       success: function(data) {
         
           tableData = data.upso; 
-          console.log(tableData);
 
           let addresses = []; // 주소 배열 추가
 
@@ -77,16 +76,12 @@ $(document).ready(function(){
               addresses.push(address);
           }
 
-          console.log('Ranks:', ranks); // rank 객체 출력
-          console.log('Addrs:', addrs); // addr 객체 출력
 
           for (let i in ranks){
             ranklabel.push(i)
             rankdata.push(ranks[i])
           }
 
-          console.log('rankdata:', rankdata); // rank 객체 출력
-          console.log('ranklabel:', ranklabel);
           
           /* ChartJS
            * -------
