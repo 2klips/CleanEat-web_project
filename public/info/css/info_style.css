@@ -127,11 +127,12 @@ label{
   background-color: #BDF3FF;
   border-color: #8AE9FF;
 }
+
 footer{
   z-index: 2;
   text-align: center;
   width: 100%;
-  height: 80px;
+  height: 30px;
   padding: 0px;
   box-sizing:border-box;
   color: #595959;
@@ -139,8 +140,14 @@ footer{
   position: fixed;
   bottom: 0;
   left: 0;
+  margin-bottom: 50px;
 }
 
+#tohome {
+  width: auto;
+  height: 45px;
+  margin-top: 10px;
+}
 
 
 #info2 {
@@ -216,6 +223,8 @@ footer{
   vertical-align: middle;
   background-color: white;
   color: #8AE9FF;
+  font-weight: bold;
+  font-size: 15px;
   border: 2px solid #8AE9FF;
   border-radius: 30px;
   position: relative;
@@ -224,7 +233,10 @@ footer{
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 30px;
+  font-family: 'NanumBarunGothic';
+
 }
+
 #logout.active {
   background-color: #007bff;
 }
@@ -232,5 +244,6 @@ footer{
 #logout img{
   width: 15px;
   height: 15px;
+  margin-right: 5px;
 }
 

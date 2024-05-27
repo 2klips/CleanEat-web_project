@@ -509,17 +509,51 @@ input[type="checkbox"]{appearance: none;}
 
 @media screen and (min-width:1024px) {
     #footer{
-        height: 100%;
-        width: 50px;
-        left: 0;
-        top: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        width: 45px;
+        text-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        bottom: 30px;
+        left: 40px;
+        z-index: 140;
+        list-style: none;
+        background-color: var(--skyblue-color);
+        border-radius: 35px;
     }
-    #footer > a:nth-child(3){
-        order: -1;
+    
+    #footer-btn ~ label{
+        cursor: pointer;
+        z-index: 150;
+    
     }
+    
+    #footer > #footer-btn{
+        display: none;
+    }
+    #footer > label  img{
+        background-color: rgba(0, 0, 0, 0);
+    }
+    #footer > #footer-btn ~ li{
+        margin: 0;
+    }
+    
+    
+    #footer > #footer-btn ~ li{
+        display: none;
+    }
+    
+    #footer > #footer-btn:checked ~ li{
+        display: block;
+        height: 45px;
+    }
+    
+    #footer > li > a > img{
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+    }
+    
     #slide{
         height: 100%;
         width: 52px;
