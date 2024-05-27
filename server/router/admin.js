@@ -4,8 +4,8 @@ const path = require('path');
 const db = require('../../server/database/userDB.js');
 const db_upso = require('../../server/database/database.js');
 const firebase_message = require('../firebase_message.js');
-const fetchAll = require('../api/safetyRankAPI.js');
-const fetchData = require('../api/apidate.js');
+const fetchAll = require('../../server/api/safetyRankAPI.js');
+const fetchData = require('../../server/api/apidate.js');
 const config = require('../config.js');
 
 const app = express();
@@ -47,6 +47,19 @@ router.get('/api/upso', async (req, res) => {
     const upso = await db_upso.searchDB();
     // 클라이언트에 사용자 데이터를 JSON 형식으로 반환
     res.json({upso: upso});
+  } catch (error) {
+    // 오류가 발생할 경우 오류를 반환
+    res.status(500).json({ message: error.message });
+  }
+});
+
+/* 어드민 페이지에서 사용할 위반 업소 db 불러오기 */
+router.get('/api/violation', async (req, res) => {
+  try {
+    // 데이터베이스에서 사용자 데이터를 가져오기
+    const violation = await db_upso.searchDB("violation");
+    // 클라이언트에 사용자 데이터를 JSON 형식으로 반환
+    res.json({violation: violation});
   } catch (error) {
     // 오류가 발생할 경우 오류를 반환
     res.status(500).json({ message: error.message });
