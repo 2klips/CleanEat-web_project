@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 itemHTML += `<h2>${item.name}</h2>`;
 
                 const itemId = item._id;
+<<<<<<< HEAD
                 let isBookmarked = false;
                 const token = localStorage.getItem('token');
                 if (token) {
@@ -132,10 +133,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         // 북마크 배열에서 현재 아이템의 ID와 일치하는 북마크 찾기
                         isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
                     }
+=======
+                // 로컬 스토리지에서 북마크 데이터  가져오기
+                const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
+                // 객체를 배열로 변환
+                const bookmarksArray = Object.values(bookmarksObject);
+                const isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
+                if (isBookmarked) {
+                    console.log('북마크됨');
+>>>>>>> 3f27597989fe51433425e11bef68157cc35138fe
                 }
                 // 체크된 상태인지 확인하여 HTML에 추가
                 itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 3f27597989fe51433425e11bef68157cc35138fe
                 if (item.detail) {
                     itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
                 } else if (!item.detail && !item.rank) {
