@@ -28,13 +28,13 @@ messaging.onBackgroundMessage((payload) => {
   console.log('Title:', title);
   console.log('Body:', body);
 
-  // // 알림 설정
-  // const notificationTitle = title || 'Default Title'; // 제목이 없으면 기본값 사용
-  // const notificationOptions = {
-  //   body: body || 'Default Body', // 내용이 없으면 기본값 사용
-  //   icon: '/firebase-logo.png'
-  // };
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: '/firebase-logo.png'
+  };
+
 
   // 브라우저 알림 표시
-  self.registration.showNotification();
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });

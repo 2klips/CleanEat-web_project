@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function displayListData(datas) {
         const container = document.getElementById('data-container');
         container.innerHTML = ''; // 이전 데이터를 지웁니다.
+        container.innerHTML += `<div style="height: 120px; width: 100%;"></div>`;
 
         if (datas && Array.isArray(datas)) {
             datas.forEach(item => {

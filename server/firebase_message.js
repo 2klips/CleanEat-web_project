@@ -30,7 +30,6 @@ async function subscribeToTopic(topic) {
 }
 
 async function send_message (req, res, next) {
-  subscribeToTopic('all');
   const { title, body } = req.body;
   const message = {
     notification: {
@@ -58,11 +57,11 @@ async function send_message (req, res, next) {
 }
 
 async function send_update_message (req, res, next) {
-  subscribeToTopic('all');
+  const { title, body } = req.body;
   const message = {
     notification: {
-      title: '크린잇 알림',
-      body: '위생정보가 업데이트 되었습니다!',
+      title: title,
+      body: body,
     },
     data: {
       title: 'text',
@@ -84,4 +83,4 @@ async function send_update_message (req, res, next) {
   });
 }
 
-module.exports = { send_message, send_update_message };
+module.exports = { send_message, send_update_message, subscribeToTopic};
