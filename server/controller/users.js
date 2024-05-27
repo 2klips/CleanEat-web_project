@@ -3,6 +3,7 @@ const config = require('../config.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userDB = require('../database/userDB.js');
+const firebase_admin = require('../firebase_message.js');
 
 function createJwtToken(id){
     return jwt.sign({id}, config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec});
@@ -54,6 +55,7 @@ async function setDeviceToken(req, res, next){
     const {deviceToken} = req.body;
     const user = req.user;
     const result = await userDB.setDeviceToken(user.email, deviceToken);
+    firebase_admin.subscribeToTopic('all');
     res.status(200).json({message: 'Device token updated'});
 }
 

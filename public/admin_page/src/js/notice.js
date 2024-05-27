@@ -3,7 +3,7 @@ $(document).ready(function () {
     let DBData_u = []; // 전체 DB 데이터
     let APIData_u = []; // 전체 API 데이터
 
-    function compareData(dbData, apiData) {
+    async function compareData(dbData, apiData) {
         // 결과가 다른 항목을 저장할 배열
         let differentResults = [];
     
@@ -38,12 +38,22 @@ $(document).ready(function () {
     
         // 다른 데이터가 있을 경우 메시지 표시
         if (differentResults.length > 0) {
-            fetch('/admin/send_update_message', {
+            const response = await fetch('/admin/send_update_message', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    title: '클린잇 데이터 업데이트 알림',
+                    body: `새로운 데이터가 ${differentResults.length}개 업데이트 되었습니다.`
+                })
             })
+            if(response.status === 200) {
+                const data = await response.json();
+                console.log(data.message);
+            } else {
+                console.error('알림 전송 실패');
+            }
             displayDifferentDataMessage(differentResults.length);
         }
     }
