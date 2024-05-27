@@ -656,45 +656,92 @@ input[type="checkbox"]{appearance: none;}
 
 @media screen and (min-width:1024px) {
     #footer{
+        width: 45px;
+        text-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        bottom: 30px;
+        left: 40px;
+        z-index: 140;
+        list-style: none;
+        background-color: var(--skyblue-color);
+        border-radius: 35px;
+    }
+    
+    #footer-btn ~ label{
+        cursor: pointer;
+        z-index: 150;
+    
+    }
+    
+    #footer > #footer-btn{
+        display: none;
+    }
+    #footer > label  img{
+        background-color: rgba(0, 0, 0, 0);
+    }
+    #footer > #footer-btn ~ li{
+        margin: 0;
+    }
+    
+    
+    #footer > #footer-btn ~ li{
+        display: none;
+    }
+    
+    #footer > #footer-btn:checked ~ li{
+        display: block;
+        height: 45px;
+    }
+    
+    #footer > li > a > img{
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+    }
+
+    #slide{
+        background-color: white;
         height: 100%;
-        width: 50px;
+        width: 30px;
         left: 0;
         top: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    #footer > a:nth-child(3){
-        order: -1;
-    }
-    #slide{
-        height: 100%;
-        width: 52px;
-        left: 20px;
-        top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 15px; /* 오른쪽 위 둥근 모서리 */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 15px; /* 오른쪽 아래 둥근 모서리 */
+        overflow: hidden;
     }
     #slide > iframe{
         display: none;
     }
     #up{
-        left: 48px;
+        left:5px;
         top: 48%;
         transform: rotate(90deg);
+    }
+    #check:not(:checked) ~ #slide .slide-content {
+        display: none; /* slide가 up 버튼 클릭하기 전까지 숨김 */
     }
     #check:checked + label #up{
 
         transform: rotate(270deg);
-        left: 290px;
+        left: 275px;
         bottom: 370px;
     }
+
     
     #check:checked ~ #slide{
         width: 300px;
         height: 100%;
+        overflow: visible;
     }
     #check:checked ~ #slide > iframe{
         display: flex;
         padding-left: 10px;
     }
-
+    #slide-empty {
+        display: none;
+    }
 }
