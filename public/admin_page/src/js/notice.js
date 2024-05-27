@@ -45,7 +45,8 @@ $(document).ready(function () {
                 },
                 body: JSON.stringify({
                     title: '클린잇 데이터 업데이트 알림',
-                    body: `${differentResults.length}개의 새로운 데이터가 업데이트 되었습니다.`
+                    body: `${differentResults.length}개의 새로운 데이터가 업데이트 되었습니다.`,
+                    icon: '/public/admin_page/src/icon/logo_name.png'
                 })
             })
             if(response.status === 200) {
