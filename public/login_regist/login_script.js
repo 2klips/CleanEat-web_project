@@ -19,7 +19,7 @@ document.getElementById('signInButton').addEventListener('click', async (event) 
             localStorage.setItem('token', result.token);
             const token = result.token;
             console.log(localStorage.getItem('token'));
-            window.location.href = '../info/main.html';
+            window.location.href = '../main/index.html';
         } else {
             throw new Error(result.message || '로그인 실패');
         }

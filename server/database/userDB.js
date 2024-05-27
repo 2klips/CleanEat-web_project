@@ -34,6 +34,19 @@ async function createUser(user){
     return new User(user).save().then(data => data.id);
 }
 
+async function getDeviceToken() {
+    try {
+        // deviceToken 필드가 비어있지 않은 항목만 반환하고, deviceToken 필드만 포함
+        const tokens = await User.find({ deviceToken: { $ne: '' } }, { deviceToken: 1, _id: 0 });
+        // deviceToken 필드만 추출하여 배열로 반환
+        const validTokens = tokens.filter(item => item !== '').map(tokenObj => tokenObj.deviceToken);;
+        return validTokens;
+    } catch (error) {
+      console.error('Error fetching device tokens:', error);
+      throw error;
+    }
+  }
+
 async function setDeviceToken(email, deviceToken){
     try {
         const user = await User.findOneAndUpdate(
@@ -68,4 +81,4 @@ async function deleteDeviceToken(email){
     }
 }
 
-module.exports = {findByEmail, createUser, findById, setDeviceToken, findAll, deleteDeviceToken};
+module.exports = {findByEmail, createUser, findById, setDeviceToken, findAll, deleteDeviceToken, getDeviceToken};

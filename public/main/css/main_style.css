@@ -102,9 +102,9 @@ header{
 /* 검색필터 */
 #search-filter{
     width: 100%;
-    height: 280px;
+    height: 350px;
     border-radius: 10px;
-    z-index: 150;
+    z-index: 20;
     padding: 10px 10px 0px 10px;
     display: none;
     font-weight: bolder;
@@ -117,7 +117,7 @@ header{
     position: sticky;
 }
 
-#search-filter > p{
+#search-filter > #rank_line{
     border-bottom: 1px solid var(--skyblue-color);
     margin-bottom: 10px;
     padding: 5px;
@@ -125,6 +125,26 @@ header{
     text-align: left;
     font-size: 12px;
     color: var(--skyblue-color);
+}
+
+#search-filter > #example_line{
+    border-bottom: 1px solid var(--skyblue-color);
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
+}
+
+#search-filter > #violation_line{
+    border-bottom: 1px solid red;
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: red;
 }
 
 
@@ -152,13 +172,13 @@ header{
     margin-right: 5px;
 }
 
-#search-filter label:last-child{
+/* #search-filter label:last-child{
     margin: 0px;
     margin-top: 10%;
     margin-bottom: 0px!important; 
-}
+} */
 
-#search-filter label:nth-child(7) > div{
+#search-filter label:nth-child(9) > div{
     width: 150px;
     height: 30px;
     padding: 5px;
@@ -636,45 +656,92 @@ input[type="checkbox"]{appearance: none;}
 
 @media screen and (min-width:1024px) {
     #footer{
+        width: 45px;
+        text-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        bottom: 30px;
+        left: 40px;
+        z-index: 140;
+        list-style: none;
+        background-color: var(--skyblue-color);
+        border-radius: 35px;
+    }
+    
+    #footer-btn ~ label{
+        cursor: pointer;
+        z-index: 150;
+    
+    }
+    
+    #footer > #footer-btn{
+        display: none;
+    }
+    #footer > label  img{
+        background-color: rgba(0, 0, 0, 0);
+    }
+    #footer > #footer-btn ~ li{
+        margin: 0;
+    }
+    
+    
+    #footer > #footer-btn ~ li{
+        display: none;
+    }
+    
+    #footer > #footer-btn:checked ~ li{
+        display: block;
+        height: 45px;
+    }
+    
+    #footer > li > a > img{
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+    }
+
+    #slide{
+        background-color: white;
         height: 100%;
-        width: 50px;
+        width: 30px;
         left: 0;
         top: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    #footer > a:nth-child(3){
-        order: -1;
-    }
-    #slide{
-        height: 100%;
-        width: 52px;
-        left: 20px;
-        top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 15px; /* 오른쪽 위 둥근 모서리 */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 15px; /* 오른쪽 아래 둥근 모서리 */
+        overflow: hidden;
     }
     #slide > iframe{
         display: none;
     }
     #up{
-        left: 48px;
+        left:5px;
         top: 48%;
         transform: rotate(90deg);
+    }
+    #check:not(:checked) ~ #slide .slide-content {
+        display: none; /* slide가 up 버튼 클릭하기 전까지 숨김 */
     }
     #check:checked + label #up{
 
         transform: rotate(270deg);
-        left: 290px;
+        left: 275px;
         bottom: 370px;
     }
+
     
     #check:checked ~ #slide{
         width: 300px;
         height: 100%;
+        overflow: visible;
     }
     #check:checked ~ #slide > iframe{
         display: flex;
         padding-left: 10px;
     }
-
+    #slide-empty {
+        display: none;
+    }
 }

@@ -1,0 +1,418 @@
+
+@font-face {
+    font-family: 'NanumBarunGothic';
+    font-style: normal;
+    font-weight: 300;
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+.nanumbarungothic * {
+    font-family: 'NanumBarunGothic', sans-serif;
+}
+
+* { 
+    font-family: 'NanumBarunGothic';
+}
+
+/* tutorial.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./images/tutorial-background.PNG') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    position: relative;
+}
+
+#tutorialScreen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+#tutorialScreen img {
+    width: 100px;
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+header, #searchbox, #list_button, #slide, #footer {
+    z-index: 2;
+}
+
+#searchbox {
+    width: 85%;
+    height: 40px;
+    display: flex;
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    justify-content: space-between;
+    align-items: center; /* 세로 정렬 */
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.5);
+    max-width: 550px;
+    flex-wrap: wrap;
+    min-width: 288px;
+    background-color: white;
+    top: 20px;
+    padding: 0 10px; /* 좌우 패딩 추가 */
+}
+
+#search::placeholder {
+    color: rgba(128, 128, 128, 0.5);
+    font-weight: bolder;
+}
+
+#searchbox > #search::placeholder {
+    font-size: 16px;
+    font-weight: lighter;
+    color: rgba(128, 128, 128, 1.2);
+}
+
+#search-filter-btn {
+    display: none;
+}
+
+#search-filter {
+    width: 100%;
+    height: 280px;
+    border-radius: 10px;
+    z-index: 150;
+    padding: 10px 10px 0px 10px;
+    display: none;
+    font-weight: bolder;
+    text-align: center;
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, 0.5);
+    min-width: 288px;
+    max-width: 550px;
+    background-color: white;
+    justify-content: center;
+    position: sticky;
+}
+
+#search-filter > p {
+    border-bottom: 1px solid var(--skyblue-color);
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--skyblue-color);
+}
+
+#search-filter > input {
+    display: none;
+}
+
+#search-filter > label {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: -11px;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+}
+
+#search-filter > label > div > img,
+#search-filter > label > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-filter > label > div > img {
+    margin-right: 5px;
+}
+
+#search-filter label:last-child {
+    margin: 0px;
+    margin-top: 10%;
+    margin-bottom: 0px!important;
+}
+
+#search-filter label:nth-child(7) > div {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+}
+
+#search-filter > .search-check:checked + label > div {
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+}
+
+#search-filter > label > div {
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+}
+
+#search-filter > div > label > div {
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 9px;
+    padding: 7px;
+    font-size: 13px;
+    width: 80px;
+    cursor: pointer;
+}
+
+#search-filter > div > .rank:checked + label > div {
+    background-color: rgba(138, 233, 255, 0.4);
+    border-color: #8AE9FF;
+    cursor: pointer;
+}
+
+.star {
+    display: flex;
+    justify-content: center;
+}
+
+.star :nth-child(4) {
+    margin: 0 10px 10px 10px;
+}
+
+#search-filter label:nth-child(6) {
+    margin: 0 5px 10px 5px;
+}
+
+#search-filter-btn:checked + label + #search-filter {
+    display: block;
+}
+
+header > #searchbox > label > #menu {
+    width: 35px;
+    height: 35px;
+    background-color: var(--white-color);
+    z-index: 110;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#search {
+    border: none;
+    font-weight: bolder;
+    font-size: var(--medium-font);
+    width: 75%;
+    height: 24px;
+    margin-bottom: 28px;
+}
+
+#search-btn {
+    background-color: rgba(0, 0, 0, 0);
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+#search-btn > img {
+    width: 23px;
+    height: 23px;
+    margin-bottom: 30px;
+}
+
+#search-filter-btn + label {
+    margin: 0 3px 5px 0;
+}
+
+#list_button {
+    position: absolute;
+    bottom: 30px;
+    width: 80px;
+    left: calc(50% - 40px);
+    height: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--skyblue-color);
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+#slide{
+    width: 100%;
+    height: 10px;
+    background-color: white;
+    position: fixed;
+    z-index: 149;
+    bottom: -20px;
+    transition: all 300ms ease-in-out;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    box-shadow: 0px 1px 10px 0px gray;
+    padding: 0 15px 40px 15px;
+    border-radius: 30px 30px 0px 0px;
+}
+
+#slide > #slide-empty{
+    width: 100%;
+    height: 10px;
+    position: fixed;
+    left: 0;
+    background-color: white;
+    z-index: 150;
+    border-radius: 30px 30px 0px 0px;
+}
+
+#slide > #up {
+    width: 20px;
+    position: absolute;
+    bottom: 5px;
+    left: calc(50% - 10px);
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    z-index: 150;
+}
+
+#footer {
+    width: 45px;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 5px;
+    left: -20px;
+    z-index: 140;
+    list-style: none;
+    background-color: var(--skyblue-color);
+    border-radius: 35px;
+}
+
+#footer-btn ~ label {
+    cursor: pointer;
+    z-index: 150;
+}
+
+#footer > #footer-btn {
+    display: none;
+}
+
+#footer > label img {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#footer > #footer-btn ~ li {
+    margin: 0;
+}
+
+#footer > #footer-btn ~ li {
+    display: none;
+}
+
+#footer > #footer-btn:checked ~ li {
+    display: block;
+    height: 45px;
+}
+
+#footer > li > a > img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+/* 화살표 및 텍스트 배치 */
+.tutorial-text {
+    position: absolute;
+    color: white;
+    font-size: 17px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    
+}
+
+.tutorial-text > p{
+    margin-top: -10px;
+}
+
+.tutorial-text > img {
+    width: auto;
+    height: 100px;
+    margin-top: -10px; /* 화살표와 텍스트 간격 */
+}
+
+.tutorial-search {
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tutorial-category {
+    position: fixed;
+    top: 90px;
+    right: calc(50% - 350px);
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    color: white;
+    font-size: 17px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.tutorial-list, .tutorial-expand, .tutorial-menu {
+    flex-direction: column-reverse; /* 텍스트가 화살표 위로 오도록 설정 */
+}
+
+.arrow-up {
+    transform: rotate(180deg); /* 화살표 상하 반전 */
+}
+
+
+.tutorial-list {
+    bottom: 75px;
+    left: calc(50% - 60px);
+}
+
+.tutorial-expand {
+    bottom: 20px;
+    left: 80%;
+    transform: translateX(-50%);
+}
+
+.tutorial-menu {
+    bottom: 90px;
+    left: 0px;
+}
+
+/* 일정 해상도 이하에서 위치 고정 */
+@media (max-width: 700px) {
+    .tutorial-category {
+        position: fixed;
+        top: 90px;
+        left: 89%;
+        transform: translateX(-50%);
+    }
+}

@@ -1,18 +1,12 @@
-
 document.addEventListener('DOMContentLoaded', function() {
-     // sessionStorage에서 'introSeen' 값을 확인
-     if (!sessionStorage.getItem('introSeen')) {
-        introScreen.style.display = 'flex'; // 인트로 화면을 보여줍니다
-        container.style.display = 'none'; // 메인 컨텐츠를 숨깁니다
+    const container = document.getElementById('container');
 
-        setTimeout(() => {
-            introScreen.style.display = 'none'; // 인트로 화면을 숨깁니다
-            container.style.display = 'block'; // 메인 컨텐츠를 보여줍니다
-            sessionStorage.setItem('introSeen', 'true'); // sessionStorage에 방문 기록을 저장합니다
-        }, 2300); // 예를 들어 5초 후에 인트로 화면을 숨기고 메인 컨텐츠를 보여줍니다
+    if (!localStorage.getItem('introSeen')) {
+        window.location.href = 'intro.html';
+    } else if (!localStorage.getItem('tutorialSeen')) {
+        window.location.href = 'tutorial.html';
     } else {
-        introScreen.style.display = 'none'; // 인트로 화면을 숨깁니다
-        container.style.display = 'block'; // 메인 컨텐츠를 즉시 보여줍니다
+        container.style.display = 'block';
     }
 
 
@@ -28,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('searchRank');
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
-            
+        sessionStorage.removeItem('tutorialSeen');
 
     }
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
@@ -151,16 +145,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
 
                     let slideContent = `<h2>${item.name}`;
-                    
-                    
                     const itemId = item._id;
-                    // 로컬 스토리지에서 북마크 데이터  가져오기
-                    const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
-                    // 객체를 배열로 변환
-                    const bookmarksArray = Object.values(bookmarksObject);
-                    const isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
-                    if (isBookmarked) {
-                        console.log('북마크됨');
+                    let isBookmarked = false;
+                    const token = localStorage.getItem('token');
+                    if (token) {
+                        // 로컬 스토리지에서 북마크 데이터  가져오기
+                        const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
+                        // 객체를 배열로 변환
+                        const bookmarksArray = Object.values(bookmarksObject);
+                        if (bookmarksArray.length > 0) {
+                            // 북마크 배열에서 현재 아이템의 ID와 일치하는 북마크 찾기
+                            isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
+                        }
                     }
                     // 체크된 상태인지 확인하여 HTML에 추가
                     slideContent += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
@@ -241,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         try {
             const queryString = encodeURIComponent(JSON.stringify(query));
-            const response = await fetch(`http://localhost:8080/main/search?collection=${collection}&query=${queryString}`);
+            const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
             if (!response.ok) {
                 throw new Error('서버 응답에 문제가 발생했습니다.');
             }

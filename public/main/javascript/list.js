@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            const bookmarkElement = await event.target.closest('.slide-content'); // 부모 요소 중 가장 가까운 북마크 요소 찾기
+
+            const bookmarkElement = await event.target.closest('.content-info'); // 부모 요소 중 가장 가까운 북마크 요소 찾기
             console.log(bookmarkElement);
             const checkbox = await bookmarkElement.querySelector('.bookmarkicon'); // 북마크 아이콘 체크박스 가져오기
             const dataid = await bookmarkElement.querySelector('.dataid').textContent; // 북마크 요소에서 dataId 가져오기
@@ -59,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function displayListData(datas) {
         const container = document.getElementById('data-container');
         container.innerHTML = ''; // 이전 데이터를 지웁니다.
+        container.innerHTML += `<div style="height: 120px; width: 100%;"></div>`;
 
         if (datas && Array.isArray(datas)) {
             datas.forEach(item => {
@@ -116,35 +118,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     itemElement.classList.add('violation');
                 }
                 let itemHTML = '<div class="content-info">';
-                itemHTML += `<h2>${item.name}`;
+                itemHTML += `<h2>${item.name}</h2>`;
 
-
-
+                const itemId = item._id;
+                let isBookmarked = false;
+                const token = localStorage.getItem('token');
+                if (token) {
+                    // 로컬 스토리지에서 북마크 데이터  가져오기
+                    const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
+                    // 객체를 배열로 변환
+                    const bookmarksArray = Object.values(bookmarksObject);
+                    if (bookmarksArray.length > 0) {
+                        // 북마크 배열에서 현재 아이템의 ID와 일치하는 북마크 찾기
+                        isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
+                    }
+                }
+                // 체크된 상태인지 확인하여 HTML에 추가
+                itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
                 if (item.detail) {
                     itemHTML += ` <img src="./css/images/alert_circle_outline_icon_red.png" alt="위반" class="violation-icon">`;
                 } else if (!item.detail && !item.rank) {
                     itemHTML += ` <span class="exemplary-text"><img src="./css/images/Logo.png" alt="모범음식점" class="exemplary-icon"> 클린잇 - 모범음식점</span>`;
                 }
-
-
-                itemHTML += `</h2>`;
-
-                
-                const itemId = item._id;
-                // 로컬 스토리지에서 북마크 데이터  가져오기
-                const bookmarksObject = JSON.parse(localStorage.getItem('bookmark') || '{}');
-                // 객체를 배열로 변환
-                const bookmarksArray = Object.values(bookmarksObject);
-                const isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
-                if (isBookmarked) {
-                    console.log('북마크됨');
-                }
-                // 체크된 상태인지 확인하여 HTML에 추가
-                itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
-
-
-
                 itemHTML += rank; // 위생등급
                 itemHTML += `<p>${item.detail || ''}</p><br>`;                               
                 itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소
@@ -156,12 +152,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.clearMarkersAndOverlays();
                 
                 itemElement.addEventListener('click', function() {
-                    console.log('Saving selected location:', item.addr);
-                    // 클릭된 항목의 데이터를 sessionStorage에 저장
-                    sessionStorage.setItem('selectedLocation', item.addr);
-                    clearMarkersAndOverlays(); 
-                    // index.html로 이동
-                    window.location.href = 'index.html';
+                    if (!event.target.classList.contains('bookmarkicon')) {
+                        console.log('Saving selected location:', item.addr);
+                        // 클릭된 항목의 데이터를 sessionStorage에 저장
+                        sessionStorage.setItem('selectedLocation', item.addr);
+                        clearMarkersAndOverlays(); 
+                        // index.html로 이동
+                        window.location.href = 'index.html';
+                    }
                 });
             });
         } else {
@@ -259,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         try {
             const queryString = encodeURIComponent(JSON.stringify(query));
-            const response = await fetch(`http://localhost:8080/main/search?collection=${collection}&query=${queryString}`);
+            const response = await fetch(`/main/search?collection=${collection}&query=${queryString}`);
             if (!response.ok) {
                 throw new Error('서버 응답에 문제가 발생했습니다.');
             }
