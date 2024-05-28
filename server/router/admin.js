@@ -8,8 +8,6 @@ const fetchAll = require('../../server/api/safetyRankAPI.js');
 const fetchData = require('../../server/api/apidate.js');
 const config = require('../config.js');
 
-const app = express();
-app.use(express.json());
 
 /* 어드민 페이지 http://localhost:8080/admin/ */
 router.get('/', function(req, res, next) {
@@ -128,6 +126,11 @@ router.post('/send_message', firebase_message.send_message);
 router.post('/send_update_message', firebase_message.send_update_message);
 
 router.use(express.static(path.join(__dirname, '../../public/admin_page/src')));
-app.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/css')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/js')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/vendor')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/scss')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/fonts')));
 
 module.exports = router;
