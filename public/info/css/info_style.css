@@ -117,7 +117,7 @@ label{
   background-color: #BDF3FF;
   left: 0;
   top: 50%;
-  transition: left 250ms linear;
+  transition: left 180ms linear;
 }
 #push_alram:checked::before {
   background-color: white;
@@ -245,5 +245,4 @@ footer{
   width: 15px;
   height: 15px;
   margin-right: 5px;
-
-
+}

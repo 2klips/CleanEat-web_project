@@ -11,10 +11,30 @@ import { getMessaging, getToken, deleteToken} from "https://www.gstatic.com/fire
         measurementId: "G-XM5967EN5W"
     };
 
+
+
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
 
-    window.requestToken = () => {
+
+
+    window.onload = function() {
+      initializeToken();
+  };
+  async function initializeToken() {
+      try {
+          const currentToken = await getToken(messaging);
+          if (currentToken) {
+              console.log('deviceToken:', currentToken);
+              document.getElementById('push_alram').checked = true;
+          }
+      } catch (err) {
+          console.log('An error occurred while retrieving token:', err);
+      }
+  }
+
+
+  window.requestToken = () => {
     function requestPermission() {
     console.log('Requesting permission...');
     Notification.requestPermission().then((permission) => {
@@ -71,5 +91,3 @@ window.deleteToken = () => {
         console.log('An error occurred while retrieving token:', err);
     });
 };
-
-    document.getElementById('notifyBtn').addEventListener('click', requestToken);
