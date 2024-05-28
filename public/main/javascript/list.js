@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (bookmarksArray.length > 0) {
                         // 북마크 배열에서 현재 아이템의 ID와 일치하는 북마크 찾기
                         isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
-                }
+                }}
                 // 체크된 상태인지 확인하여 HTML에 추가
                 itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
