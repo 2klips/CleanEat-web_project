@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="container">
-    <a href="../login_regist/index.html"><!--로그인 시 아래쪽처럼 값이 들어감. -->
+    <a href="#"><!--로그인 시 아래쪽처럼 값이 들어감. -->
       <div id="userinfo">
         <!-- <img src="./source/avata.png" alt="avata">
         <div id="user">
@@ -26,14 +26,8 @@
   </a>
   <div id="alarm" class="section">
     <div><span class="font-ctrl">알림 수신</span></div>
-    <div class="circleBtn">
-      <button class="custom-button" onclick="toggleBackground()">
-          <div class="circle-icon">
-              <i class="fas fa-circle"></i>
-          </div>
-      </button>
+    <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram"></label></div>
   </div>
-</div>
     <!-- <div id="alarm" class="section">
       <div><span class="font-ctrl">알림 수신</span></div>
       <div><label for="push_alram"><input type="checkbox" name="push_alram" id="push_alram" onclick="toggleBackground()"></label></div>
@@ -55,9 +49,19 @@
   <footer><a href="../main/index.html"><img src="./source/zip.png" alt="홈버튼 이미지" id="tohome"></a></footer>
 
 
-  <script src="./index.js"></script>
   <script src="./javascript/main.js"></script>
   <script type="module" src="toggle_button.js"></script>
-  
+  <script>
+
+    document.getElementById('push_alram').addEventListener('click', function(){
+      if(document.getElementById('push_alram').checked){
+        requestToken()
+        alert('알림 수신을 켰습니다.');
+      }else{
+        deleteToken()
+        alert('알림 수신을 껐습니다.');
+      }
+    });
+  </script>
 </body>
 </html>
