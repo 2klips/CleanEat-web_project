@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (selectedLocation) {
         setTimeout(() => {
             window.moveMapCenter(selectedLocation.addr);
-        }, 30); // 2초 지연 후 지도 이동
+        }, 500); // 2초 지연 후 지도 이동
     }
     
     
