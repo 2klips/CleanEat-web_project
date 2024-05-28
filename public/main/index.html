@@ -179,7 +179,7 @@
         <div id="slide">
             <div id="slide-empty"></div>
             <!-- ect.txt에 주석부분 백업 -->
-            <div class="loadercontainer">
+            <div id="loadercontainer" class="hidediv">
                 <div class="loader"></div>
                 <div>검색어를 입력시 결과가 나타납니다. </div>
             </div>
@@ -268,6 +268,19 @@
             }
         }
     }
-</script> 
+    </script>
+    <script>
+        const check = document.getElementById('check');
+        const slide = document.getElementById('slide');
+        const loadercontainer = document.getElementById('loadercontainer');
+
+        check.addEventListener('change', function() {
+            if (check.checked) { 
+                loadercontainer.classList.remove('hidediv');
+            } else {
+                loadercontainer.classList.add('hidediv');
+            }
+        });
+    </script>
 </body>
 </html>
