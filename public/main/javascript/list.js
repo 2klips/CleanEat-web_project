@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 itemHTML += rank; // 위생등급
                 itemHTML += `<p>${item.detail || ''}</p><br>`;                               
-                itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소
+                itemHTML += `<p class="address">${item.addr || '[ ※ 폐업한 음식점 입니다. ]'}</p><br>`; // 주소
                 if (tel) {
                     itemHTML += `<p class="tel">전화번호: ${tel}</p><br>`; // 전화번호
                 }

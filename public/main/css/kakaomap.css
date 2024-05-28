@@ -8,7 +8,7 @@
     font-family: 'NanumBarunGothic', sans-serif;
     word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈 */
     white-space: normal; /* 줄바꿈을 허용 */
-    transform: translateY(-100%); /* 위치를 위로 조정 */
+    transform: translateY(-90%); /* 위치를 위로 조정 */
 
 }
 

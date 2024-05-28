@@ -13,6 +13,7 @@ var markers = []; // 기존 마커들을 저장할 배열
 var overlays = []; // 기존 커스텀 오버레이를 저장할 배열
 let firstSearch = true; // 첫 번째 검색 여부
 
+
 // 인포윈도우 내용 생성
 function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
     let starImg = '';
@@ -81,7 +82,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
 
             // detail 존재 여부에 따른 마커 이미지 경로 설정
             var imageSrc = data.violation ? './css/images/violation_marker.svg' : './css/images/map_marker.svg',
-                imageSize = new kakao.maps.Size(44, 49),
+                imageSize = new kakao.maps.Size(36, 41),
                 imageOption = { offset: new kakao.maps.Point(22, 49) };
 
             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -98,12 +99,13 @@ function searchAndDisplayAddress(data, shouldRecenter) {
             var customOverlay = new kakao.maps.CustomOverlay({
                 position: coords,
                 content: infowindowContent,
-                yAnchor: 0.9
+                yAnchor: 0.6
             });
 
             markers.push(marker);
             overlays.push(customOverlay);
 
+            
             // 기존 마커와 오버레이를 맵에 추가
             marker.setMap(map);
             customOverlay.setMap(map);
