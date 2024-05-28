@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (bookmarksArray.length > 0) {
                         // 북마크 배열에서 현재 아이템의 ID와 일치하는 북마크 찾기
                         isBookmarked = bookmarksArray[0].find(bookmark => bookmark.dataId == itemId);
-                }
+                    }}
                 // 체크된 상태인지 확인하여 HTML에 추가
                 itemHTML += `<input type="checkbox" class="bookmarkicon" name="bookmarkicon" ${isBookmarked ? 'checked' : ''}></input><p class="dataid" style="display:none">${itemId}</p>`;
 
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.href = 'index.html';
                     }
                 });
-            });
+                })
         } else {
             console.error('데이터가 없습니다.');
         }
@@ -274,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('데이터를 불러오는 중 오류가 발생했습니다.', error);
         }
     };
+});
 
     async function getBookmark() {
         const token = localStorage.getItem('token');
@@ -299,4 +300,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-});
+
