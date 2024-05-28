@@ -151,12 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.appendChild(itemElement);
                 window.clearMarkersAndOverlays();
                 
-                itemElement.addEventListener('click', function() {
+                itemElement.addEventListener('click', function(event) {
                     if (!event.target.classList.contains('bookmarkicon')) {
                         console.log('Saving selected location:', item.addr);
                         // 클릭된 항목의 데이터를 sessionStorage에 저장
-                        sessionStorage.setItem('selectedLocation', item.addr);
-                        clearMarkersAndOverlays(); 
+                        sessionStorage.setItem('selectedLocation', JSON.stringify(item));
                         // index.html로 이동
                         window.location.href = 'index.html';
                     }

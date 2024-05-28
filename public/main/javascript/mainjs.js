@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.style.display = 'block';
     }
 
+    
 
     if (performance.navigation.type === 1) {
         localStorage.removeItem('searchResults');
@@ -383,9 +384,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 데이터 초기화 및 지도 이동 처리
-    const selectedLocation = sessionStorage.getItem('selectedLocation');
+    const selectedLocation = JSON.parse(sessionStorage.getItem('selectedLocation'));
     console.log('Loaded selected location:', selectedLocation);
-    window.moveMapCenter(selectedLocation);
+    if (selectedLocation) {
+        setTimeout(() => {
+            window.moveMapCenter(selectedLocation.addr);
+        }, 30); // 2초 지연 후 지도 이동
+    }
     
     
     window.search = search;
