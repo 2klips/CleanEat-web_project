@@ -8,8 +8,6 @@ const fetchAll = require('../../server/api/safetyRankAPI.js');
 const fetchData = require('../../server/api/apidate.js');
 const config = require('../config.js');
 
-const app = express();
-app.use(express.json());
 
 /* 어드민 페이지 http://localhost:8080/admin/ */
 router.get('/', function(req, res, next) {
