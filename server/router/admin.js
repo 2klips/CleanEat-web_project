@@ -129,5 +129,10 @@ router.post('/send_update_message', firebase_message.send_update_message);
 
 router.use(express.static(path.join(__dirname, '../../public/admin_page/src')));
 router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/css')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/js')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/vendor')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/scss')));
+router.use('/assets', express.static(path.join(__dirname, '../../public/admin_page/src/assets/fonts')));
 
 module.exports = router;
