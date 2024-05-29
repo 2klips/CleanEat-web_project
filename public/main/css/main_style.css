@@ -761,4 +761,18 @@ input[type="checkbox"]{appearance: none;}
     text-align: center;
 }
 
+
 .hidediv >*{display: none;}
+
+@media screen and (max-width: 768px) {
+    #recenter-btn {
+        padding-top: 30px;
+        bottom: 600px; /* 버튼의 하단 여백을 조정 */
+        right: 10px; /* 버튼의 오른쪽 여백을 조정 */
+    }
+
+    #searchbox {
+        margin-bottom: 30px; /* searchbox의 하단 여백 추가 */
+    }
+}
+

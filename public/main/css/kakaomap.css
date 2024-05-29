@@ -1,5 +1,6 @@
 .custom-info-window {
-    width: 250px;
+    width: 220px;
+    height: auto;
     position: relative;
     background: white;
     padding: 10px;
@@ -8,13 +9,22 @@
     font-family: 'NanumBarunGothic', sans-serif;
     word-wrap: break-word; /* 텍스트가 넘칠 경우 줄바꿈 */
     white-space: normal; /* 줄바꿈을 허용 */
-    transform: translateY(-100%); /* 위치를 위로 조정 */
+    transform: translateY(-50%); /* 위치를 위로 조정 */
 
+}
+
+#info-toggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    transform: translateX(-50%)
 }
 
 .info-title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 5px;
 }
 
@@ -32,19 +42,19 @@
 }
 
 .rank-text {
-    font-size: 14px; /* 텍스트 크기 조정 */
+    font-size: 12px; /* 텍스트 크기 조정 */
     font-weight: bold;
 }
 
 .info-address {
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-weight: bold;
     color: #7c7c7c;
     margin-bottom: 5px;
 }
 
 .info-phone {
-    font-size: 0.8em;
+    font-size: 0.7em;
     color: #000000;
     margin-bottom: 5px;
 }
@@ -82,7 +92,7 @@
 
 
 .custom-info-window .info-detail {
-    font-size: 14px;
+    font-size: 12px;
     margin: 2px 0;
     font-weight: bold;
     color: red;

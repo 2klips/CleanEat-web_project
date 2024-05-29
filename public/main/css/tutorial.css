@@ -360,7 +360,7 @@ header > #searchbox > label > #menu {
 .tutorial-text > img {
     width: auto;
     height: 100px;
-    margin-top: -10px; /* 화살표와 텍스트 간격 */
+    margin-top: 0px; /* 화살표와 텍스트 간격 */
 }
 
 .tutorial-search {
