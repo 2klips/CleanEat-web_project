@@ -3,8 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!localStorage.getItem('introSeen')) {
         window.location.href = 'intro.html';
+        clearMarkersAndOverlays();
     } else if (!localStorage.getItem('tutorialSeen')) {
         window.location.href = 'tutorial.html';
+        clearMarkersAndOverlays();
     } else {
         container.style.display = 'block';
     }
@@ -29,25 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    // 언로드 이벤트 추가
-        window.addEventListener('beforeunload', function() {
-            clearMarkersAndOverlays();
-            localStorage.removeItem('searchResults');
-            localStorage.removeItem('searchKeyword');
-            localStorage.removeItem('searchCollection');
-            localStorage.removeItem('searchRank');
-            localStorage.removeItem('addresses');
-            sessionStorage.removeItem('searchResults');
-            sessionStorage.removeItem('searchKeyword');
-            sessionStorage.removeItem('searchCollection');
-            sessionStorage.removeItem('searchRank');
-            sessionStorage.removeItem('addresses');
-            sessionStorage.removeItem('selectedLocation');
-            sessionStorage.removeItem('tutorialSeen');
-            localStorage.setItem('introSeen', '');
-            localStorage.setItem('tutorialSeen', '');
-        });
-
+    
 
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
     document.addEventListener('click', async function(event) {
