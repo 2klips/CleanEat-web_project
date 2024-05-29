@@ -28,6 +28,27 @@ document.addEventListener('DOMContentLoaded', function() {
         // localStorage.setItem('tutorialSeen', '');
 
     }
+
+    // 언로드 이벤트 추가
+        window.addEventListener('beforeunload', function() {
+            clearMarkersAndOverlays();
+            localStorage.removeItem('searchResults');
+            localStorage.removeItem('searchKeyword');
+            localStorage.removeItem('searchCollection');
+            localStorage.removeItem('searchRank');
+            localStorage.removeItem('addresses');
+            sessionStorage.removeItem('searchResults');
+            sessionStorage.removeItem('searchKeyword');
+            sessionStorage.removeItem('searchCollection');
+            sessionStorage.removeItem('searchRank');
+            sessionStorage.removeItem('addresses');
+            sessionStorage.removeItem('selectedLocation');
+            sessionStorage.removeItem('tutorialSeen');
+            localStorage.setItem('introSeen', '');
+            localStorage.setItem('tutorialSeen', '');
+        });
+
+
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
     document.addEventListener('click', async function(event) {
         if (event.target.classList.contains('bookmarkicon')) {
@@ -360,6 +381,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             overlays = [];
         }
+
+        if (Array.isArray(toggleOverlays)) {
+            toggleOverlays.forEach(overlay => overlay.setMap(null));
+            toggleOverlays = [];
+        } else {
+            toggleOverlays = [];
+        }
     }
     async function getBookmark() {
         const token = localStorage.getItem('token');
@@ -391,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (selectedLocation) {
         setTimeout(() => {
             window.moveMapCenter(selectedLocation.addr);
-        }, 700); // 2초 지연 후 지도 이동
+        }, 900); // 2초 지연 후 지도 이동
     }
     
     

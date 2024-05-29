@@ -5,6 +5,33 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         draggable: true // 드래그 허용 설정
     };
 
+
+
+    
+document.addEventListener('DOMContentLoaded', function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            currentLocation = new kakao.maps.LatLng(lat, lng);
+
+            map.setCenter(currentLocation);
+            firstSearch = false; // 첫 검색 완료로 설정
+            watchCurrentLocation(); // 위치 추적 시작
+        }, function(error) {
+            console.error('Error occurred. Error code: ' + error.code);
+            watchCurrentLocation(); // 위치 추적 시작
+        }, {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: Infinity
+        });
+    } else {
+        console.error('Geolocation is not supported by this browser.');
+        watchCurrentLocation(); // 위치 추적 시작
+    }
+});
+
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
 var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
 
@@ -145,7 +172,8 @@ function showToggleIcon(position, infowindow) {
         position: position,
         content: toggleIconContent,
         yAnchor: 10,
-        xAnchor: 0.5
+        xAnchor: 0.5,
+        zIndex: -1
     });
 
     // 토글 아이콘 클릭 이벤트 추가
@@ -275,7 +303,7 @@ function watchCurrentLocation() {
 
 document.getElementById('recenter-btn').addEventListener('click', recenterMap);
 
-watchCurrentLocation();
+// watchCurrentLocation();
 
 // // 지도 줌 레벨 변경 시 오버레이 업데이트
 // kakao.maps.event.addListener(map, 'zoom_changed', function() {
@@ -293,6 +321,9 @@ function updateLocationOverlay() {
         currentLocationOverlay.setPosition(currentLocation);
     }
 }
+
+
+
 
 // 필요 함수들을 전역으로 노출
 window.searchAndDisplayAddress = searchAndDisplayAddress;

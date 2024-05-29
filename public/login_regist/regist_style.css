@@ -141,6 +141,7 @@ color:#0ECFFF
     color:#6D6D6D;
     display: inline-block;
     vertical-align: middle;
+    height: 30px;
 }
 .popup {
     position: fixed;
@@ -191,6 +192,7 @@ color:#0ECFFF
     font-weight: bold;
     cursor: pointer;
     font-size: 17px;
+    z-index: 9999;
 }
 #RegisterSubmit:hover{
     background-color: #6dbfff;
@@ -236,7 +238,8 @@ color:#0ECFFF
 }
 
 .bottom{
-    text-align: center;
+    text-align: center;;
+    height: 0px;
 
 }
 #confirmCode{
@@ -276,4 +279,7 @@ color:#0ECFFF
 
 .bottom{
     margin-top: -30px;
+}
+#cleaneatAlarm{
+    margin-bottom: 100px;
 }
