@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
         sessionStorage.removeItem('tutorialSeen');
-        // localStorage.setItem('introSeen', '');
-        // localStorage.setItem('tutorialSeen', '');
+        localStorage.setItem('introSeen', '');
+        localStorage.setItem('tutorialSeen', '');
 
     }
 
