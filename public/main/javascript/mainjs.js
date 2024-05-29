@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
         sessionStorage.removeItem('tutorialSeen');
-        localStorage.setItem('introSeen', '');
-        localStorage.setItem('tutorialSeen', '');
+        // localStorage.setItem('introSeen', '');
+        // localStorage.setItem('tutorialSeen', '');
 
     }
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof map !== 'undefined') {
         map.addListener('zoom_changed', function() {
             zoomLevel = map.getLevel();
-            updateOverlaysVisibility();
+            // updateOverlaysVisibility();
         });
     }
 
@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (selectedLocation) {
         setTimeout(() => {
             window.moveMapCenter(selectedLocation.addr);
-        }, 500); // 2초 지연 후 지도 이동
+        }, 700); // 2초 지연 후 지도 이동
     }
     
     
