@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
         sessionStorage.removeItem('tutorialSeen');
+        localStorage.setItem('introSeen', '');
+        localStorage.setItem('tutorialSeen', '');
 
     }
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
