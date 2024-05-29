@@ -82,7 +82,7 @@ $(document).ready(function(){
             rankdata.push(ranks[i])
           }
 
-          
+
           /* ChartJS
            * -------
            * Data and config for chartjs
@@ -141,6 +141,26 @@ $(document).ready(function(){
       linedatasets.push(dataEntry);
   }
 
+  const mainupsotable = document.querySelector('#mainupsotable');
+  mainupsotable.innerHTML = '';
+  
+  console.log('되나',addresses)
+  console.log('되나2',linedatasets)
+  for (let i = 0; i < addresses.length; i++) {
+    let address = addresses[i];
+    let newElements = `
+        <tr>
+            <td>${address}</td>`;
+    
+    // 각 라벨에 대한 데이터를 추가
+    linedatasets.forEach(dataset => {
+        newElements += `<td>${dataset.data[i]}</td>`;
+    });
+    
+    // 행을 완성하고 테이블에 추가
+    newElements += `</tr>`;
+    mainupsotable.innerHTML += newElements;
+}
   /*종료*/
   /*각 구 별로 */
   var multiLineData = {

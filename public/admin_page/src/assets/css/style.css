@@ -25768,3 +25768,18 @@ content: attr(data-name);}
 .upsoaddr:hover::after {
   content: attr(data-addr);
 }
+
+/* 로딩 css*/
+
+.loader {
+  width: 80px;
+ height: 100px;
+ background: url(../../../../main/css/Logo.png) no-repeat center;
+ background-size:  contain;
+ margin: 0px auto;
+}
+
+.loadercontainer {
+  height: 100%; width: 100%; display:inline-block; flex-direction: column; justify-content:center;
+  text-align: center;
+}
