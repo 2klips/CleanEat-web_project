@@ -9,6 +9,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
     
 document.addEventListener('DOMContentLoaded', function() {
+    watchCurrentLocation();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
@@ -96,7 +97,6 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
 
 // 기존 마커와 오버레이를 제거하는 함수
 function clearMarkersAndOverlays() {
-    console.log("clearMarkersAndOverlays 호출됨");
     if (Array.isArray(markers)) {
         markers.forEach(marker => marker.setMap(null));
         markers = [];
@@ -169,6 +169,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
 
 // 토글 아이콘을 표시하는 함수
 function showToggleIcon(position, infowindow) {
+    
     var toggleIconContent = document.createElement('div');
     toggleIconContent.className = 'info-toggle';
     toggleIconContent.innerHTML = '<img src="./css/images/info_toggle.png" class="info-toggle" alt="Toggle Icon" style=width:40px height:40px>';
@@ -177,7 +178,7 @@ function showToggleIcon(position, infowindow) {
     toggleIconContent.style.position = 'absolute';
     toggleIconContent.style.left = '50%';
     toggleIconContent.style.bottom = '35px';
-    toggleIconContent.style.transform = 'translateX(-52%)';
+    toggleIconContent.style.transform = 'translateX(-51%)';
 
     var toggleIconOverlay = new kakao.maps.CustomOverlay({
         position: position,
