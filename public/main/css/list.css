@@ -596,7 +596,11 @@ input[type="checkbox"]{appearance: none;}
    margin: 0px auto;
   }
 
-.loadercontainer {
+#loadercontainer {
     height: 100%; width: 100%; display:flex; flex-direction: column; justify-content:center;
     text-align: center;
+}
+
+.hidediv {
+    display: none;
 }

@@ -756,10 +756,13 @@ input[type="checkbox"]{appearance: none;}
    margin: 0px auto;
   }
 
-.loadercontainer {
+#loadercontainer {
     height: 100%; width: 100%; display:flex; flex-direction: column; justify-content:center;
     text-align: center;
 }
+
+
+.hidediv >*{display: none;}
 
 @media screen and (max-width: 768px) {
     #recenter-btn {
@@ -772,3 +775,4 @@ input[type="checkbox"]{appearance: none;}
         margin-bottom: 30px; /* searchbox의 하단 여백 추가 */
     }
 }
+
