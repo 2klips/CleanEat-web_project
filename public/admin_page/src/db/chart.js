@@ -29,8 +29,7 @@ function nextDay(){
 /**/
 $(document).ready(function(){
   let tableData = [];
-  let tableData_violation
-  = [];
+  let exemplaryData = [];
 
   // 페이지 로드 시 사용자 데이터 가져오기
   $.ajax({
@@ -38,7 +37,8 @@ $(document).ready(function(){
       method: 'GET',
       success: function(data) {
         
-          tableData = data.upso; 
+          tableData = data.upso;
+          exemplaryData = data.exemplary;
 
           let addresses = []; // 주소 배열 추가
 
@@ -59,7 +59,6 @@ $(document).ready(function(){
               } else {
                   ranks[item.rank] = 1;
               }
-
               // addr 객체에 데이터 추가 및 세분화
               if (!addrs[item.addr.split(' ')[1]]) {
                   addrs[item.addr.split(' ')[1]] = {};
@@ -71,18 +70,38 @@ $(document).ready(function(){
               }
           });
 
+          const addrCounts = {}
+          // 구에 따른 모범음식점 갯수
+          exemplaryData.forEach(function(item) {
+            const addr = item.addr.split(' ')[1];
+                if (addrCounts[addr]) {
+                    addrCounts[addr]++;
+                } else {
+                    addrCounts[addr] = 1;
+                }
+            });
+
           // addrs 객체를 순회하며 배열에 데이터 추가
           for (const address in addrs) {
               addresses.push(address);
           }
 
-
           for (let i in ranks){
             ranklabel.push(i)
             rankdata.push(ranks[i])
           }
+          ranklabel.push('모범 음식점')
+          ranks['모범 음식점'] = exemplaryData.length;
+          rankdata.push(exemplaryData.length) //모범 음식점의 데이터 갯수
+          const newRanks = { '모범 음식점': exemplaryData.length, ...ranks };
 
 
+          for (const [addr, count] of Object.entries(addrCounts)) {
+            if (addrs[addr]) {
+                addrs[addr]['모범 음식점'] = count;
+            }
+        }
+          
           /* ChartJS
            * -------
            * Data and config for chartjs
@@ -93,14 +112,16 @@ $(document).ready(function(){
     datasets: [{
       data: rankdata,
       backgroundColor: [
-        '#BDF3FF',
         '#55ddff',
-        '#FFAEC9'
+        '#BDF3FF',
+        '#FFAEC9',
+        '#FFDD00'
       ],
       borderColor: [
-        '#0AB4FF',
         '#0978ED',
-        '#C00000'
+        '#0AB4FF',
+        '#C00000',
+        '#FFAF16'
       ],
     }],
     // These labels appear in the legend and in the tooltips when hovering different arcs
@@ -114,13 +135,15 @@ $(document).ready(function(){
     }
   };
   /*끝 */
+  
   /*데이터 호출*/
-  let linelabels = Object.keys(ranks);
+  let linelabels = Object.keys(newRanks);
+  console.log('linelabels :',linelabels)
   /*데이터 셋 초기화*/
   let linedatasets = [];
 
   /*선 색상*/
-  const colors = ['#0930ED', '#0978ED', '#2DB3FE', '#FF33EA', '#33EAFF', '#EAFF33'];
+  const colors = ['#FFAF16','#0930ED', '#0978ED', '#2DB3FE', '#FF33EA', '#33EAFF', '#EAFF33'];
   // 각 등급에 대해 데이터셋 생성
   for (let i = 0; i < linelabels.length; i++) {
       let rank = linelabels[i];
@@ -141,11 +164,10 @@ $(document).ready(function(){
       linedatasets.push(dataEntry);
   }
 
+  console.log('linedatasets :',linedatasets)
   const mainupsotable = document.querySelector('#mainupsotable');
   mainupsotable.innerHTML = '';
-  
-  console.log('되나',addresses)
-  console.log('되나2',linedatasets)
+
   for (let i = 0; i < addresses.length; i++) {
     let address = addresses[i];
     let newElements = `

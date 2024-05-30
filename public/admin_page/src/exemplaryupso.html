@@ -112,17 +112,16 @@
                             <thead id="usertablelavel">
                               <tr>
                                 <th>고유 식별 아이디 <input type="checkbox" class="sortable" data-column="_id" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
-                                <th>지정번호 <input type="checkbox"class="sortable" data-column="num" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
+                                <th>지정번호</th>
                                 <th>지정날짜</th>
                                 <th>업소 이름 <input type="checkbox"class="sortable" data-column="name" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
                                 <th>업태명</th>
-                                <th>등급  <input type="checkbox"class="sortable" data-column="rank" data-order="asc" name="sort" onclick="checkOnlyOne(this)"></th>
                                 <th>전화번호</th>
                                 <th>업소 주소</th>
                               </tr>
                             </thead>
-                            <tbody id="upsotable">
-                                <!--여기에 업소 데이터 삽입.-->
+                            <tbody id="exemplaryupso">
+                                <!--여기에 모범업소 데이터 삽입.-->
                             </tbody>
                           </table>
                           <div class="page_ctrl">
@@ -171,7 +170,6 @@
     <!-- Custom js for this page-->
     <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>
     <script src="assets/js/dashboard.js"></script>
-    <script src="./db/upsochart.js"></script>
     <script>
       function checkOnlyOne(element) {
       const checkboxes = document.getElementsByName("sort");
@@ -185,7 +183,7 @@
     }
     </script>
     <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
-    <script src="./js/upsotable.js"></script>
+    <script src="./js/exemplarytable.js"></script>
     <!-- End custom js for this page-->
   </body>
 </html>

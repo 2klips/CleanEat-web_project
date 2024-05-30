@@ -41,7 +41,7 @@ $(document).ready(function () {
         addEventListenersToPageButtons();
     };
 
-    const upsotable = document.querySelector('#upsotable');
+    const upsotable = document.querySelector('#exemplaryupso');
 
     // 페이지 설정
     const setPage = (pageNumber) => {
@@ -61,11 +61,10 @@ $(document).ready(function () {
                 <td>${upso._id}</td>
                 <td>${upso.no}</td>
                 <td>${upso.date}</td>
-                <td class="abbhover" data-name="${upso.name}">${upsoname}</td>
+                <td>${upsoname}</td>
                 <td>${upso.type}</td>
-                <td>${upso.rank}</td>
-                <td>${upso.hp}</td>
-                <td class="abbhover" data-name="${upso.addr}">${upsoaddr}</td>
+                <td>${upso.tel}</td>
+                <td>${upsoaddr}</td>
                 
             </tr>`;
             upsotable.innerHTML += newElements;
@@ -142,8 +141,8 @@ $(document).ready(function () {
         url: '/admin/api/upso', // 서버에서 사용자 데이터를 가져올 엔드포인트
         method: 'GET',
         success: function (data) {
-            exData = data.upso;
-            console.log('exData :',exData)
+            exData = data.exemplary;
+            console.log('exData : ', exData)
             setPageNum(); // 페이지 번호 설정
             setPage(defaultPage); // 초기 페이지 설정
             setSelectedPage(); // 선택된 페이지 스타일 적용

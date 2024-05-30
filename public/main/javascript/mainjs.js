@@ -3,12 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!localStorage.getItem('introSeen')) {
         window.location.href = 'intro.html';
+        clearMarkersAndOverlays();
     } else if (!localStorage.getItem('tutorialSeen')) {
         window.location.href = 'tutorial.html';
+        clearMarkersAndOverlays();
     } else {
         container.style.display = 'block';
     }
 
+    
 
     if (performance.navigation.type === 1) {
         localStorage.removeItem('searchResults');
@@ -23,8 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('addresses');
         sessionStorage.removeItem('selectedLocation');
         sessionStorage.removeItem('tutorialSeen');
+        localStorage.setItem('introSeen', '');
+        localStorage.setItem('tutorialSeen', '');
 
     }
+
+    
+
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
     document.addEventListener('click', async function(event) {
         if (event.target.classList.contains('bookmarkicon')) {
@@ -335,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof map !== 'undefined') {
         map.addListener('zoom_changed', function() {
             zoomLevel = map.getLevel();
-            updateOverlaysVisibility();
+            // updateOverlaysVisibility();
         });
     }
 
@@ -356,6 +364,13 @@ document.addEventListener('DOMContentLoaded', function() {
             overlays = [];
         } else {
             overlays = [];
+        }
+
+        if (Array.isArray(toggleOverlays)) {
+            toggleOverlays.forEach(overlay => overlay.setMap(null));
+            toggleOverlays = [];
+        } else {
+            toggleOverlays = [];
         }
     }
     async function getBookmark() {
@@ -383,9 +398,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 데이터 초기화 및 지도 이동 처리
-    const selectedLocation = sessionStorage.getItem('selectedLocation');
+    const selectedLocation = JSON.parse(sessionStorage.getItem('selectedLocation'));
     console.log('Loaded selected location:', selectedLocation);
-    window.moveMapCenter(selectedLocation);
+    if (selectedLocation) {
+        setTimeout(() => {
+            window.moveMapCenter(selectedLocation.addr);
+        }, 900); // 2초 지연 후 지도 이동
+    }
     
     
     window.search = search;

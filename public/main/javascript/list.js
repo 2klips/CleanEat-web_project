@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 itemHTML += rank; // 위생등급
                 itemHTML += `<p>${item.detail || ''}</p><br>`;                               
-                itemHTML += `<p class="address">${item.addr || ''}</p><br>`; // 주소
+                itemHTML += `<p class="address">${item.addr || '[ ※ 폐업한 음식점 입니다. ]'}</p><br>`; // 주소
                 if (tel) {
                     itemHTML += `<p class="tel">전화번호: ${tel}</p><br>`; // 전화번호
                 }
@@ -152,12 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.appendChild(itemElement);
                 window.clearMarkersAndOverlays();
                 
-                itemElement.addEventListener('click', function() {
+                itemElement.addEventListener('click', function(event) {
                     if (!event.target.classList.contains('bookmarkicon')) {
                         console.log('Saving selected location:', item.addr);
                         // 클릭된 항목의 데이터를 sessionStorage에 저장
-                        sessionStorage.setItem('selectedLocation', item.addr);
-                        clearMarkersAndOverlays(); 
+                        sessionStorage.setItem('selectedLocation', JSON.stringify(item));
                         // index.html로 이동
                         window.location.href = 'index.html';
                     }

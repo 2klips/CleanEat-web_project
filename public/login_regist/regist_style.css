@@ -52,7 +52,7 @@ body {
     margin-top: 5px;
 }
 .int-area {width: 280px; position: relative;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .int-area>button{
@@ -92,7 +92,7 @@ transition: all .5s ease;
 .indiviaul:first-child {margin-top: 0;}
 .individual input {
 width: 100%;
-padding: 40px 5px 10px;
+padding: 30px 5px 10px;
 background-color: transparent;
 border: none;
 border-bottom: 1px solid #B4B4B4;
@@ -141,6 +141,7 @@ color:#0ECFFF
     color:#6D6D6D;
     display: inline-block;
     vertical-align: middle;
+    height: 30px;
 }
 .popup {
     position: fixed;
@@ -183,7 +184,7 @@ color:#0ECFFF
     width: 100px;
     height: 36px;
     margin-left: 35%;
-    margin-top: 50px;
+    margin-top: 30px;
     background-color: #8AE9FF;
     color: white;
     border: none;
@@ -191,6 +192,7 @@ color:#0ECFFF
     font-weight: bold;
     cursor: pointer;
     font-size: 17px;
+    z-index: 9999;
 }
 #RegisterSubmit:hover{
     background-color: #6dbfff;
@@ -236,7 +238,8 @@ color:#0ECFFF
 }
 
 .bottom{
-    text-align: center;
+    text-align: center;;
+    height: 0px;
 
 }
 #confirmCode{
@@ -272,4 +275,11 @@ color:#0ECFFF
     max-width: 210px; 
     display: inline-block; 
     color:#0ECFFF
+}
+
+.bottom{
+    margin-top: -30px;
+}
+#cleaneatAlarm{
+    margin-bottom: 100px;
 }
