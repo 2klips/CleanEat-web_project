@@ -229,7 +229,7 @@ function sortResultsByDistance(results, center) {
     });
 }
 
-const MAX_MARKERS = 50; // 기본 최대 마커 수
+const MAX_MARKERS = 40; // 기본 최대 마커 수
 let zoomLevel = map.getLevel(); // 초기 줌 레벨
 
 // 오버레이의 가시성을 업데이트하는 함수
