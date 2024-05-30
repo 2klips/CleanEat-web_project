@@ -6,9 +6,13 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };
 
 
-
+let kakaoMapInitialized = false;
     
 document.addEventListener('DOMContentLoaded', function() {
+    if (kakaoMapInitialized) return; // 이미 초기화되었으면 리턴
+    kakaoMapInitialized = true;
+
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
@@ -96,17 +100,17 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
 function clearMarkersAndOverlays() {
     if (Array.isArray(markers)) {
         markers.forEach(marker => marker.setMap(null));
-        markers = [];
+
     }
 
     if (Array.isArray(overlays)) {
         overlays.forEach(overlay => overlay.setMap(null));
-        overlays = [];
+
     }
 
     if (Array.isArray(toggleOverlays)) {
         toggleOverlays.forEach(overlay => overlay.setMap(null));
-        toggleOverlays = [];
+
     }
 }
 
@@ -117,6 +121,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
         return;
     }
     geocoder.addressSearch(data.addr, function(result, status) {
+        
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 

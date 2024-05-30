@@ -1,4 +1,9 @@
+let listJsInitialized = false;
+
 document.addEventListener('DOMContentLoaded', function() {
+    if (listJsInitialized) return; // 이미 초기화되었으면 리턴
+    listJsInitialized = true;
+    
     const searchBtn = document.getElementById('search-btn');
     const searchbox = document.getElementById('search');
 
