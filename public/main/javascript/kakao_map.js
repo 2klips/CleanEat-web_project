@@ -9,7 +9,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
     
 document.addEventListener('DOMContentLoaded', function() {
-    watchCurrentLocation();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
             watchCurrentLocation(); // 위치 추적 시작
         }, function(error) {
             console.error('Error occurred. Error code: ' + error.code);
-            watchCurrentLocation(); // 위치 추적 시작
         }, {
             enableHighAccuracy: true,
             maximumAge: 0,
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         console.error('Geolocation is not supported by this browser.');
-        watchCurrentLocation(); // 위치 추적 시작
     }
 });
 
