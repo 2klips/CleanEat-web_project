@@ -29,9 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('introSeen', '');
         localStorage.setItem('tutorialSeen', '');
 
-    }
 
-    
 
     // 북마크 아이콘 클릭 시 북마크 추가 또는 제거
     document.addEventListener('click', async function(event) {
