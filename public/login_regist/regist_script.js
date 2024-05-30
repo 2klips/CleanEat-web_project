@@ -6,8 +6,31 @@ function checkID() {
     var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     var pElement = document.getElementById('p6');
     if (isValid) {
-        pElement.textContent = '가입이 가능한 아이디입니다.';
-        pElement.style.color = '#0ECFFF';
+        console.log(email);
+        fetch(`/me/findByEmail?email=${encodeURIComponent(email)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                pElement.textContent = '가입이 가능한 이메일입니다.';
+                pElement.style.color = '#0ECFFF';
+            } else if (res.status === 409) {
+                pElement.textContent = '이미 사용중인 이메일입니다.';
+                pElement.style.color = 'red';
+            } else {
+                throw new Error('서버 오류가 발생했습니다.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            pElement.textContent = error.message;
+            pElement.style.color = 'red';
+        });
+    //     pElement.textContent = '가입이 가능한 아이디입니다.';
+    //     pElement.style.color = '#0ECFFF';
     } else {
         pElement.textContent = '이메일 형식을 확인해주세요.';
         pElement.style.color = 'red';
@@ -263,9 +286,11 @@ var isBackgroundChanged = false;
             if (!isBackgroundChanged) {
                 button.style.backgroundColor = '#2FD8FF'; // Change to the new color
                 circleIcon.style.right = '5px'; // Move circle-icon to the right
+                requestToken();
             } else {
                 button.style.backgroundColor = '#FFFFFF'; // Revert to the original color
                 circleIcon.style.right = '40px'; // Move circle-icon back to its original position
+                deleteToken();
             }
         
                 isBackgroundChanged = !isBackgroundChanged;

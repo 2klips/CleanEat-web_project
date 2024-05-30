@@ -6,9 +6,13 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };
 
 
-
+let kakaoMapInitialized = false;
     
 document.addEventListener('DOMContentLoaded', function() {
+    if (kakaoMapInitialized) return; // 이미 초기화되었으면 리턴
+    kakaoMapInitialized = true;
+
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
@@ -20,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
             watchCurrentLocation(); // 위치 추적 시작
         }, function(error) {
             console.error('Error occurred. Error code: ' + error.code);
-            watchCurrentLocation(); // 위치 추적 시작
         }, {
             enableHighAccuracy: true,
             maximumAge: 0,
@@ -28,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         console.error('Geolocation is not supported by this browser.');
-        watchCurrentLocation(); // 위치 추적 시작
     }
 });
 
@@ -96,20 +98,19 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
 
 // 기존 마커와 오버레이를 제거하는 함수
 function clearMarkersAndOverlays() {
-    console.log("clearMarkersAndOverlays 호출됨");
     if (Array.isArray(markers)) {
         markers.forEach(marker => marker.setMap(null));
-        markers = [];
+
     }
 
     if (Array.isArray(overlays)) {
         overlays.forEach(overlay => overlay.setMap(null));
-        overlays = [];
+
     }
 
     if (Array.isArray(toggleOverlays)) {
         toggleOverlays.forEach(overlay => overlay.setMap(null));
-        toggleOverlays = [];
+
     }
 }
 
@@ -120,6 +121,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
         return;
     }
     geocoder.addressSearch(data.addr, function(result, status) {
+        
         if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -169,6 +171,7 @@ function searchAndDisplayAddress(data, shouldRecenter) {
 
 // 토글 아이콘을 표시하는 함수
 function showToggleIcon(position, infowindow) {
+    
     var toggleIconContent = document.createElement('div');
     toggleIconContent.className = 'info-toggle';
     toggleIconContent.innerHTML = '<img src="./css/images/info_toggle.png" class="info-toggle" alt="Toggle Icon" style=width:40px height:40px>';
@@ -177,7 +180,7 @@ function showToggleIcon(position, infowindow) {
     toggleIconContent.style.position = 'absolute';
     toggleIconContent.style.left = '50%';
     toggleIconContent.style.bottom = '35px';
-    toggleIconContent.style.transform = 'translateX(-52%)';
+    toggleIconContent.style.transform = 'translateX(-51%)';
 
     var toggleIconOverlay = new kakao.maps.CustomOverlay({
         position: position,
@@ -231,7 +234,7 @@ function sortResultsByDistance(results, center) {
     });
 }
 
-const MAX_MARKERS = 50; // 기본 최대 마커 수
+const MAX_MARKERS = 40; // 기본 최대 마커 수
 let zoomLevel = map.getLevel(); // 초기 줌 레벨
 
 // 오버레이의 가시성을 업데이트하는 함수

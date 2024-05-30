@@ -16,7 +16,11 @@
 </head>
 <body>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
+
+        document.addEventListener('DOMContentLoaded', function() {    
+            
+
             if (!localStorage.getItem('introSeen')) {
                 window.location.href = 'intro.html';
             } else if (!localStorage.getItem('tutorialSeen')) {
@@ -98,7 +102,6 @@
     </div>
     <!-- Initialize Swiper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./javascript/mainjs.js"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 3,

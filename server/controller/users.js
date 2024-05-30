@@ -9,6 +9,19 @@ function createJwtToken(id){
     return jwt.sign({id}, config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec});
 }
 
+async function findByEmail(req, res, next) {
+    const email = req.query.email;
+    try {
+        const found = await userDB.findByEmail(email);
+        if (found) {
+            return res.status(409).json({ message: `${email}이 이미 있습니다` });
+        } else {
+            return res.status(200).json({ message: '사용 가능한 이메일입니다' });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
 
 async function signup(req, res, next){
     let {name, password, email, addr1, addr2, hp} = req.body;
@@ -66,4 +79,4 @@ async function deleteDeviceToken(req, res, next){
 }
 
 
-module.exports = {signup, login, me, setDeviceToken, deleteDeviceToken};
+module.exports = {signup, login, me, setDeviceToken, deleteDeviceToken, findByEmail};

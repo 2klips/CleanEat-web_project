@@ -5,7 +5,7 @@ const path = require('path');
 const userController = require('../controller/users.js');
 
 
-
+router.get('/findByEmail', userController.findByEmail);
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.get('/login' , (req, res) => {

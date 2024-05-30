@@ -1,4 +1,11 @@
+
+let mainJsInitialized = false;
+
 document.addEventListener('DOMContentLoaded', function() {
+
+    if (mainJsInitialized) return; // 이미 초기화되었으면 리턴
+    mainJsInitialized = true;
+
     const container = document.getElementById('container');
 
     if (!localStorage.getItem('introSeen')) {
@@ -28,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.removeItem('tutorialSeen');
         localStorage.setItem('introSeen', '');
         localStorage.setItem('tutorialSeen', '');
+    }
 
 
 
@@ -293,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.rank').forEach(rankBox => {
             rankBox.checked = rank.includes(rankBox.value);
         });
-
+        
         displayData(results);
     }
 
