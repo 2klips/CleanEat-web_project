@@ -60,8 +60,19 @@ function createInfoWindowContent(name, addr, tel, rank, detail, violation) {
 
     if (tel.includes('*')) {
         tel = '';
-    } else if (tel.startsWith('02')) {
-        tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+    } else {
+        tel = tel.replace(/\s+/g, '-'); // 숫자 사이에 빈칸이 있으면 "-"로 대체
+        if (tel.startsWith('02')) {
+            if (tel.length === 9) {
+                tel = tel.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+            } else {
+                tel = tel.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+            }
+        } else if (tel.length <= 8) {
+            tel = '';
+        } else if (tel.startsWith('000')) {
+            tel = '';
+        }
     }
 
     const infoWindowClass = violation ? 'custom-info-window violation' : 'custom-info-window';
