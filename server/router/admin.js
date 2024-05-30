@@ -43,8 +43,9 @@ router.get('/api/upso', async (req, res) => {
   try {
     // 데이터베이스에서 사용자 데이터를 가져오기
     const upso = await db_upso.searchDB();
+    const exemplary = await db_upso.searchDB("ExemplaryRestaurantData");
     // 클라이언트에 사용자 데이터를 JSON 형식으로 반환
-    res.json({upso: upso});
+    res.json({upso: upso, exemplary: exemplary});
   } catch (error) {
     // 오류가 발생할 경우 오류를 반환
     res.status(500).json({ message: error.message });
