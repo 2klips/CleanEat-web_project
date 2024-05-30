@@ -263,9 +263,11 @@ var isBackgroundChanged = false;
             if (!isBackgroundChanged) {
                 button.style.backgroundColor = '#2FD8FF'; // Change to the new color
                 circleIcon.style.right = '5px'; // Move circle-icon to the right
+                requestToken();
             } else {
                 button.style.backgroundColor = '#FFFFFF'; // Revert to the original color
                 circleIcon.style.right = '40px'; // Move circle-icon back to its original position
+                deleteToken();
             }
         
                 isBackgroundChanged = !isBackgroundChanged;
